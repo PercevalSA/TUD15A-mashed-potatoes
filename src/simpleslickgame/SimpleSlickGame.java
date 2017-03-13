@@ -1,13 +1,13 @@
 package simpleslickgame;
         import java.util.logging.Level;
         import java.util.logging.Logger;
-        import org.newdawn.slick.AppGameContainer;
-        import org.newdawn.slick.BasicGame;
-        import org.newdawn.slick.GameContainer;
-        import org.newdawn.slick.Graphics;
-        import org.newdawn.slick.SlickException;
 
-public class SimpleSlickGame extends BasicGame
+        import org.newdawn.slick.*;
+        import org.newdawn.slick.geom.Circle;
+        import org.newdawn.slick.geom.Shape;
+        import org.newdawn.slick.geom.Vector2f;
+
+public class SimpleSlickGame extends    BasicGame
 {
     public SimpleSlickGame(String gamename)
     {
@@ -23,7 +23,8 @@ public class SimpleSlickGame extends BasicGame
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
-        g.drawString("Howdy!", 10, 10);
+        g.drawString("Howdy!", 50, 50);
+        g.fill(new Circle(10, 10, 5));
     }
 
     public static void main(String[] args)
