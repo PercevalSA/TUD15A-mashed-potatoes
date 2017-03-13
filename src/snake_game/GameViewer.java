@@ -45,6 +45,7 @@ public class GameViewer extends BasicGameState{
         //float x = 100;
         //float y = 100;
 
+
         SnakeHead snake_head = app.getSnakeHead();
         float x = snake_head.x_position;
         float y = snake_head.y_position;
