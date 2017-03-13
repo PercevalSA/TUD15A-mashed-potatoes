@@ -12,6 +12,7 @@ import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import simpleslickgame.SimpleSlickGame;
 
 /**
  * Created by martin on 13.03.17.
@@ -39,6 +40,9 @@ public class GameViewer extends BasicGameState{
         float y = 100;
         float w = 20;
         float h = 20;
+
+
+
         Rectangle rectangle_shape = new Rectangle(x,y,w,h);
 
         g.draw(rectangle_shape);
@@ -50,6 +54,8 @@ public class GameViewer extends BasicGameState{
     public int getID(){
         return id;
     }
+
+
 
 
 }
