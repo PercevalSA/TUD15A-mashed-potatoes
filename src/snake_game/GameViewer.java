@@ -45,22 +45,16 @@ public class GameViewer extends BasicGameState{
         //float x = 100;
         //float y = 100;
 
-        float w = ITEMSIZE;
-        float h = ITEMSIZE;
-
-        SnakeHead snake_head = this.app.getSnakeHead();
+        SnakeHead snake_head = app.getSnakeHead();
         float x = snake_head.x_position;
         float y = snake_head.y_position;
 
-        Rectangle rectangle_shape = new Rectangle(x,y,w,h);
+        Rectangle rectangle_shape = new Rectangle(x,y,ITEMSIZE,ITEMSIZE);
 
         g.draw(rectangle_shape);
         g.fill(rectangle_shape);
 
     }
-
-
-
 
     public int getID(){
         return id;
