@@ -20,4 +20,15 @@ public class SnakeHead extends Item{
         }
         direction = a;
     }
+
+    public void updateCoord(int speed){
+        if( direction > 2){
+            speed = -speed;
+        }
+        if(direction%2 == 0){
+            x_position += speed;
+        }else{
+            y_position += speed;
+        }
+    }
 }
