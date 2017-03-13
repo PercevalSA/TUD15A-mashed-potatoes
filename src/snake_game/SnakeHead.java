@@ -23,5 +23,6 @@ public class SnakeHead extends Item{
         if( a%2 == direction%2){
             throw new InvalidMove();
         }
+        direction = a;
     }
 }
