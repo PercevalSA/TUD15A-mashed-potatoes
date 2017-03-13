@@ -12,7 +12,9 @@ import org.newdawn.slick.opengl.renderer.Renderer;
 import org.newdawn.slick.opengl.renderer.SGL;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import simpleslickgame.SimpleSlickGame;
+import snake_game.Application;
+
+import static snake_game.Application.main;
 
 /**
  * Created by martin on 13.03.17.
@@ -20,10 +22,14 @@ import simpleslickgame.SimpleSlickGame;
 public class GameViewer extends BasicGameState{
 
     protected int id;
+    protected Application app;
+
+    private static final int ITEMSIZE = 20;
 
 
     public GameViewer(int id){
         this.id = id;
+        this.app = Application.getApp();
     }
 
     @Override
@@ -36,12 +42,15 @@ public class GameViewer extends BasicGameState{
     public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException
     {
         //g.drawString("Howdy!", 10, 10);
-        float x = 100;
-        float y = 100;
-        float w = 20;
-        float h = 20;
+        //float x = 100;
+        //float y = 100;
 
+        float w = ITEMSIZE;
+        float h = ITEMSIZE;
 
+        SnakeHead snake_head = this.app.getSnakeHead();
+        float x = snake_head.x_position;
+        float y = snake_head.y_position;
 
         Rectangle rectangle_shape = new Rectangle(x,y,w,h);
 
@@ -51,11 +60,11 @@ public class GameViewer extends BasicGameState{
     }
 
 
+
+
     public int getID(){
         return id;
     }
-
-
 
 
 }
