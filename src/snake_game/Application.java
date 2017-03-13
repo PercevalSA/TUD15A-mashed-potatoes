@@ -5,6 +5,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.util.ArrayDeque;
+
 /**
  * Created by martin on 13.03.17.
  */
@@ -17,6 +19,8 @@ public class Application extends StateBasedGame {
     private static final int GAMEVIEWER_ID = 1;
     private static GameController gameController = null;
     private SnakeHead snakeHead = null;
+
+    private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
 
     // Application Properties
     private static final int WIDTH   = 640;
@@ -70,5 +74,13 @@ public class Application extends StateBasedGame {
 
     public SnakeHead getSnakeHead() {
         return snakeHead;
+    }
+
+    public ArrayDeque<SnakeBody> getSnakeArray() {
+        return snakeArray;
+    }
+
+    public void setSnakeArray(ArrayDeque<SnakeBody> snakeArray) {
+        this.snakeArray = snakeArray;
     }
 }

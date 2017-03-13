@@ -23,7 +23,6 @@ public class GameController {
      */
 
     //private ArrayList<SnakeBody> snakeArray= new ArrayList<>();
-    private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
 
     public void updateBodyPosition (){
         SnakeBody last = snakeArray.getLast();
