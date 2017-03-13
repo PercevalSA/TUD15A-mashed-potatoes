@@ -14,9 +14,9 @@ public class SnakeHead extends Item{
         return direction;
     }
 
-    public void updateDirection(int a) throws InvalidMove{
+    public void updateDirection(int a) throws InvalidMoveException {
         if( a%2 == direction%2){
-            throw new InvalidMove();
+            throw new InvalidMoveException();
         }
         direction = a;
     }
