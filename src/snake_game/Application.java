@@ -14,6 +14,8 @@ public class Application extends StateBasedGame {
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
     private static GameViewer gameView = null;
+    private static final int GAMEVIEWER_ID = 1;
+    private static GameController gameController = null;
     private SnakeHead snakeHead = null;
 
     // Application Properties
@@ -33,15 +35,12 @@ public class Application extends StateBasedGame {
     public Application(String appName){
         super(appName);
         snakeHead = new SnakeHead(WIDTH / 2, HEIGHT / 2);
-    }
-
-    public SnakeHead getSnakeHead() {
-        return snakeHead;
+        gameView = new GameViewer(GAMEVIEWER_ID);
+        gameController = new GameController();
     }
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
-        gameView = new GameViewer(1);
         this.addState(gameView);
         this.enterState(gameView.getID());
     }
@@ -67,5 +66,9 @@ public class Application extends StateBasedGame {
 
     public static int getHEIGHT() {
         return HEIGHT;
+    }
+
+    public SnakeHead getSnakeHead() {
+        return snakeHead;
     }
 }
