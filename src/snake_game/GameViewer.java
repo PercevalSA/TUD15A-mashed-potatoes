@@ -1,4 +1,5 @@
 package snake_game;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import org.newdawn.slick.opengl.renderer.SGL;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import snake_game.Application;
+import java.util.ArrayDeque;
 
 import static snake_game.Application.main;
 
@@ -25,7 +27,6 @@ public class GameViewer extends BasicGameState{
     protected Application app;
 
     private static final int ITEMSIZE = 20;
-
 
     public GameViewer(int id){
         this.id = id;
@@ -45,10 +46,22 @@ public class GameViewer extends BasicGameState{
         //float x = 100;
         //float y = 100;
 
-
         SnakeHead snake_head = app.getSnakeHead();
-        float x = snake_head.x_position;
-        float y = snake_head.y_position;
+        ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
+        
+
+        for (SnakeBody element : snakeArray) {
+            float x = element.getX();
+            float y = element.getY();
+
+            Rectangle rectangle_shape = new Rectangle(x,y,ITEMSIZE,ITEMSIZE);
+
+            g.draw(rectangle_shape);
+            g.fill(rectangle_shape);
+        }
+
+        float x = snake_head.getX();
+        float y = snake_head.getY();
 
         Rectangle rectangle_shape = new Rectangle(x,y,ITEMSIZE,ITEMSIZE);
 
