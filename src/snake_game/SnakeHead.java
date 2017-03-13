@@ -21,7 +21,7 @@ public class SnakeHead extends Item{
         direction = a;
     }
 
-    public void updateCoord(int speed){
+    public void updateCoord(float speed){
         if( direction > 2){
             speed = -speed;
         }
