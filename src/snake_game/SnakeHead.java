@@ -4,7 +4,7 @@ package snake_game;
  * Created by martin on 13.03.17.
  */
 public class SnakeHead extends Item{
-    private int direction = 0;
+    private int direction = 1;
 
     public SnakeHead(float x, float y){
         super(x,y);

@@ -38,8 +38,9 @@ public class Application extends StateBasedGame {
 
     public Application(String appName){
         super(appName);
-        snakeHead = new SnakeHead(WIDTH / 2, HEIGHT / 2);
+        snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
         gameController = new GameController();
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 1, HEIGHT / 2));
     }
 
     @Override
@@ -82,5 +83,9 @@ public class Application extends StateBasedGame {
 
     public void setSnakeArray(ArrayDeque<SnakeBody> snakeArray) {
         this.snakeArray = snakeArray;
+    }
+
+    public static GameController getGameController() {
+        return gameController;
     }
 }
