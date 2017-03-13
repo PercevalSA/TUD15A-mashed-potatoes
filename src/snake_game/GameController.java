@@ -22,7 +22,7 @@ public class GameController {
 
         if(input.isKeyDown(Input.KEY_UP)) {
             try {
-                getSnake().updateDirection(0);
+           //     getSnake().updateDirection(0);
             } catch(Exception e) {
                 System.out.println("Invalid Direction");
             }
@@ -30,7 +30,7 @@ public class GameController {
 
         if(input.isKeyDown(Input.KEY_DOWN)) {
             try {
-                getSnake().updateDirection(2);
+             //   getSnake().updateDirection(2);
             } catch(Exception e) {
                 System.out.println("Invalid Direction");
             }
@@ -38,7 +38,7 @@ public class GameController {
 
         if(input.isKeyDown(Input.KEY_RIGHT)) {
             try {
-                getSnake().updateDirection(1);
+              //  getSnake().updateDirection(1);
             } catch(Exception e) {
                 System.out.println("Invalid Direction");
             }
@@ -46,7 +46,7 @@ public class GameController {
 
         if(input.isKeyDown(Input.KEY_LEFT)) {
             try {
-                getSnake().updateDirection(3);
+             //   getSnake().updateDirection(3);
             } catch(Exception e) {
                 System.out.println("Invalid Direction");
             }
