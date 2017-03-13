@@ -14,6 +14,7 @@ public class Application extends StateBasedGame {
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
     private static GameViewer gameView = null;
+    private SnakeHead snakeHead = null;
 
     // Application Properties
     private static final int WIDTH   = 640;
@@ -31,6 +32,11 @@ public class Application extends StateBasedGame {
 
     public Application(String appName){
         super(appName);
+        snakeHead = new SnakeHead(WIDTH / 2, HEIGHT / 2);
+    }
+
+    public SnakeHead getSnakeHead() {
+        return snakeHead;
     }
 
     @Override
@@ -53,10 +59,11 @@ public class Application extends StateBasedGame {
         }
     }
 
+
+
     public static int getWIDTH() {
         return WIDTH;
     }
-
 
     public static int getHEIGHT() {
         return HEIGHT;
