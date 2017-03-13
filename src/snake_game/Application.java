@@ -35,7 +35,6 @@ public class Application extends StateBasedGame {
     public Application(String appName){
         super(appName);
         snakeHead = new SnakeHead(WIDTH / 2, HEIGHT / 2);
-        gameView = new GameViewer(GAMEVIEWER_ID);
         gameController = new GameController();
     }
 
@@ -48,6 +47,7 @@ public class Application extends StateBasedGame {
     public static void main(String[] args){
         try {
             instance = new Application("Potato Snake v" + VERSION);
+            gameView = new GameViewer(GAMEVIEWER_ID);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
