@@ -67,6 +67,7 @@ public class Application extends StateBasedGame {
             appContainer.setTargetFrameRate(FPS);
             appContainer.setShowFPS(true);
             appContainer.start();
+            gameController.createFoodItem();
         } catch(SlickException e) {
             e.printStackTrace();
         }
