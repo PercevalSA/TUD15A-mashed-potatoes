@@ -13,7 +13,6 @@ public class GameViewer extends BasicGameState{
 
     public static final int ITEMSIZE = 20;
 
-
     public GameViewer(int id){
         this.id = id;
         this.app = Application.getApp();
@@ -53,6 +52,14 @@ public class GameViewer extends BasicGameState{
         g.setColor(Color.white);
         g.draw(rectangle_shape);
         g.fill(rectangle_shape);
+
+        Rectangle wall = new Rectangle(1,1,app.getWIDTH()-1,app.getGAMEHEIGHT());
+
+        g.setColor(Color.white);
+        g.draw(wall);
+
+        g.drawString("Score: " + snakeArray.size(), app.getWIDTH()/2.3f, app.getGAMEHEIGHT());
+
 
     }
 
