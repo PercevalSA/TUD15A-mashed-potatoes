@@ -24,51 +24,44 @@ public class GameController {
 
     //private ArrayList<SnakeBody> snakeArray= new ArrayList<>();
 
-    public void updateBodyPosition (){
-        ArrayDeque<SnakeBody> snakeArray= Application.getApp().getSnakeArray();
+    public void updateBodyPosition(GameContainer gc) {
+        whichDirection(gc);
+        ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
         SnakeBody last = snakeArray.getLast();
         snakeArray.removeLast();
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         last.updateBody(snakeHead.getX(),snakeHead.getY());
         snakeArray.addFirst(last);
         Application.getApp().setSnakeArray(snakeArray);
-        snakeHead.updateCoord((float)1);
+        snakeHead.updateCoord(1);
     }
 
-    protected void wichDirection(GameContainer gc) {
+    protected void whichDirection(GameContainer gc) {
 
         Input input = gc.getInput();
 
         if(input.isKeyDown(Input.KEY_UP)) {
             try {
                 Application.getApp().getSnakeHead().updateDirection(0);
-            }catch (InvalidMoveException e) {
-                e.printStackTrace();
-            }
+            }catch (InvalidMoveException e) {}
         }
 
         if(input.isKeyDown(Input.KEY_DOWN)) {
             try {
                 Application.getApp().getSnakeHead().updateDirection(2);
-            } catch (InvalidMoveException e) {
-                e.printStackTrace();
-            }
+            } catch (InvalidMoveException e) {}
         }
 
         if(input.isKeyDown(Input.KEY_RIGHT)) {
             try {
                 Application.getApp().getSnakeHead().updateDirection(1);
-            } catch (InvalidMoveException e) {
-                e.printStackTrace();
-            }
+            } catch (InvalidMoveException e) {}
         }
 
         if(input.isKeyDown(Input.KEY_LEFT)) {
             try {
                 Application.getApp().getSnakeHead().updateDirection(3);
-            } catch (InvalidMoveException e) {
-                e.printStackTrace();
-            }
+            } catch (InvalidMoveException e) {}
         }
     }
     

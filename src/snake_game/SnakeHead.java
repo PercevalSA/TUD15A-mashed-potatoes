@@ -1,5 +1,7 @@
 package snake_game;
 
+import org.lwjgl.Sys;
+
 /**
  * Created by martin on 13.03.17.
  */
@@ -14,21 +16,30 @@ public class SnakeHead extends Item{
         return direction;
     }
 
-    public void updateDirection(int a) throws InvalidMoveException {
-        if( a%2 == direction%2){
+    public void updateDirection(int dir) throws InvalidMoveException {
+        if(dir%2 == direction%2){
             throw new InvalidMoveException();
+        } else {
+            direction = dir;
         }
-        direction = a;
+
     }
 
-    public void updateCoord(float speed){
-        if( direction > 2){
-            speed = -speed;
+    public void updateCoord(int speed){
+        switch(direction) {
+            case 0:
+                y_position -= speed;
+                break;
+            case 1:
+                x_position += speed;
+                break;
+            case 2:
+                y_position += speed;
+                break;
+            case 3:
+                x_position -= speed;
+                break;
         }
-        if(direction%2 == 0){
-            x_position += speed;
-        }else{
-            y_position += speed;
-        }
+
     }
 }

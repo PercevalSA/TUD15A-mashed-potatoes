@@ -38,15 +38,11 @@ public class GameViewer extends BasicGameState{
 
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
-        Application.getApp().getGameController().updateBodyPosition();
+        Application.getApp().getGameController().updateBodyPosition(gc);
     }
 
     @Override
-    public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException
-    {
-        //g.drawString("Howdy!", 10, 10);
-        //float x = 100;
-        //float y = 100;
+    public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException {
 
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
