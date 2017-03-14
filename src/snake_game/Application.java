@@ -8,10 +8,14 @@ import java.util.ArrayDeque;
 
 public class Application extends StateBasedGame {
 
+    // Game state identifiers
+    public static final int MAINMENU = 1;
+    public static final int GAMEVIEWER = 2;
+
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
+    private static MainMenu mainMenu = null;
     private static GameViewer gameView = null;
-    private static final int GAMEVIEWER_ID = 1;
     private static GameController gameController = null;
     private SnakeHead snakeHead = null;
     private Food food = null;
@@ -52,16 +56,19 @@ public class Application extends StateBasedGame {
 
     }
 
+    // Initialize game states
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
+        this.addState(mainMenu);
         this.addState(gameView);
-        this.enterState(gameView.getID());
+        this.enterState(mainMenu.getID());
     }
 
     public static void main(String[] args){
         try {
             instance = new Application("Potato Snake v" + VERSION);
-            gameView = new GameViewer(GAMEVIEWER_ID);
+            mainMenu = new MainMenu(MAINMENU);
+            gameView = new GameViewer(GAMEVIEWER);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
@@ -105,5 +112,17 @@ public class Application extends StateBasedGame {
         return gameController;
     }
 
+    public static MainMenu getMainMenu() {
+        return mainMenu;
+    }
+
+    public static GameViewer getGameView() {
+        return gameView;
+    }
+
     public void setFood(Food food) { this.food = food;}
+
+    public Food getFood() {
+        return food;
+    }
 }
