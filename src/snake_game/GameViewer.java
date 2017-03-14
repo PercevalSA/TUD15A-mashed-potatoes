@@ -44,52 +44,28 @@ public class GameViewer extends BasicGameState{
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
         Food food = app.getFood();
 
-        g.setColor(Color.blue);
         for (SnakeBody element : snakeArray) {
-            float body_x = element.getX();
-            float body_y = element.getY();
-
-
-            Rectangle body_shape = new Rectangle(body_x,body_y,Application.ITEMSIZE,Application.ITEMSIZE);
-            g.draw(body_shape);
-            g.fill(body_shape);
+            element.drawItem(g,element.getX(),element.getY());
         }
 
-        Image img = new Image("res/SnakeHeadVector.jpg");
-        int direction = snake_head.getDirection();
-        img.setCenterOfRotation(0,0);
+        snake_head.drawItem(g,snake_head.getX(),snake_head.getY());
 
-        switch(direction) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                img = img.getFlippedCopy(true,false);
-                break;
-        }
-
-        img.draw(snake_head.getX(), snake_head.getY(),Application.ITEMSIZE,Application.ITEMSIZE);
 
         Rectangle wall = new Rectangle(1,1,app.WIDTH-1,app.GAMEHEIGHT-1);
         g.setColor(Color.white);
         g.draw(wall);
 
+
         if (food != null){
-            Rectangle food_shape = new Rectangle(food.getX(),food.getY(),Application.ITEMSIZE,Application.ITEMSIZE);
-            g.setColor(Color.red);
-            g.draw(food_shape);
-            g.fill(food_shape);
+            food.drawItem(g, food.getX(), food.getY());
         }
 
         g.setColor(Color.white);
-
         g.drawString("FPS: " + app.getAppContainer().getFPS() + "   Score: " + snakeArray.size() + "   Position : (" + snake_head.x_position + ", " + snake_head.y_position + ")"
                 , app.WIDTH/5f, app.GAMEHEIGHT);
 
     }
+
 
     public int getID(){
         return id;

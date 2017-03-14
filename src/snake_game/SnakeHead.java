@@ -1,5 +1,11 @@
 package snake_game;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
+
 import java.util.Deque;
 
 public class SnakeHead extends Item{
@@ -19,7 +25,6 @@ public class SnakeHead extends Item{
         } else {
             previous_direction = dir;
         }
-
     }
 
     public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException {
@@ -74,5 +79,25 @@ public class SnakeHead extends Item{
             if (y_temp == y && x_temp == x) return true;
         }
         return false;
+    }
+
+    public void drawItem(Graphics g, float x, float y) throws SlickException {
+        Image img = new Image("res/SnakeHeadVector.jpg");
+        int direction = getDirection();
+        img.setCenterOfRotation(0,0);
+
+        switch(direction) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                img = img.getFlippedCopy(true,false);
+                break;
+        }
+
+        img.draw(x, y,Application.getITEMSIZE(),Application.getITEMSIZE());
     }
 }
