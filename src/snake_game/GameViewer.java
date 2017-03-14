@@ -9,12 +9,20 @@ import java.util.ArrayDeque;
 
 public class GameViewer extends BasicGameState{
 
-    protected int id;
-    protected Application app;
+    private int id;
+    private Application app;
+    private static GameViewer instance = null;
 
-    public GameViewer(int id){
-        this.id = id;
+    private GameViewer(){
+        this.id = Application.GAMEVIEWER;
         this.app = Application.getApp();
+    }
+
+    public static GameViewer getInstance(){
+        if(instance == null){
+            instance = new GameViewer();
+        }
+        return instance;
     }
 
     @Override
@@ -24,7 +32,7 @@ public class GameViewer extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         try {
             Application.getApp().getGameController().updateBodyPosition(gc);
-        }catch (WallCollisionException|BodyCollisionException e){
+        }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
         }
     }
