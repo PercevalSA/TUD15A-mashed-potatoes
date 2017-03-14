@@ -33,8 +33,8 @@ public class GameController {
             last.updateBody(snakeHead.getX(), snakeHead.getY());
             snakeArray.addFirst(last);
             Application.getApp().setSnakeArray(snakeArray);
+            snakeHead.updateCoord(10);
         }
-        snakeHead.updateCoord(1);
     }
 
     protected void whichDirection(GameContainer gc) {
