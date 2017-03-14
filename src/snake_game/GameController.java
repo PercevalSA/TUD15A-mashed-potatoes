@@ -25,12 +25,15 @@ public class GameController {
     //private ArrayList<SnakeBody> snakeArray= new ArrayList<>();
 
     public void updateBodyPosition(GameContainer gc) {
+        //Get the input from keyboard
         whichDirection(gc);
+
+        //Get the body of the snake
         ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
         SnakeBody last = snakeArray.getLast();
         snakeArray.removeLast();
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
-        last.updateBody(snakeHead.getX(),snakeHead.getY());
+        last.updateBody(snakeHead.getX() - 20,snakeHead.getY());
         snakeArray.addFirst(last);
         Application.getApp().setSnakeArray(snakeArray);
         snakeHead.updateCoord(1);

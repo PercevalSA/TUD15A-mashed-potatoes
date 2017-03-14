@@ -46,17 +46,6 @@ public class GameViewer extends BasicGameState{
 
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
-        
-
-        for (SnakeBody element : snakeArray) {
-            float x = element.getX();
-            float y = element.getY();
-
-            Rectangle rectangle_shape = new Rectangle(x,y,ITEMSIZE,ITEMSIZE);
-
-            g.draw(rectangle_shape);
-            g.fill(rectangle_shape);
-        }
 
         float x = snake_head.getX();
         float y = snake_head.getY();
@@ -65,6 +54,21 @@ public class GameViewer extends BasicGameState{
 
         g.draw(rectangle_shape);
         g.fill(rectangle_shape);
+        g.setColor(Color.white);
+
+
+        for (SnakeBody element : snakeArray) {
+            x = element.getX();
+            y = element.getY();
+
+            rectangle_shape = new Rectangle(x,y,ITEMSIZE,ITEMSIZE);
+
+            g.draw(rectangle_shape);
+            g.fill(rectangle_shape);
+            g.setColor(Color.blue);
+        }
+
+
 
     }
 
