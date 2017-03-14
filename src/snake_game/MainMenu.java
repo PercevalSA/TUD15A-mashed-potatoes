@@ -13,13 +13,9 @@ public class MainMenu extends BasicGameState {
     // ID we return to class 'Application'
     protected int id;
     protected Application app;
-    protected int choice = 0;
-
-
 
     private Font font;
     private TrueTypeFont playersOptionsTTF;
-
 
     public MainMenu(int id) {
         this.id = id;
@@ -37,23 +33,20 @@ public class MainMenu extends BasicGameState {
     // render-method for all the things happening on-screen
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        renderPlayersOptions();
-        if (choice > 10) {
-            app.enterState(app.getGameView().getID());
-
-            // gc.exit();
-        }
+        playersOptionsTTF.drawString(100, 100, "Press Space to start :)");
+        playersOptionsTTF.drawString(100, 150, "Press Escape to quit");
+        playersOptionsTTF.drawString(100, 200, "Score : "+app.getSnakeArray().size());
     }
 
     // update-method with all the magic happening in it
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
         Input input = gc.getInput();
-        if (input.isKeyPressed(Input.KEY_DOWN)) {
-            choice++;
+        if (input.isKeyPressed(Input.KEY_SPACE)) {
+            app.enterState(app.getGameView().getID());
         }
-        if (input.isKeyPressed(Input.KEY_UP)) {
-            choice--;
+        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+            gc.exit();
         }
     }
 
@@ -63,8 +56,4 @@ public class MainMenu extends BasicGameState {
         return id;
     }
 
-    private void renderPlayersOptions() {
-        playersOptionsTTF.drawString(100, 100, "toto"+choice);
-
-    }
 }
