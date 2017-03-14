@@ -14,6 +14,10 @@ public class MainMenu extends BasicGameState {
     protected int id;
     protected Application app;
 
+    private String gameOverMessage;
+
+    private static boolean firstTimeLaunched = true;
+
     private Font font;
     private TrueTypeFont playersOptionsTTF;
 
@@ -33,9 +37,15 @@ public class MainMenu extends BasicGameState {
     // render-method for all the things happening on-screen
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        playersOptionsTTF.drawString(100, 100, "Press Space to start :)");
-        playersOptionsTTF.drawString(100, 150, "Press Escape to quit");
-        playersOptionsTTF.drawString(100, 200, "Score : "+app.getSnakeArray().size());
+        if(firstTimeLaunched) {
+            playersOptionsTTF.drawString(100, 100, "Press Space to start :)");
+            playersOptionsTTF.drawString(100, 150, "Press Escape to quit");
+        }
+        else{
+            playersOptionsTTF.drawString(100, 100, "Game Over");
+            playersOptionsTTF.drawString(100, 150, gameOverMessage);
+            playersOptionsTTF.drawString(100, 200, "Score : " + app.getSnakeArray().size());
+        }
     }
 
     // update-method with all the magic happening in it
@@ -57,4 +67,11 @@ public class MainMenu extends BasicGameState {
         return id;
     }
 
+    public static void setFirstTimeLaunched() {
+        MainMenu.firstTimeLaunched = false;
+    }
+
+    public void setGameOverMessage(String gameOverMessage) {
+        this.gameOverMessage = gameOverMessage;
+    }
 }
