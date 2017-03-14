@@ -22,12 +22,16 @@ public class SnakeHead extends Item{
 
     }
 
-    public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException, InvalidMoveException {
+    public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException {
         float y_temp = y_position;
         float x_temp = x_position;
 
         if(direction != previous_direction) {
-            updateDirection(direction);
+            try {
+                updateDirection(direction);
+            }catch(InvalidMoveException e){
+                direction = previous_direction;
+            }
         }
 
         switch(direction) {
@@ -55,9 +59,9 @@ public class SnakeHead extends Item{
     }
 
     private boolean checkWallCollision(float x_temp, float y_temp) {
-        int GAMEHEIGHT = Application.getGAMEHEIGHT();
-        int GAMEWIDTH = Application.getWIDTH();
-        if(x_temp <= 0 - Application.getITEMSIZE() / 2|| x_temp + Application.getITEMSIZE() / 2 >= GAMEWIDTH || y_temp <= 0 - Application.getITEMSIZE() / 2|| y_temp + Application.getITEMSIZE() / 2 >= GAMEHEIGHT)
+        int GAMEHEIGHT = Application.GAMEHEIGHT;
+        int GAMEWIDTH = Application.WIDTH;
+        if(x_temp <= 0 - Application.ITEMSIZE / 2|| x_temp + Application.ITEMSIZE / 2 >= GAMEWIDTH || y_temp <= 0 - Application.ITEMSIZE / 2|| y_temp + Application.ITEMSIZE / 2 >= GAMEHEIGHT)
             return true;
         return false;
     }

@@ -35,13 +35,7 @@ public class GameController {
             float temp_x = snakeHead.getX();
             float temp_y = snakeHead.getY();
 
-            try {
-                snakeHead.updateCoord(20, direction);
-            } catch(InvalidMoveException e) {
-                try {
-                    snakeHead.updateCoord(20, snakeHead.getDirection());
-                } catch(InvalidMoveException e2) {}
-            }
+            snakeHead.updateCoord(20, direction);
 
             //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
@@ -60,19 +54,21 @@ public class GameController {
                 Application.getApp().getFood().eat();
 
                 Random rand = new Random();
-                float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-                float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+                float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+                float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
                 Application.getApp().getFood().setX(x_position);
                 Application.getApp().getFood().setY(y_position);
             }
         }
     }
 
+    //TODO: Shift to Factory
     public void createFoodItem(){
         Random rand = new Random();
-        float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-        float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
         Application.getApp().setFood(new Food(x_position, y_position, false));
+
 
         System.out.println("Food was created here : (" + x_position + ", " + y_position + ")" );
     }
@@ -81,15 +77,15 @@ public class GameController {
         Food foo = Application.getApp().getFood();
         if(foo != null) {
             SnakeHead snakeHead = Application.getApp().getSnakeHead();
-            float x_snake = snakeHead.x_position + Application.getITEMSIZE() / 2;
-            float y_snake = snakeHead.y_position + Application.getITEMSIZE() / 2;
+            float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;
+            float y_snake = snakeHead.y_position + Application.ITEMSIZE / 2;
             float x_food = foo.x_position;
             float y_food = foo.y_position;
 
-            if ((x_snake >= x_food - (Application.getITEMSIZE() / 2))
-                    && (x_snake <= x_food + 1.5 * Application.getITEMSIZE())
-                    && (y_snake >= y_food - 0.5 * Application.getITEMSIZE())
-                    && (y_snake <= y_food + 1.5 * Application.getITEMSIZE())
+            if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
+                    && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
+                    && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
+                    && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
                     ) {
                 System.out.println("You ate the FOOOOOOOOD");
                 return true;

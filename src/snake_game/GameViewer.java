@@ -42,7 +42,7 @@ public class GameViewer extends BasicGameState{
             float body_y = element.getY();
 
 
-            Rectangle body_shape = new Rectangle(body_x,body_y,Application.getITEMSIZE(),Application.getITEMSIZE());
+            Rectangle body_shape = new Rectangle(body_x,body_y,Application.ITEMSIZE,Application.ITEMSIZE);
             g.draw(body_shape);
             g.fill(body_shape);
         }
@@ -63,14 +63,14 @@ public class GameViewer extends BasicGameState{
                 break;
         }
 
-        img.draw(snake_head.getX(), snake_head.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
+        img.draw(snake_head.getX(), snake_head.getY(),Application.ITEMSIZE,Application.ITEMSIZE);
 
-        Rectangle wall = new Rectangle(1,1,app.getWIDTH()-1,app.getGAMEHEIGHT()-1);
+        Rectangle wall = new Rectangle(1,1,app.WIDTH-1,app.GAMEHEIGHT-1);
         g.setColor(Color.white);
         g.draw(wall);
 
         if (food != null){
-            Rectangle food_shape = new Rectangle(food.getX(),food.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
+            Rectangle food_shape = new Rectangle(food.getX(),food.getY(),Application.ITEMSIZE,Application.ITEMSIZE);
             g.setColor(Color.red);
             g.draw(food_shape);
             g.fill(food_shape);
@@ -79,7 +79,7 @@ public class GameViewer extends BasicGameState{
         g.setColor(Color.white);
 
         g.drawString("FPS: " + app.getAppContainer().getFPS() + "   Score: " + snakeArray.size() + "   Position : (" + snake_head.x_position + ", " + snake_head.y_position + ")"
-                , app.getWIDTH()/5f, app.getGAMEHEIGHT());
+                , app.WIDTH/5f, app.GAMEHEIGHT);
 
     }
 
