@@ -79,7 +79,7 @@ public class GameController {
         Random rand = new Random();
         float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
         float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        Application.getApp().setFood(new Food(x_position, y_position, false));
+        Application.getApp().setFood(new Food(x_position, y_position, true));
 
 
         System.out.println("Food was created here : (" + x_position + ", " + y_position + ")" );
