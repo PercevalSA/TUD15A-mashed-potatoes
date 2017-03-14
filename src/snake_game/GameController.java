@@ -46,10 +46,11 @@ public class GameController {
 
     public void createFoodItem(){
         Random rand = new Random();
-         float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-         float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+        float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+        float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
         Application.getApp().setFood(new Food(x_position, y_position, 5));
 
+        System.out.println("Food was created here : (" + x_position + ", " + y_position + ")" );
     }
 
     private boolean checkFoodCollision() {
@@ -63,7 +64,7 @@ public class GameController {
 
             if ((x_snake >= x_food - (Application.getITEMSIZE() / 2))
                     && (x_snake <= x_food + 1.5 * Application.getITEMSIZE())
-                    && (y_snake <= y_food - 0.5 * Application.getITEMSIZE())
+                    && (y_snake >= y_food - 0.5 * Application.getITEMSIZE())
                     && (y_snake <= y_food + 1.5 * Application.getITEMSIZE())
                     ) {
                 System.out.println("You ate the FOOOOOOOOD");

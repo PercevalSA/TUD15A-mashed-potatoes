@@ -71,7 +71,8 @@ public class GameViewer extends BasicGameState{
         }
 
         g.setColor(Color.white);
-        g.drawString("Score: " + snakeArray.size(), app.getWIDTH()/2.3f, app.getGAMEHEIGHT());
+        g.drawString("Score: " + snakeArray.size() + "   Position : (" + snake_head.x_position + ", " + snake_head.y_position + ")"
+                , app.getWIDTH()/2.3f, app.getGAMEHEIGHT());
 
 
 
