@@ -68,6 +68,7 @@ public class Application extends StateBasedGame {
     public static void main(String[] args){
         try {
             instance = new Application("Potato Snake v" + VERSION);
+            gameController.createFoodItem();
             mainMenu = new MainMenu(MAINMENU);
             gameView = new GameViewer(GAMEVIEWER);
             appContainer = new AppGameContainer(instance);
@@ -75,7 +76,6 @@ public class Application extends StateBasedGame {
             appContainer.setTargetFrameRate(FPS);
             appContainer.setShowFPS(true);
             appContainer.start();
-            gameController.createFoodItem();
         } catch(SlickException e) {
             e.printStackTrace();
         }

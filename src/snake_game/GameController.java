@@ -19,27 +19,23 @@ public class GameController {
      * Left : 3
      */
 
-
-    public void updateBodyPosition(GameContainer gc) throws WallCollisionException {
-
-        //Get the input from keyboard
-        whichDirection(gc);
-
+    public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException {
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         if( ++fps % 10 == 0) {
             fps=0;
-            //Update the body of the snake
+            //Get the input from keyboard
+            whichDirection(gc);
+            float temp_x = snakeHead.getX();
+            float temp_y = snakeHead.getY();
+            snakeHead.updateCoord(20);
+            //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
             SnakeBody last = snakeArray.getLast();
             snakeArray.removeLast();
-            last.updateBody(snakeHead.getX(), snakeHead.getY());
+            last.updateBody(temp_x, temp_y);
             snakeArray.addFirst(last);
             Application.getApp().setSnakeArray(snakeArray);
-
-            //Update position of the head
-            snakeHead.updateCoord(10);
-
             checkFoodCollision();
 
             if (checkFoodCollision()) {
@@ -54,10 +50,11 @@ public class GameController {
 
     public void createFoodItem(){
         Random rand = new Random();
-         float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-         float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+        float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+        float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
         Application.getApp().setFood(new Food(x_position, y_position, 5));
 
+        System.out.println("Food was created here : (" + x_position + ", " + y_position + ")" );
     }
 
     private boolean checkFoodCollision() {
@@ -71,7 +68,7 @@ public class GameController {
 
             if ((x_snake >= x_food - (Application.getITEMSIZE() / 2))
                     && (x_snake <= x_food + 1.5 * Application.getITEMSIZE())
-                    && (y_snake <= y_food - 0.5 * Application.getITEMSIZE())
+                    && (y_snake >= y_food - 0.5 * Application.getITEMSIZE())
                     && (y_snake <= y_food + 1.5 * Application.getITEMSIZE())
                     ) {
                 System.out.println("You ate the FOOOOOOOOD");
@@ -110,9 +107,4 @@ public class GameController {
         }
     }
 
-
-    public void update(){
-        SnakeHead snakeHead = Application.getApp().getSnakeHead();
-
-    }
 }
