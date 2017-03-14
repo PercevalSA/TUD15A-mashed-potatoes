@@ -10,16 +10,27 @@ package snake_game;
  */
 
 public class GameController {
+
     public int fps = 0;
     private int direction = 1;
+    GameController instance = null;
 
-    /*
-     * Directions (clockwise order):
-     * Up : 0
-     * Right : 1
-     * Down : 2
-     * Left : 3
-     */
+    private GameController() {}
+
+    public GameController getInstance() {
+        if(instance == null) {
+            instance = new GameController();
+        }
+        return instance;
+    }
+
+/*
+ * Directions (clockwise order):
+ * Up : 0
+ * Right : 1
+ * Down : 2
+ * Left : 3
+ */
 
     public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException {
         //Get the snakeHead for updates
