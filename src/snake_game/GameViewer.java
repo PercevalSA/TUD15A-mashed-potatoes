@@ -36,6 +36,9 @@ public class GameViewer extends BasicGameState{
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
 
+        Food food = app.getFood();
+
+
         g.setColor(Color.blue);
         for (SnakeBody element : snakeArray) {
             float body_x = element.getX();
@@ -47,27 +50,6 @@ public class GameViewer extends BasicGameState{
             g.draw(rectangle_shape);
             g.fill(rectangle_shape);
         }
-//
-//        Image img = new Image("res/SnakeHeadVector.jpg");
-//        int direction = snake_head.getDirection();
-//
-//        switch(direction) {
-//            case 0:
-//                img = img.getFlippedCopy(false,false);
-//                break;
-//            case 1:
-//                img = img.getFlippedCopy(true,false);
-//                break;
-//            case 2:
-//                img = img.getFlippedCopy(false,true);
-//                break;
-//            case 3:
-//                img = img.getFlippedCopy(true,true);
-//                break;
-//        }
-//
-//
-//        img.draw(snake_head.getX(), snake_head.getY());
 
 
 
@@ -81,7 +63,16 @@ public class GameViewer extends BasicGameState{
         g.setColor(Color.white);
         g.draw(wall);
 
+        if (food != null){
+            Rectangle food_shape = new Rectangle(food.getX(),food.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
+            g.setColor(Color.red);
+            g.draw(food_shape);
+            g.fill(food_shape);
+        }
+
+        g.setColor(Color.white);
         g.drawString("Score: " + snakeArray.size(), app.getWIDTH()/2.3f, app.getGAMEHEIGHT());
+
 
 
 
