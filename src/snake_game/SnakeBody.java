@@ -1,8 +1,5 @@
 package snake_game;
 
-/**
- * Created by martin on 13.03.17.
- */
 public class SnakeBody extends Item {
 
     public SnakeBody(float x,float y){

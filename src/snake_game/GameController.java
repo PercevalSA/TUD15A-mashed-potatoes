@@ -1,11 +1,7 @@
 package snake_game;
     import org.newdawn.slick.GameContainer;
     import org.newdawn.slick.Input;
-    import org.newdawn.slick.SlickException;
-
     import java.util.ArrayDeque;
-    import java.util.ArrayList;
-    import java.util.Deque;
 
 /**
  * main game controller
@@ -21,8 +17,6 @@ public class GameController {
      * Down : 2
      * Left : 3
      */
-
-    //private ArrayList<SnakeBody> snakeArray= new ArrayList<>();
 
     public void updateBodyPosition(GameContainer gc) {
         whichDirection(gc);

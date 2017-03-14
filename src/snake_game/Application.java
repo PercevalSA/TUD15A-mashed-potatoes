@@ -4,12 +4,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
 import java.util.ArrayDeque;
-
-/**
- * Created by martin on 13.03.17.
- */
 
 public class Application extends StateBasedGame {
 
@@ -62,8 +57,6 @@ public class Application extends StateBasedGame {
             e.printStackTrace();
         }
     }
-
-
 
     public static int getWIDTH() {
         return WIDTH;

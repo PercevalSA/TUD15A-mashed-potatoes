@@ -1,10 +1,5 @@
 package snake_game;
 
-import org.lwjgl.Sys;
-
-/**
- * Created by martin on 13.03.17.
- */
 public class SnakeHead extends Item{
     private int direction = 1;
 
@@ -40,6 +35,5 @@ public class SnakeHead extends Item{
                 x_position -= speed;
                 break;
         }
-
     }
 }
