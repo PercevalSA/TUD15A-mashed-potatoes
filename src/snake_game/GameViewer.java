@@ -32,8 +32,6 @@ public class GameViewer extends BasicGameState{
     @Override
     public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException {
 
-
-
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
         Food food = app.getFood();
@@ -70,15 +68,10 @@ public class GameViewer extends BasicGameState{
         g.drawString("Score: " + snakeArray.size() + "   Position : (" + snake_head.x_position + ", " + snake_head.y_position + ")"
                 , app.getWIDTH()/2.3f, app.getGAMEHEIGHT());
 
-
-
-
-
     }
 
     public int getID(){
         return id;
     }
-
 
 }

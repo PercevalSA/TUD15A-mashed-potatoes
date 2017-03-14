@@ -48,9 +48,12 @@ public class GameController {
             last.updateBody(temp_x, temp_y);
             snakeArray.addFirst(last);
             Application.getApp().setSnakeArray(snakeArray);
-            checkFoodCollision();
 
             if (checkFoodCollision()) {
+
+                SnakeBody grow = snakeArray.getLast();
+                snakeArray.addLast(new SnakeBody(grow.getX(), grow.getY()));
+
                 Random rand = new Random();
                 float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
                 float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
