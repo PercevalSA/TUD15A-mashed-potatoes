@@ -47,11 +47,30 @@ public class GameViewer extends BasicGameState{
             g.fill(body_shape);
         }
 
-        Rectangle head_shape = new Rectangle(snake_head.getX(),snake_head.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
+        Image img = new Image("res/SnakeHeadVector.jpg");
+        int direction = snake_head.getDirection();
+        img.setCenterOfRotation(0,0);
 
-        g.setColor(Color.white);
-        g.draw(head_shape);
-        g.fill(head_shape);
+        switch(direction) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                img = img.getFlippedCopy(true,false);
+                break;
+        }
+
+        img.draw(snake_head.getX(), snake_head.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
+
+//
+//        Rectangle head_shape = new Rectangle(snake_head.getX(),snake_head.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
+//
+//        g.setColor(Color.white);
+//        g.draw(head_shape);
+//        g.fill(head_shape);
 
         Rectangle wall = new Rectangle(1,1,app.getWIDTH()-1,app.getGAMEHEIGHT()-1);
         g.setColor(Color.white);
