@@ -42,9 +42,11 @@ public class GameController {
 
     public void createFoodItem(){
         Random rand = new Random();
-         float x_position = rand.nextInt(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-         float y_position = rand.nextInt(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-         Application.getApp().setFood(new Food(x_position, y_position, 5));
+         //float x_position = rand.nextInt(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+         //float y_position = rand.nextInt(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+         float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+         float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+        Application.getApp().setFood(new Food(x_position, y_position, 5));
 
     }
 
