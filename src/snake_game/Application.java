@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 public class Application extends StateBasedGame {
 
@@ -15,12 +16,11 @@ public class Application extends StateBasedGame {
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
     private static MainMenu mainMenu = null;
-    private static GameViewer gameView = null;
-    private static GameController gameController = null;
 
     private SnakeHead snakeHead = null;
-    private Food food = null;
+
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
+
 
     // Application Properties
     public static final int WIDTH   = 640;
@@ -30,7 +30,6 @@ public class Application extends StateBasedGame {
     public static final double VERSION = 1.0;
 
     public static final int ITEMSIZE = 20;
-    public static final int BODYSIZE = 15;
 
 
     public static Application getApp() {
@@ -57,6 +56,7 @@ public class Application extends StateBasedGame {
         try {
             instance = new Application("Potato Snake v" + VERSION);
             GameController.getInstance().createFoodItem();
+            new Thread(FoodManager.getInstance()).start();
             mainMenu = new MainMenu(MAINMENU);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
@@ -92,21 +92,8 @@ public class Application extends StateBasedGame {
         this.snakeArray = snakeArray;
     }
 
-    public static GameController getGameController() {
-        return gameController;
-    }
-
     public static MainMenu getMainMenu() {
         return mainMenu;
     }
 
-    public static GameViewer getGameView() {
-        return gameView;
-    }
-
-    public void setFood(Food food) { this.food = food;}
-
-    public Food getFood() {
-        return food;
-    }
 }

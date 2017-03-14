@@ -42,7 +42,6 @@ public class GameViewer extends BasicGameState{
 
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
-        Food food = app.getFood();
 
         for (SnakeBody element : snakeArray) {
             element.drawItem(g,element.getX(),element.getY());
@@ -56,8 +55,19 @@ public class GameViewer extends BasicGameState{
         g.draw(wall);
 
 
-        if (food != null){
-            food.drawItem(g, food.getX(), food.getY());
+        //Draw the good apple
+        Food foo = FoodManager.getInstance().getGoodApple();
+        if (foo != null){
+            foo.drawItem(g, foo.getX(), foo.getY());
+        }
+
+
+        // Draw list of other apples
+        for(Food food : FoodManager.getInstance().getApples()){
+
+            if (food != null){
+                food.drawItem(g, food.getX(), food.getY());
+            }
         }
 
         g.setColor(Color.white);
