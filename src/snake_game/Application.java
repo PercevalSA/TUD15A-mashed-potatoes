@@ -42,19 +42,7 @@ public class Application extends StateBasedGame {
 
     public Application(String appName){
         super(appName);
-        snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
-        gameController = new GameController();
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-
+        resetGame();
     }
 
     // Initialize game states
@@ -79,6 +67,19 @@ public class Application extends StateBasedGame {
         } catch(SlickException e) {
             e.printStackTrace();
         }
+    }
+
+
+    protected void resetGame() {
+        snakeArray.clear();
+
+        snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
+        gameController = new GameController();
+
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
     }
 
     public static int getWIDTH() {
