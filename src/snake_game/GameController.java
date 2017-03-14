@@ -41,6 +41,14 @@ public class GameController {
             snakeHead.updateCoord(10);
 
             checkFoodCollision();
+
+            if (checkFoodCollision()) {
+                Random rand = new Random();
+                float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+                float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+                Application.getApp().getFood().setX(x_position);
+                Application.getApp().getFood().setY(y_position);
+            }
         }
     }
 
@@ -101,7 +109,8 @@ public class GameController {
             } catch (InvalidMoveException e) {}
         }
     }
-    
+
+
     public void update(){
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
 

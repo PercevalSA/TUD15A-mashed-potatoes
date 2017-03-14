@@ -17,4 +17,12 @@ public abstract class Item {
     public float getY(){
         return y_position;
     }
+
+    public void setX(float x_position){
+        this.x_position = x_position;
+    }
+
+    public void setY(float y_position){
+        this.y_position = y_position;
+    }
 }
