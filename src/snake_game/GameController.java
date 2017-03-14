@@ -11,6 +11,8 @@ package snake_game;
 
 public class GameController {
     public int fps = 0;
+    private int direction = 1;
+
     /*
      * Directions (clockwise order):
      * Up : 0
@@ -22,13 +24,23 @@ public class GameController {
     public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException {
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
-        if( ++fps % 10 == 0) {
+        whichDirection(gc);
+
+        if( ++fps % 5 == 0) {
             fps=0;
+
             //Get the input from keyboard
-            whichDirection(gc);
             float temp_x = snakeHead.getX();
             float temp_y = snakeHead.getY();
-            snakeHead.updateCoord(20);
+
+            try {
+                snakeHead.updateCoord(20, direction);
+            } catch(InvalidMoveException e) {
+                try {
+                    snakeHead.updateCoord(20, snakeHead.getDirection());
+                } catch(InvalidMoveException e2) {}
+            }
+
             //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
             SnakeBody last = snakeArray.getLast();
@@ -74,27 +86,19 @@ public class GameController {
         Input input = gc.getInput();
 
         if(input.isKeyDown(Input.KEY_UP)) {
-            try {
-                Application.getApp().getSnakeHead().updateDirection(0);
-            }catch (InvalidMoveException e) {}
+            direction = 0;
         }
 
         if(input.isKeyDown(Input.KEY_DOWN)) {
-            try {
-                Application.getApp().getSnakeHead().updateDirection(2);
-            } catch (InvalidMoveException e) {}
+            direction = 2;
         }
 
         if(input.isKeyDown(Input.KEY_RIGHT)) {
-            try {
-                Application.getApp().getSnakeHead().updateDirection(1);
-            } catch (InvalidMoveException e) {}
+            direction = 1;
         }
 
         if(input.isKeyDown(Input.KEY_LEFT)) {
-            try {
-                Application.getApp().getSnakeHead().updateDirection(3);
-            } catch (InvalidMoveException e) {}
+            direction = 3;
         }
     }
 }

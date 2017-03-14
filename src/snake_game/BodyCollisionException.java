@@ -1,7 +1,9 @@
 package snake_game;
 
-/**
- * Created by tsepol on 14-03-2017.
- */
 public class BodyCollisionException extends Exception {
+    public BodyCollisionException() {
+        super();
+        Application app = Application.getApp();
+        app.enterState(app.getMainMenu().getID());
+    }
 }
