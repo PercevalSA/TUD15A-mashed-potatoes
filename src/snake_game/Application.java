@@ -17,20 +17,20 @@ public class Application extends StateBasedGame {
     private static MainMenu mainMenu = null;
     private static GameViewer gameView = null;
     private static GameController gameController = null;
+
     private SnakeHead snakeHead = null;
     private Food food = null;
-
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
 
     // Application Properties
-    private static final int WIDTH   = 640;
-    private static final int HEIGHT  = 500;
-    private static final int GAMEHEIGHT = 480;
-    private static final int FPS     = 60;
-    private static final double VERSION = 1.0;
+    public static final int WIDTH   = 640;
+    public static final int HEIGHT  = 500;
+    public static final int GAMEHEIGHT = 480;
+    public static final int FPS     = 60;
+    public static final double VERSION = 1.0;
 
-    private static final int ITEMSIZE = 20;
-    private static final int BODYSIZE = 15;
+    public static final int ITEMSIZE = 20;
+    public static final int BODYSIZE = 15;
 
 
     public static Application getApp() {
@@ -49,7 +49,7 @@ public class Application extends StateBasedGame {
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         this.addState(mainMenu);
-        this.addState(gameView);
+        this.addState(GameViewer.getInstance());
         this.enterState(mainMenu.getID());
     }
 
@@ -58,7 +58,6 @@ public class Application extends StateBasedGame {
             instance = new Application("Potato Snake v" + VERSION);
             gameController.createFoodItem();
             mainMenu = new MainMenu(MAINMENU);
-            gameView = new GameViewer(GAMEVIEWER);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
@@ -80,22 +79,6 @@ public class Application extends StateBasedGame {
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-    }
-
-    public static int getWIDTH() {
-        return WIDTH;
-    }
-
-    public static int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    public static int getITEMSIZE() {
-        return ITEMSIZE;
-    }
-
-    public static int getGAMEHEIGHT() {
-        return GAMEHEIGHT;
     }
 
     public SnakeHead getSnakeHead() {

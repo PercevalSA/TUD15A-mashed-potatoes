@@ -9,12 +9,20 @@ import java.util.ArrayDeque;
 
 public class GameViewer extends BasicGameState{
 
-    protected int id;
-    protected Application app;
+    private int id;
+    private Application app;
+    private static GameViewer instance = null;
 
-    public GameViewer(int id){
-        this.id = id;
+    private GameViewer(){
+        this.id = Application.GAMEVIEWER;
         this.app = Application.getApp();
+    }
+
+    public static GameViewer getInstance(){
+        if(instance == null){
+            instance = new GameViewer();
+        }
+        return instance;
     }
 
     @Override
@@ -24,7 +32,7 @@ public class GameViewer extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         try {
             Application.getApp().getGameController().updateBodyPosition(gc);
-        }catch (WallCollisionException|BodyCollisionException e){
+        }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
         }
     }
@@ -42,18 +50,19 @@ public class GameViewer extends BasicGameState{
 
         snake_head.drawItem(g,snake_head.getX(),snake_head.getY());
 
-        Rectangle wall = new Rectangle(1,1,app.getWIDTH()-1,app.getGAMEHEIGHT()-1);
+
+        Rectangle wall = new Rectangle(1,1,app.WIDTH-1,app.GAMEHEIGHT-1);
         g.setColor(Color.white);
         g.draw(wall);
 
 
         if (food != null){
-            food.drawItem(g,food.getX(),food.getY());
+            food.drawItem(g, food.getX(), food.getY());
         }
 
         g.setColor(Color.white);
         g.drawString("FPS: " + app.getAppContainer().getFPS() + "   Score: " + snakeArray.size() + "   Position : (" + snake_head.x_position + ", " + snake_head.y_position + ")"
-                , app.getWIDTH()/5f, app.getGAMEHEIGHT());
+                , app.WIDTH/5f, app.GAMEHEIGHT);
 
     }
 

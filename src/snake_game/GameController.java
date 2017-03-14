@@ -1,4 +1,5 @@
 package snake_game;
+    import org.newdawn.slick.AppGameContainer;
     import org.newdawn.slick.GameContainer;
     import org.newdawn.slick.Input;
     import java.util.ArrayDeque;
@@ -10,64 +11,76 @@ package snake_game;
  */
 
 public class GameController {
+
     public int fps = 0;
     private int direction = 1;
+    private int delay = 5;
 
-    /*
-     * Directions (clockwise order):
-     * Up : 0
-     * Right : 1
-     * Down : 2
-     * Left : 3
-     */
+    GameController instance = null;
 
-    public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException {
+    private GameController() {}
+
+    public GameController getInstance() {
+        if(instance == null) {
+            instance = new GameController();
+        }
+        return instance;
+    }
+
+/*
+ * Directions (clockwise order):
+ * Up : 0
+ * Right : 1
+ * Down : 2
+ * Left : 3
+ */
+
+    public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException, InvalidSizeException {
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         whichDirection(gc);
 
-        if( ++fps % 5 == 0) {
+        if( ++fps % delay == 0) {
             fps=0;
 
             //Get the input from keyboard
             float temp_x = snakeHead.getX();
             float temp_y = snakeHead.getY();
 
-            try {
-                snakeHead.updateCoord(20, direction);
-            } catch(InvalidMoveException e) {
-                try {
-                    snakeHead.updateCoord(20, snakeHead.getDirection());
-                } catch(InvalidMoveException e2) {}
-            }
+            snakeHead.updateCoord(20, direction);
 
             //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
-            SnakeBody last = snakeArray.getLast();
-            snakeArray.removeLast();
-            last.updateBody(temp_x, temp_y);
-            snakeArray.addFirst(last);
-            Application.getApp().setSnakeArray(snakeArray);
+            if(snakeArray.size() != 0) {
+                SnakeBody last = snakeArray.getLast();
+                snakeArray.removeLast();
+                last.updateBody(temp_x, temp_y);
+                snakeArray.addFirst(last);
+                Application.getApp().setSnakeArray(snakeArray);
+            }
+            else
+                throw new InvalidSizeException();
 
             if (checkFoodCollision()) {
 
-                SnakeBody grow = snakeArray.getLast();
-                snakeArray.addLast(new SnakeBody(grow.getX(), grow.getY()));
+                Application.getApp().getFood().eat();
 
                 Random rand = new Random();
-                float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-                float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+                float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+                float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
                 Application.getApp().getFood().setX(x_position);
                 Application.getApp().getFood().setY(y_position);
             }
         }
     }
 
+    //TODO: Shift to Factory
     public void createFoodItem(){
         Random rand = new Random();
-        float x_position = rand.nextFloat()*(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-        float y_position = rand.nextFloat()*(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
-        Application.getApp().setFood(new Food(x_position, y_position, 5));
+        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        Application.getApp().setFood(new Food(x_position, y_position, false));
+
 
         System.out.println("Food was created here : (" + x_position + ", " + y_position + ")" );
     }
@@ -76,15 +89,15 @@ public class GameController {
         Food foo = Application.getApp().getFood();
         if(foo != null) {
             SnakeHead snakeHead = Application.getApp().getSnakeHead();
-            float x_snake = snakeHead.x_position + Application.getITEMSIZE() / 2;
-            float y_snake = snakeHead.y_position + Application.getITEMSIZE() / 2;
+            float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;
+            float y_snake = snakeHead.y_position + Application.ITEMSIZE / 2;
             float x_food = foo.x_position;
             float y_food = foo.y_position;
 
-            if ((x_snake >= x_food - (Application.getITEMSIZE() / 2))
-                    && (x_snake <= x_food + 1.5 * Application.getITEMSIZE())
-                    && (y_snake >= y_food - 0.5 * Application.getITEMSIZE())
-                    && (y_snake <= y_food + 1.5 * Application.getITEMSIZE())
+            if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
+                    && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
+                    && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
+                    && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
                     ) {
                 System.out.println("You ate the FOOOOOOOOD");
                 return true;
