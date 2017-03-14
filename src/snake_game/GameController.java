@@ -113,5 +113,4 @@ public class GameController {
             direction = 3;
         }
     }
-
 }
