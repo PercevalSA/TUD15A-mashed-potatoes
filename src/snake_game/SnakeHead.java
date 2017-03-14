@@ -20,20 +20,37 @@ public class SnakeHead extends Item{
 
     }
 
-    public void updateCoord(int speed){
+    public void updateCoord (int speed) throws WallCollisionException {
+        float y_temp = y_position;
+        float x_temp = x_position;
+
         switch(direction) {
             case 0:
-                y_position -= speed;
+                y_temp -= speed;
                 break;
             case 1:
-                x_position += speed;
+                x_temp += speed;
                 break;
             case 2:
-                y_position += speed;
+                y_temp += speed;
                 break;
             case 3:
-                x_position -= speed;
+                x_temp -= speed;
                 break;
         }
+
+        if(checkWallCollision(x_temp, y_temp))
+            throw new WallCollisionException();
+
+        x_position = x_temp;
+        y_position = y_temp;
+    }
+
+    private boolean checkWallCollision(float x_temp, float y_temp) {
+        int GAMEHEIGHT = Application.getGAMEHEIGHT();
+        int GAMEWIDTH = Application.getWIDTH();
+        if(x_temp <= 0 - GameViewer.ITEMSIZE / 2|| x_temp + GameViewer.ITEMSIZE / 2 >= GAMEWIDTH || y_temp <= 0 - GameViewer.ITEMSIZE / 2|| y_temp + GameViewer.ITEMSIZE / 2 >= GAMEHEIGHT)
+            return true;
+        return false;
     }
 }
