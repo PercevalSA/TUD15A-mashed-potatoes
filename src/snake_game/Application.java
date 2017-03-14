@@ -19,7 +19,8 @@ public class Application extends StateBasedGame {
 
     // Application Properties
     private static final int WIDTH   = 640;
-    private static final int HEIGHT  = 480;
+    private static final int HEIGHT  = 500;
+    private static final int GAMEHEIGHT = 480;
     private static final int FPS     = 60;
     private static final double VERSION = 1.0;
 
@@ -74,6 +75,10 @@ public class Application extends StateBasedGame {
 
     public static int getHEIGHT() {
         return HEIGHT;
+    }
+
+    public static int getGAMEHEIGHT() {
+        return GAMEHEIGHT;
     }
 
     public SnakeHead getSnakeHead() {
