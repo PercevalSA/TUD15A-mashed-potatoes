@@ -2,6 +2,7 @@ package snake_game;
     import org.newdawn.slick.GameContainer;
     import org.newdawn.slick.Input;
     import java.util.ArrayDeque;
+    import java.util.Random;
 
 /**
  * main game controller
@@ -17,6 +18,10 @@ public class GameController {
      * Down : 2
      * Left : 3
      */
+
+    public GameController(){
+        createFoodItem();
+    }
 
     public void updateBodyPosition(GameContainer gc) {
         //Get the input from keyboard
@@ -36,6 +41,15 @@ public class GameController {
             snakeHead.updateCoord(10);
         }
     }
+
+    public void createFoodItem(){
+        Random rand = new Random();
+         float x_position = rand.nextInt(Application.getWIDTH()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+         float y_position = rand.nextInt(Application.getGAMEHEIGHT()- 2 * Application.getITEMSIZE()) + Application.getITEMSIZE();
+         Application.getApp().setFood(new Food(x_position, y_position, 5));
+
+    }
+
 
     protected void whichDirection(GameContainer gc) {
 

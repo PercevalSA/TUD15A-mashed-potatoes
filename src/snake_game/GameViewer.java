@@ -11,8 +11,8 @@ public class GameViewer extends BasicGameState{
     protected int id;
     protected Application app;
 
-    private static final int ITEMSIZE = 20;
-    private static final int BODYSIZE = 15;
+    //private static final int ITEMSIZE = 20;
+    //private static final int BODYSIZE = 15;
 
 
     public GameViewer(int id){
