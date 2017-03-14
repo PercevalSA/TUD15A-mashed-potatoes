@@ -59,6 +59,7 @@ public class Application extends StateBasedGame {
         try {
             instance = new Application("Potato Snake v" + VERSION);
             GameController.getInstance().createFoodItem();
+            new Thread(FoodManager.getInstance()).start();
             mainMenu = new MainMenu(MAINMENU);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);

@@ -113,6 +113,7 @@ public class GameController {
 
     //TODO: Shift to Factory
     public void createFoodItem(){
+
         Random rand = new Random();
         float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
         float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
