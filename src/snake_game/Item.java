@@ -1,7 +1,13 @@
 package snake_game;
 
-public abstract class Item {
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.*;
+import org.newdawn.slick.geom.Rectangle;
 
+import java.awt.*;
+
+public abstract class Item {
+    protected Color color;
     protected float x_position;
     protected float y_position;
 
@@ -24,5 +30,10 @@ public abstract class Item {
 
     public void setY(float y_position){
         this.y_position = y_position;
+    }
+
+
+    public Color getCol(){
+        return color;
     }
 }

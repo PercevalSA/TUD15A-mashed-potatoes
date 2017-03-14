@@ -1,6 +1,12 @@
 package snake_game;
 
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
+
 import java.util.ArrayDeque;
+
 
 public class Food extends Item {
 
@@ -34,4 +40,12 @@ public class Food extends Item {
             snakeArray.removeLast();
         }
     }
+    public void drawItem(Graphics g, float x, float y){
+
+        g.setColor(tasteBehavior.getTasteColor());
+        Rectangle shape = new Rectangle(x,y,Application.ITEMSIZE,Application.ITEMSIZE);
+        g.draw(shape);
+        g.fill(shape);
+    }
+
 }
