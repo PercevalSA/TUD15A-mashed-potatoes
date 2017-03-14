@@ -18,7 +18,7 @@ public class GameController {
      * Left : 3
      */
 
-    public void updateBodyPosition(GameContainer gc) {
+    public void updateBodyPosition(GameContainer gc) throws WallCollisionException {
         //Get the input from keyboard
         whichDirection(gc);
 

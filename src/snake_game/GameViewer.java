@@ -11,8 +11,7 @@ public class GameViewer extends BasicGameState{
     protected int id;
     protected Application app;
 
-    private static final int ITEMSIZE = 20;
-    private static final int BODYSIZE = 15;
+    public static final int ITEMSIZE = 20;
 
 
     public GameViewer(int id){
@@ -25,7 +24,11 @@ public class GameViewer extends BasicGameState{
 
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
-        Application.getApp().getGameController().updateBodyPosition(gc);
+        try {
+            Application.getApp().getGameController().updateBodyPosition(gc);
+        }catch (WallCollisionException e){
+
+        }
     }
 
     @Override
@@ -50,9 +53,6 @@ public class GameViewer extends BasicGameState{
         g.setColor(Color.white);
         g.draw(rectangle_shape);
         g.fill(rectangle_shape);
-
-
-
 
     }
 
