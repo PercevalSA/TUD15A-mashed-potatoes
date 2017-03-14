@@ -87,7 +87,7 @@ public class GameViewer extends BasicGameState{
 
         g.drawString("FPS: " + app.getAppContainer().getFPS() + "   Score: " + snakeArray.size() + "   Position : (" + snake_head.x_position + ", " + snake_head.y_position + ")"
                 , app.getWIDTH()/5f, app.getGAMEHEIGHT());
-        
+
     }
 
     public int getID(){

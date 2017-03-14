@@ -53,7 +53,7 @@ public class MainMenu extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
         Input input = gc.getInput();
         if (input.isKeyPressed(Input.KEY_SPACE)) {
-            // TODO : Reset snake position and score
+            app.resetGame();
             app.enterState(app.getGameView().getID());
         }
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
