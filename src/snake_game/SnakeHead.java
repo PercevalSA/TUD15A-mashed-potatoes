@@ -49,7 +49,7 @@ public class SnakeHead extends Item{
     private boolean checkWallCollision(float x_temp, float y_temp) {
         int GAMEHEIGHT = Application.getGAMEHEIGHT();
         int GAMEWIDTH = Application.getWIDTH();
-        if(x_temp <= 0 - GameViewer.ITEMSIZE / 2|| x_temp + GameViewer.ITEMSIZE / 2 >= GAMEWIDTH || y_temp <= 0 - GameViewer.ITEMSIZE / 2|| y_temp + GameViewer.ITEMSIZE / 2 >= GAMEHEIGHT)
+        if(x_temp <= 0 - Application.getITEMSIZE() / 2|| x_temp + Application.getITEMSIZE() / 2 >= GAMEWIDTH || y_temp <= 0 - Application.getITEMSIZE() / 2|| y_temp + Application.getITEMSIZE() / 2 >= GAMEHEIGHT)
             return true;
         return false;
     }

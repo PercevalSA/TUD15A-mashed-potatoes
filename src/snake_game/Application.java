@@ -14,6 +14,7 @@ public class Application extends StateBasedGame {
     private static final int GAMEVIEWER_ID = 1;
     private static GameController gameController = null;
     private SnakeHead snakeHead = null;
+    private Food food = null;
 
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
 
@@ -23,6 +24,8 @@ public class Application extends StateBasedGame {
     private static final int GAMEHEIGHT = 480;
     private static final int FPS     = 60;
     private static final double VERSION = 1.0;
+    private static final int ITEMSIZE = 20;
+    private static final int BODYSIZE = 15;
 
 
     public static Application getApp() {
@@ -64,6 +67,7 @@ public class Application extends StateBasedGame {
             appContainer.setTargetFrameRate(FPS);
             appContainer.setShowFPS(true);
             appContainer.start();
+            gameController.createFoodItem();
         } catch(SlickException e) {
             e.printStackTrace();
         }
@@ -75,6 +79,10 @@ public class Application extends StateBasedGame {
 
     public static int getHEIGHT() {
         return HEIGHT;
+    }
+
+    public static int getITEMSIZE() {
+        return ITEMSIZE;
     }
 
     public static int getGAMEHEIGHT() {
@@ -96,4 +104,6 @@ public class Application extends StateBasedGame {
     public static GameController getGameController() {
         return gameController;
     }
+
+    public void setFood(Food food) { this.food = food;}
 }
