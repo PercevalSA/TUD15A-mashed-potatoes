@@ -16,8 +16,6 @@ public class Application extends StateBasedGame {
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
     private static MainMenu mainMenu = null;
-    private static GameViewer gameView = null;
-    private static GameController gameController = null;
 
     private SnakeHead snakeHead = null;
 
@@ -32,7 +30,6 @@ public class Application extends StateBasedGame {
     public static final double VERSION = 1.0;
 
     public static final int ITEMSIZE = 20;
-    public static final int BODYSIZE = 15;
 
 
     public static Application getApp() {
@@ -95,16 +92,8 @@ public class Application extends StateBasedGame {
         this.snakeArray = snakeArray;
     }
 
-    public static GameController getGameController() {
-        return gameController;
-    }
-
     public static MainMenu getMainMenu() {
         return mainMenu;
-    }
-
-    public static GameViewer getGameView() {
-        return gameView;
     }
 
 }
