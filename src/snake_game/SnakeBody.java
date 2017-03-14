@@ -33,7 +33,7 @@ public class SnakeBody extends Item {
 
     public void drawItem(Graphics g, float x, float y){
         g.setColor(Color.blue);
-        Rectangle shape = new Rectangle(x,y,Application.getITEMSIZE(),Application.getITEMSIZE());
+        Rectangle shape = new Rectangle(x,y,Application.ITEMSIZE,Application.ITEMSIZE);
         g.draw(shape);
         g.fill(shape);
     }

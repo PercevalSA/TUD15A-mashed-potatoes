@@ -42,7 +42,7 @@ public class Food extends Item {
     }
     public void drawItem(Graphics g, float x, float y){
         g.setColor(Color.red);
-        Rectangle shape = new Rectangle(x,y,Application.getITEMSIZE(),Application.getITEMSIZE());
+        Rectangle shape = new Rectangle(x,y,Application.ITEMSIZE,Application.ITEMSIZE);
         g.draw(shape);
         g.fill(shape);
     }

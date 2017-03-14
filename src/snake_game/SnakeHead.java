@@ -98,6 +98,6 @@ public class SnakeHead extends Item{
                 break;
         }
 
-        img.draw(x, y,Application.getITEMSIZE(),Application.getITEMSIZE());
+        img.draw(x, y,Application.ITEMSIZE,Application.ITEMSIZE);
     }
 }
