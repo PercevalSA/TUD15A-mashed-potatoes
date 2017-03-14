@@ -19,27 +19,23 @@ public class GameController {
      * Left : 3
      */
 
-
-    public void updateBodyPosition(GameContainer gc) throws WallCollisionException {
-
-        //Get the input from keyboard
-        whichDirection(gc);
-
+    public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException {
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         if( ++fps % 10 == 0) {
             fps=0;
-            //Update the body of the snake
+            //Get the input from keyboard
+            whichDirection(gc);
+            float temp_x = snakeHead.getX();
+            float temp_y = snakeHead.getY();
+            snakeHead.updateCoord(20);
+            //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
             SnakeBody last = snakeArray.getLast();
             snakeArray.removeLast();
-            last.updateBody(snakeHead.getX(), snakeHead.getY());
+            last.updateBody(temp_x, temp_y);
             snakeArray.addFirst(last);
             Application.getApp().setSnakeArray(snakeArray);
-
-            //Update position of the head
-            snakeHead.updateCoord(10);
-
             checkFoodCollision();
         }
     }
@@ -101,10 +97,5 @@ public class GameController {
                 Application.getApp().getSnakeHead().updateDirection(3);
             } catch (InvalidMoveException e) {}
         }
-    }
-    
-    public void update(){
-        SnakeHead snakeHead = Application.getApp().getSnakeHead();
-
     }
 }
