@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 public class Application extends StateBasedGame {
 
@@ -18,9 +19,11 @@ public class Application extends StateBasedGame {
     private static GameViewer gameView = null;
     private static GameController gameController = null;
     private SnakeHead snakeHead = null;
-    private Food food = null;
 
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
+
+    private Food food;
+    private ArrayList<Food> foodArray = new ArrayList<>();
 
     // Application Properties
     public static final int WIDTH   = 640;
@@ -106,9 +109,19 @@ public class Application extends StateBasedGame {
         return gameView;
     }
 
-    public void setFood(Food food) { this.food = food;}
+    public void setFoodArray(ArrayList<Food> foodArray) {
+        this.foodArray = foodArray;
+    }
+
+    public ArrayList<Food> getFoodArray() {
+        return foodArray;
+    }
 
     public Food getFood() {
         return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
     }
 }

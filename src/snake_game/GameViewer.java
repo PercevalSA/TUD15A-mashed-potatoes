@@ -34,7 +34,6 @@ public class GameViewer extends BasicGameState{
 
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
-        Food food = app.getFood();
 
         g.setColor(Color.blue);
         for (SnakeBody element : snakeArray) {
@@ -69,11 +68,26 @@ public class GameViewer extends BasicGameState{
         g.setColor(Color.white);
         g.draw(wall);
 
-        if (food != null){
-            Rectangle food_shape = new Rectangle(food.getX(),food.getY(),Application.ITEMSIZE,Application.ITEMSIZE);
-            g.setColor(Color.red);
+
+        //Draw the good apple
+        Food foo = Application.getApp().getFood();
+        if ( foo != null){
+            Rectangle food_shape = new Rectangle(foo.getX(),foo.getY(),Application.ITEMSIZE,Application.ITEMSIZE);
+            g.setColor(Color.green);
             g.draw(food_shape);
             g.fill(food_shape);
+        }
+
+
+        // Draw list of other apples
+        for(Food food : app.getFoodArray()){
+
+            if (food != null){
+                Rectangle food_shape = new Rectangle(food.getX(),food.getY(),Application.ITEMSIZE,Application.ITEMSIZE);
+                g.setColor(Color.red);
+                g.draw(food_shape);
+                g.fill(food_shape);
+            }
         }
 
         g.setColor(Color.white);

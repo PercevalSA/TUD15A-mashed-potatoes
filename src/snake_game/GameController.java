@@ -1,8 +1,8 @@
 package snake_game;
-    import org.newdawn.slick.AppGameContainer;
     import org.newdawn.slick.GameContainer;
     import org.newdawn.slick.Input;
     import java.util.ArrayDeque;
+    import java.util.ArrayList;
     import java.util.Random;
 
 /**
@@ -49,38 +49,43 @@ public class GameController {
             else
                 throw new InvalidSizeException();
 
-            if (checkFoodCollision()) {
+            if(checkFoodCollision()){
 
                 Application.getApp().getFood().eat();
-
+                
                 Random rand = new Random();
                 float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
                 float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
                 Application.getApp().getFood().setX(x_position);
                 Application.getApp().getFood().setY(y_position);
             }
+
+            Food food = checkBadFoodCollision();
+            if (food != null) {
+
+                food.eat();
+
+                try{
+                    ArrayList<Food> foodArray = Application.getApp().getFoodArray();
+                    foodArray.remove(food);
+                    Application.getApp().setFoodArray(foodArray);
+                }catch (Exception e){
+                    System.out.println("Error while trying to remove a bad apple from the list");
+                }
+
+            }
         }
     }
 
-    //TODO: Shift to Factory
-    public void createFoodItem(){
-        Random rand = new Random();
-        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        Application.getApp().setFood(new Food(x_position, y_position, false));
-
-
-        System.out.println("Food was created here : (" + x_position + ", " + y_position + ")" );
-    }
-
     private boolean checkFoodCollision() {
-        Food foo = Application.getApp().getFood();
-        if(foo != null) {
+        Food food = Application.getApp().getFood();
+        if(food != null) {
             SnakeHead snakeHead = Application.getApp().getSnakeHead();
             float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;
             float y_snake = snakeHead.y_position + Application.ITEMSIZE / 2;
-            float x_food = foo.x_position;
-            float y_food = foo.y_position;
+
+            float x_food = food.x_position;
+            float y_food = food.y_position;
 
             if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
                     && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
@@ -92,6 +97,53 @@ public class GameController {
             }
         }
         return false;
+    }
+
+    //TODO: Shift to Factory
+    public void createFoodItem(){
+        Random rand = new Random();
+        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+
+        //Create one Good apple and a list of bad apples
+        ArrayList<Food> foods = new ArrayList<>();
+        Food food = new Food(x_position, y_position, true);
+        Application.getApp().setFood(food);
+
+        x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        foods.add(new Food(x_position, y_position, false));
+
+        x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        foods.add(new Food(x_position, y_position, false));
+        Application.getApp().setFoodArray(foods);
+
+
+    }
+
+    private Food checkBadFoodCollision() {
+        ArrayList<Food> foodArray = Application.getApp().getFoodArray();
+        if(foodArray != null) {
+            SnakeHead snakeHead = Application.getApp().getSnakeHead();
+            float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;
+            float y_snake = snakeHead.y_position + Application.ITEMSIZE / 2;
+
+            for(Food food : foodArray){
+                float x_food = food.x_position;
+                float y_food = food.y_position;
+
+                if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
+                        && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
+                        && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
+                        && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
+                        ) {
+                    System.out.println("You ate the FOOOOOOOOD");
+                    return food;
+                }
+            }
+        }
+        return null;
     }
 
     protected void whichDirection(GameContainer gc) {
