@@ -41,24 +41,46 @@ public class GameViewer extends BasicGameState{
             float body_x = element.getX();
             float body_y = element.getY();
 
-            Rectangle rectangle_shape = new Rectangle(body_x,body_y,app.ITEMSIZE,app.ITEMSIZE);
+            Rectangle body_shape = new Rectangle(body_x,body_y,app.ITEMSIZE,app.ITEMSIZE);
 
-            g.draw(rectangle_shape);
-            g.fill(rectangle_shape);
+            g.draw(body_shape);
+            g.fill(body_shape);
         }
+//
+//        Image img = new Image("res/SnakeHeadVector.jpg");
+//        int direction = snake_head.getDirection();
+//
+//        switch(direction) {
+//            case 0:
+//                img = img.getFlippedCopy(false,false);
+//                break;
+//            case 1:
+//                img = img.getFlippedCopy(true,false);
+//                break;
+//            case 2:
+//                img = img.getFlippedCopy(false,true);
+//                break;
+//            case 3:
+//                img = img.getFlippedCopy(true,true);
+//                break;
+//        }
+//
+//
+//        img.draw(snake_head.getX(), snake_head.getY());
 
-        Rectangle rectangle_shape = new Rectangle(snake_head.getX(),snake_head.getY(),app.ITEMSIZE,app.ITEMSIZE);
+        Rectangle head_shape = new Rectangle(snake_head.getX(),snake_head.getY(),app.ITEMSIZE,app.ITEMSIZE);
 
         g.setColor(Color.white);
-        g.draw(rectangle_shape);
-        g.fill(rectangle_shape);
+        g.draw(head_shape);
+        g.fill(head_shape);
 
         Rectangle wall = new Rectangle(1,1,app.getWIDTH()-1,app.getGAMEHEIGHT()-1);
-
         g.setColor(Color.white);
         g.draw(wall);
 
         g.drawString("Score: " + snakeArray.size(), app.getWIDTH()/2.3f, app.getGAMEHEIGHT());
+
+
 
 
     }
