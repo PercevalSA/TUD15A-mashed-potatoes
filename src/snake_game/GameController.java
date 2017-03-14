@@ -63,13 +63,13 @@ public class GameController {
 
             if(checkFoodCollision()){
 
-                Application.getApp().getFood().eat();
+                FoodManager.getInstance().getGoodApple().eat();
                 
                 Random rand = new Random();
                 float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
                 float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-                Application.getApp().getFood().setX(x_position);
-                Application.getApp().getFood().setY(y_position);
+                FoodManager.getInstance().getGoodApple().setX(x_position);
+                FoodManager.getInstance().getGoodApple().setY(y_position);
             }
 
             Food food = checkBadFoodCollision();
@@ -78,9 +78,9 @@ public class GameController {
                 food.eat();
 
                 try{
-                    ArrayList<Food> foodArray = Application.getApp().getFoodArray();
+                    ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
                     foodArray.remove(food);
-                    Application.getApp().setFoodArray(foodArray);
+                    FoodManager.getInstance().setApples(foodArray);
                 }catch (Exception e){
                     System.out.println("Error while trying to remove a bad apple from the list");
                 }
@@ -90,7 +90,7 @@ public class GameController {
     }
 
     private boolean checkFoodCollision() {
-        Food food = Application.getApp().getFood();
+        Food food = FoodManager.getInstance().getGoodApple();
         if(food != null) {
             SnakeHead snakeHead = Application.getApp().getSnakeHead();
             float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;
@@ -120,7 +120,7 @@ public class GameController {
         //Create one Good apple and a list of bad apples
         ArrayList<Food> foods = new ArrayList<>();
         Food food = new Food(x_position, y_position, true);
-        Application.getApp().setFood(food);
+        FoodManager.getInstance().setGoodApple(food);
 
         x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
         y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
@@ -129,13 +129,13 @@ public class GameController {
         x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
         y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
         foods.add(new Food(x_position, y_position, false));
-        Application.getApp().setFoodArray(foods);
+        FoodManager.getInstance().setApples(foods);
 
 
     }
 
     private Food checkBadFoodCollision() {
-        ArrayList<Food> foodArray = Application.getApp().getFoodArray();
+        ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
         if(foodArray != null) {
             SnakeHead snakeHead = Application.getApp().getSnakeHead();
             float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;

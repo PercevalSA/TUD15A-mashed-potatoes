@@ -23,8 +23,6 @@ public class Application extends StateBasedGame {
 
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
 
-    private Food food;
-    private ArrayList<Food> foodArray = new ArrayList<>();
 
     // Application Properties
     public static final int WIDTH   = 640;
@@ -108,19 +106,4 @@ public class Application extends StateBasedGame {
         return gameView;
     }
 
-    public void setFoodArray(ArrayList<Food> foodArray) {
-        this.foodArray = foodArray;
-    }
-
-    public ArrayList<Food> getFoodArray() {
-        return foodArray;
-    }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
 }
