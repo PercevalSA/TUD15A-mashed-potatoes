@@ -113,6 +113,10 @@ public class Application extends StateBasedGame {
         return gameController;
     }
 
+    public static MainMenu getMainMenu() {
+        return mainMenu;
+    }
+
     public static GameViewer getGameView() {
         return gameView;
     }
