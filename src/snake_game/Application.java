@@ -56,7 +56,7 @@ public class Application extends StateBasedGame {
     public static void main(String[] args){
         try {
             instance = new Application("Potato Snake v" + VERSION);
-            gameController.createFoodItem();
+            GameController.getInstance().createFoodItem();
             mainMenu = new MainMenu(MAINMENU);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
@@ -73,7 +73,6 @@ public class Application extends StateBasedGame {
         snakeArray.clear();
 
         snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
-        gameController = new GameController();
 
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));

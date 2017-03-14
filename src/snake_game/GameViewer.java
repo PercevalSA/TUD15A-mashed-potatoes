@@ -31,7 +31,7 @@ public class GameViewer extends BasicGameState{
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         try {
-            Application.getApp().getGameController().updateBodyPosition(gc);
+            GameController.getInstance().updateBodyPosition(gc);
         }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
         }

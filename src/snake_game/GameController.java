@@ -16,11 +16,11 @@ public class GameController {
     private int direction = 1;
     private int delay = 5;
 
-    GameController instance = null;
+    private static GameController instance = null;
 
     private GameController() {}
 
-    public GameController getInstance() {
+    public static GameController getInstance() {
         if(instance == null) {
             instance = new GameController();
         }
