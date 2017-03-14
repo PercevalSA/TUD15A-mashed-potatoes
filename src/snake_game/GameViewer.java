@@ -12,6 +12,8 @@ public class GameViewer extends BasicGameState{
     protected Application app;
 
     private static final int ITEMSIZE = 20;
+    private static final int BODYSIZE = 15;
+
 
     public GameViewer(int id){
         this.id = id;
@@ -31,27 +33,24 @@ public class GameViewer extends BasicGameState{
 
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
-
-        float x = snake_head.getX();
-        float y = snake_head.getY();
-
-        Rectangle rectangle_shape = new Rectangle(x,y,ITEMSIZE,ITEMSIZE);
-
-        g.draw(rectangle_shape);
-        g.fill(rectangle_shape);
-        g.setColor(Color.white);
-
-
+        
+        g.setColor(Color.blue);
         for (SnakeBody element : snakeArray) {
-            x = element.getX();
-            y = element.getY();
+            float body_x = element.getX();
+            float body_y = element.getY();
 
-            rectangle_shape = new Rectangle(x,y,ITEMSIZE,ITEMSIZE);
+            Rectangle rectangle_shape = new Rectangle(body_x+2.5f,body_y+2.5f,BODYSIZE,BODYSIZE);
 
             g.draw(rectangle_shape);
             g.fill(rectangle_shape);
-            g.setColor(Color.blue);
         }
+
+        Rectangle rectangle_shape = new Rectangle(snake_head.getX(),snake_head.getY(),ITEMSIZE,ITEMSIZE);
+
+        g.setColor(Color.white);
+        g.draw(rectangle_shape);
+        g.fill(rectangle_shape);
+
 
 
 

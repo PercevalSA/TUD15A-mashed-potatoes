@@ -36,6 +36,9 @@ public class Application extends StateBasedGame {
         snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
         gameController = new GameController();
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
+        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
     }
 
     @Override

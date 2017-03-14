@@ -9,7 +9,7 @@ package snake_game;
  */
 
 public class GameController {
-
+    public int fps = 0;
     /*
      * Directions (clockwise order):
      * Up : 0
@@ -22,14 +22,18 @@ public class GameController {
         //Get the input from keyboard
         whichDirection(gc);
 
-        //Get the body of the snake
-        ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
-        SnakeBody last = snakeArray.getLast();
-        snakeArray.removeLast();
+        //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
-        last.updateBody(snakeHead.getX() - 20,snakeHead.getY());
-        snakeArray.addFirst(last);
-        Application.getApp().setSnakeArray(snakeArray);
+        if( ++fps % 10 == 0) {
+            fps=0;
+            //Get the body of the snake
+            ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
+            SnakeBody last = snakeArray.getLast();
+            snakeArray.removeLast();
+            last.updateBody(snakeHead.getX(), snakeHead.getY());
+            snakeArray.addFirst(last);
+            Application.getApp().setSnakeArray(snakeArray);
+        }
         snakeHead.updateCoord(1);
     }
 
