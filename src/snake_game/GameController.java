@@ -19,24 +19,24 @@ public class GameController {
      * Left : 3
      */
 
-
-    public void updateBodyPosition(GameContainer gc) throws WallCollisionException {
-
-        //Get the input from keyboard
-        whichDirection(gc);
-
+    public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException {
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         if( ++fps % 10 == 0) {
             fps=0;
+            //Get the input from keyboard
+            whichDirection(gc);
+            float temp_x = snakeHead.getX();
+            float temp_y = snakeHead.getY();
+            snakeHead.updateCoord(20);
             //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
             SnakeBody last = snakeArray.getLast();
             snakeArray.removeLast();
-            last.updateBody(snakeHead.getX(), snakeHead.getY());
+            last.updateBody(temp_x, temp_y);
             snakeArray.addFirst(last);
             Application.getApp().setSnakeArray(snakeArray);
-            snakeHead.updateCoord(10);
+            checkFoodCollision();
         }
     }
 
@@ -48,6 +48,26 @@ public class GameController {
 
     }
 
+    private boolean checkFoodCollision() {
+        Food foo = Application.getApp().getFood();
+        if(foo != null) {
+            SnakeHead snakeHead = Application.getApp().getSnakeHead();
+            float x_snake = snakeHead.x_position + Application.getITEMSIZE() / 2;
+            float y_snake = snakeHead.y_position + Application.getITEMSIZE() / 2;
+            float x_food = foo.x_position;
+            float y_food = foo.y_position;
+
+            if ((x_snake >= x_food - (Application.getITEMSIZE() / 2))
+                    && (x_snake <= x_food + 1.5 * Application.getITEMSIZE())
+                    && (y_snake <= y_food - 0.5 * Application.getITEMSIZE())
+                    && (y_snake <= y_food + 1.5 * Application.getITEMSIZE())
+                    ) {
+                System.out.println("You ate the FOOOOOOOOD");
+                return true;
+            }
+        }
+        return false;
+    }
 
     protected void whichDirection(GameContainer gc) {
 
@@ -76,10 +96,5 @@ public class GameController {
                 Application.getApp().getSnakeHead().updateDirection(3);
             } catch (InvalidMoveException e) {}
         }
-    }
-    
-    public void update(){
-        SnakeHead snakeHead = Application.getApp().getSnakeHead();
-
     }
 }

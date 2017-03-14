@@ -1,5 +1,6 @@
 package snake_game;
 
+import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -23,7 +24,7 @@ public class GameViewer extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         try {
             Application.getApp().getGameController().updateBodyPosition(gc);
-        }catch (WallCollisionException e){
+        }catch (WallCollisionException|BodyCollisionException e){
 
         }
     }
