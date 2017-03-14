@@ -3,28 +3,32 @@ package snake_game;
 import java.util.Deque;
 
 public class SnakeHead extends Item{
-    private int direction = 1;
+    private int previous_direction = 1;
 
     public SnakeHead(float x, float y){
         super(x,y);
     }
 
-    public int getDirection(){
-        return direction;
+    public int getDirection() {
+        return previous_direction;
     }
 
     public void updateDirection(int dir) throws InvalidMoveException {
-        if(dir%2 == direction%2){
+        if(dir%2 == previous_direction%2){
             throw new InvalidMoveException();
         } else {
-            direction = dir;
+            previous_direction = dir;
         }
 
     }
 
-    public void updateCoord (int speed) throws WallCollisionException, BodyCollisionException {
+    public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException, InvalidMoveException {
         float y_temp = y_position;
         float x_temp = x_position;
+
+        if(direction != previous_direction) {
+            updateDirection(direction);
+        }
 
         switch(direction) {
             case 0:

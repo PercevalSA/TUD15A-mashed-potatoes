@@ -14,6 +14,8 @@ public class MainMenu extends BasicGameState {
     protected int id;
     protected Application app;
 
+    private String gameOverMessage;
+
     private static boolean firstTimeLaunched = true;
 
     private Font font;
@@ -41,6 +43,7 @@ public class MainMenu extends BasicGameState {
         }
         else{
             playersOptionsTTF.drawString(100, 100, "Game Over");
+            playersOptionsTTF.drawString(100, 150, gameOverMessage);
             playersOptionsTTF.drawString(100, 200, "Score : " + app.getSnakeArray().size());
         }
     }
@@ -66,5 +69,9 @@ public class MainMenu extends BasicGameState {
 
     public static void setFirstTimeLaunched() {
         MainMenu.firstTimeLaunched = false;
+    }
+
+    public void setGameOverMessage(String gameOverMessage) {
+        this.gameOverMessage = gameOverMessage;
     }
 }
