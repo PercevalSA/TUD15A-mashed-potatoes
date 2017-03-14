@@ -22,12 +22,16 @@ public class SnakeHead extends Item{
 
     }
 
-    public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException, InvalidMoveException {
+    public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException {
         float y_temp = y_position;
         float x_temp = x_position;
 
         if(direction != previous_direction) {
-            updateDirection(direction);
+            try {
+                updateDirection(direction);
+            }catch(InvalidMoveException e){
+                direction = previous_direction;
+            }
         }
 
         switch(direction) {

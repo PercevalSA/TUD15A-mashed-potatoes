@@ -33,13 +33,7 @@ public class GameController {
             float temp_x = snakeHead.getX();
             float temp_y = snakeHead.getY();
 
-            try {
-                snakeHead.updateCoord(20, direction);
-            } catch(InvalidMoveException e) {
-                try {
-                    snakeHead.updateCoord(20, snakeHead.getDirection());
-                } catch(InvalidMoveException e2) {}
-            }
+            snakeHead.updateCoord(20, direction);
 
             //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
