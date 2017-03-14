@@ -26,7 +26,7 @@ public class MainMenu extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         // init font
-        font = new Font("Verdana", Font.BOLD, 40);
+        font = new Font("Verdana", Font.PLAIN, 20);
         playersOptionsTTF = new TrueTypeFont(font, true);
     }
 
@@ -43,6 +43,7 @@ public class MainMenu extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
         Input input = gc.getInput();
         if (input.isKeyPressed(Input.KEY_SPACE)) {
+            // TODO : Reset snake position and score
             app.enterState(app.getGameView().getID());
         }
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
