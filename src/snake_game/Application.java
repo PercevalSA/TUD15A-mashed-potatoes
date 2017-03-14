@@ -30,7 +30,6 @@ public class Application extends StateBasedGame {
     public static final double VERSION = 1.0;
 
     public static final int ITEMSIZE = 20;
-    public static final int BODYSIZE = 15;
 
 
     public static Application getApp() {
