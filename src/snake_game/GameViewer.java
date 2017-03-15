@@ -14,16 +14,24 @@ public class GameViewer extends BasicGameState{
     private int[] speedTimes = new int[] {10, 5 , 3};
     private int[] delays = new int[speedTimes.length];
     private int[] speedTimesCheck = new int[] {200, 166, 83 , 65, 45};
-    private int speedCounter = 0;
+    private static int speedCounter = 0;
     private int totalNumberOfFrames;
+    private static GameViewer instance = null;
 
-    public GameViewer(int id){
-        this.id = id;
+    private GameViewer(){
+        this.id = Application.GAMEVIEWER;
         this.app = Application.getApp();
         totalNumberOfFrames = 0;
         for (int i=0; i<speedTimes.length; i++){
             delays[i]  = (int)((1.0/app.getFPS()) * speedTimes[speedCounter] * 1000);
         }
+    }
+
+    public static GameViewer getInstance(){
+        if(instance == null){
+            instance = new GameViewer();
+        }
+        return instance;
     }
 
     @Override
@@ -36,9 +44,9 @@ public class GameViewer extends BasicGameState{
             totalNumberOfFrames = 0;
         }
         try {
-            Application.getApp().getGameController().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
+            GameController.getInstance().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
             //Application.getApp().getGameController().updateBodyPosition(gc, delays[speedCounter]);
-        }catch (WallCollisionException|BodyCollisionException e){
+        }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
         }
     }
@@ -49,60 +57,45 @@ public class GameViewer extends BasicGameState{
 
         SnakeHead snake_head = app.getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
-        Food food = app.getFood();
 
-        g.setColor(Color.blue);
         for (SnakeBody element : snakeArray) {
-            float body_x = element.getX();
-            float body_y = element.getY();
-
-
-            Rectangle body_shape = new Rectangle(body_x,body_y,Application.getITEMSIZE(),Application.getITEMSIZE());
-            g.draw(body_shape);
-            g.fill(body_shape);
+            element.drawItem(g,element.getX(),element.getY());
         }
 
-        Image img = new Image("res/SnakeHeadVector.jpg");
-        int direction = snake_head.getDirection();
-        img.setCenterOfRotation(0,0);
+        snake_head.drawItem(g,snake_head.getX(),snake_head.getY());
 
-        switch(direction) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                img = img.getFlippedCopy(true,false);
-                break;
-        }
 
-        img.draw(snake_head.getX(), snake_head.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
-
-        Rectangle wall = new Rectangle(1,1,app.getWIDTH()-1,app.getGAMEHEIGHT()-1);
+        Rectangle wall = new Rectangle(1,1,app.WIDTH-1,app.GAMEHEIGHT-1);
         g.setColor(Color.white);
         g.draw(wall);
 
-        if (food != null){
-            Rectangle food_shape = new Rectangle(food.getX(),food.getY(),Application.getITEMSIZE(),Application.getITEMSIZE());
-            g.setColor(Color.red);
-            g.draw(food_shape);
-            g.fill(food_shape);
+
+        //Draw the good apple
+        Food foo = FoodManager.getInstance().getGoodApple();
+        if (foo != null){
+            foo.drawItem(g, foo.getX(), foo.getY());
+        }
+
+        // Draw list of other apples
+        for(Food food : FoodManager.getInstance().getApples()){
+
+            if (food != null){
+                food.drawItem(g, food.getX(), food.getY());
+            }
         }
 
         g.setColor(Color.white);
-
         g.drawString("FPS:" + app.getAppContainer().getFPS() + "  Speed Level:" + speedCounter + "  Score:" + snakeArray.size() + "  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
-                , app.getWIDTH()/5f, app.getGAMEHEIGHT());
+                , app.WIDTH/5f, app.GAMEHEIGHT);
 
     }
+
 
     public int getID(){
         return id;
     }
 
-    public void resetSpeedCounter(){
+    public static void resetSpeedCounter(){
         speedCounter = 0;
     }
 

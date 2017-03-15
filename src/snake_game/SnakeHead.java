@@ -1,5 +1,11 @@
 package snake_game;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
+
 import java.util.Deque;
 
 public class SnakeHead extends Item{
@@ -19,15 +25,18 @@ public class SnakeHead extends Item{
         } else {
             previous_direction = dir;
         }
-
     }
 
-    public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException, InvalidMoveException {
+    public void updateCoord (int speed, int direction) throws WallCollisionException, BodyCollisionException {
         float y_temp = y_position;
         float x_temp = x_position;
 
         if(direction != previous_direction) {
-            updateDirection(direction);
+            try {
+                updateDirection(direction);
+            }catch(InvalidMoveException e){
+                direction = previous_direction;
+            }
         }
 
         switch(direction) {
@@ -55,9 +64,9 @@ public class SnakeHead extends Item{
     }
 
     private boolean checkWallCollision(float x_temp, float y_temp) {
-        int GAMEHEIGHT = Application.getGAMEHEIGHT();
-        int GAMEWIDTH = Application.getWIDTH();
-        if(x_temp <= 0 - Application.getITEMSIZE() / 2|| x_temp + Application.getITEMSIZE() / 2 >= GAMEWIDTH || y_temp <= 0 - Application.getITEMSIZE() / 2|| y_temp + Application.getITEMSIZE() / 2 >= GAMEHEIGHT)
+        int GAMEHEIGHT = Application.GAMEHEIGHT;
+        int GAMEWIDTH = Application.WIDTH;
+        if(x_temp <= 0 - Application.ITEMSIZE / 2|| x_temp + Application.ITEMSIZE / 2 >= GAMEWIDTH || y_temp <= 0 - Application.ITEMSIZE / 2|| y_temp + Application.ITEMSIZE / 2 >= GAMEHEIGHT)
             return true;
         return false;
     }
@@ -70,5 +79,25 @@ public class SnakeHead extends Item{
             if (y_temp == y && x_temp == x) return true;
         }
         return false;
+    }
+
+    public void drawItem(Graphics g, float x, float y) throws SlickException {
+        Image img = new Image("res/SnakeHeadVector.jpg");
+        int direction = getDirection();
+        img.setCenterOfRotation(0,0);
+
+        switch(direction) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                img = img.getFlippedCopy(true,false);
+                break;
+        }
+
+        img.draw(x, y,Application.ITEMSIZE,Application.ITEMSIZE);
     }
 }
