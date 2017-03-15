@@ -21,19 +21,19 @@ public class FoodManager implements Runnable{
         return uniqueInstance;
     }
 
-    public Food getGoodApple() {
+    public synchronized Food getGoodApple() {
         return goodApple;
     }
 
-    public void setGoodApple(Food goodApple) {
+    public synchronized void setGoodApple(Food goodApple) {
         this.goodApple = goodApple;
     }
 
-    public ArrayList<Food> getApples() {
+    public synchronized ArrayList<Food> getApples() {
         return apples;
     }
 
-    public void setApples(ArrayList<Food> apples) {
+    public synchronized void setApples(ArrayList<Food> apples) {
         this.apples = apples;
     }
 
