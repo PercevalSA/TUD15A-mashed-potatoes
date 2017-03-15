@@ -13,6 +13,10 @@ public class Score implements Observer {
         score += food.getValue();
     }
 
+    public void reset() {
+        score = 0;
+    }
+
 
 }
 

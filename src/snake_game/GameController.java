@@ -41,12 +41,6 @@ public class GameController {
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         whichDirection(gc);
 
-        /*try {
-            Thread.sleep(sleepFrameRate);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
         if (++fps % sleepFrameRate == 0) {
             fps = 0;
 

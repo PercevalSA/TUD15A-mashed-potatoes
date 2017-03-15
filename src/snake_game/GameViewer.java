@@ -19,7 +19,7 @@ public class GameViewer extends BasicGameState{
     private static int speedCounter = 0;
     private int totalNumberOfFrames;
     private static GameViewer instance = null;
-    private static Score score= null;
+    private static Score score = null;
 
     private GameViewer(){
         this.id = Application.GAMEVIEWER;
@@ -42,7 +42,7 @@ public class GameViewer extends BasicGameState{
         return score.getScore();
     }
 
-    public static void setScore(Object obj){
+    public static void setScore(Object obj) {
         score.update(obj);
     }
 
@@ -126,4 +126,11 @@ public class GameViewer extends BasicGameState{
     public static int getSpeedCounter() {
         return speedCounter;
     }
+
+    public static void resetScore() {
+        if(score!= null) {
+            score.reset();
+        }
+    }
+
 }
