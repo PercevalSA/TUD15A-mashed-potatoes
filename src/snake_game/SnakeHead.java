@@ -10,6 +10,7 @@ import java.util.Deque;
 
 public class SnakeHead extends Item{
     private int previous_direction = 1;
+    Image img;
 
     public SnakeHead(float x, float y){
         super(x,y,Color.green);
@@ -83,27 +84,43 @@ public class SnakeHead extends Item{
 
     public void drawItem(Graphics g){
         Image img = null;
-        try {
-            img = new Image("res/SnakeHeadVector.jpg");
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
         int direction = getDirection();
-        img.setCenterOfRotation(0,0);
-        if( img != null) {
-            switch (direction) {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
+        switch (direction) {
+            case 0:
+                try {
+                    img = new Image("res/snake-v.png");
+                    img = img.getFlippedCopy(false, true);
+                } catch (SlickException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 1:
+                try {
+                    img = new Image("res/snake-h.png");
+                } catch (SlickException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 2:
+                try {
+                    img = new Image("res/snake-v.png");
+                } catch (SlickException e) {
+                    e.printStackTrace();
+                }
+                // The image is originally in this direction
+                break;
+            case 3:
+                try {
+                    img = new Image("res/snake-h.png");
                     img = img.getFlippedCopy(true, false);
-                    break;
-            }
-            img.draw(x_position, y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+                } catch (SlickException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
-        else super.drawItem(g);
+        if(img != null)
+            img.draw(x_position, y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+        else
+            super.drawItem(g);
     }
 }
