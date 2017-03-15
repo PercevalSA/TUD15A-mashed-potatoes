@@ -24,14 +24,6 @@ public class Food extends Item {
         }
     }
 
-    public Food createGoodFood(float x, float y){
-        return new Food(x, y, true);
-    }
-
-    public Food createBadFood(float x, float y){
-        return new Food(x, y, false);
-    }
-
     public void eat() {
         ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
         if(tasteBehavior.eat() == 1) {
