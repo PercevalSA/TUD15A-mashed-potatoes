@@ -8,7 +8,7 @@ import org.newdawn.slick.geom.*;
 public class SnakeBody extends Item {
 
     public SnakeBody(float x,float y){
-        super(x,y);
+        super(x,y, Color.blue);
     }
 
     /*
@@ -28,14 +28,6 @@ public class SnakeBody extends Item {
     public void updateBody( float x, float y){
         x_position = x;
         y_position =y;
-    }
-
-
-    public void drawItem(Graphics g, float x, float y){
-        g.setColor(Color.blue);
-        Rectangle shape = new Rectangle(x,y,Application.ITEMSIZE,Application.ITEMSIZE);
-        g.draw(shape);
-        g.fill(shape);
     }
 
 }

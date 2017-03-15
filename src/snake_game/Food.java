@@ -13,11 +13,13 @@ public class Food extends Item {
     private TasteBehavior tasteBehavior;
 
     public Food(float x, float y, boolean isGood){
-        super(x,y);
+        super(x,y, null);
         if(isGood){
             tasteBehavior = new TasteGood();
+            color = Color.green;
         }
         else{
+            color = Color.red;
             tasteBehavior = new TasteBad();
         }
     }
@@ -32,12 +34,4 @@ public class Food extends Item {
             snakeArray.removeLast();
         }
     }
-    public void drawItem(Graphics g, float x, float y){
-
-        g.setColor(tasteBehavior.getTasteColor());
-        Rectangle shape = new Rectangle(x,y,Application.ITEMSIZE,Application.ITEMSIZE);
-        g.draw(shape);
-        g.fill(shape);
-    }
-
 }

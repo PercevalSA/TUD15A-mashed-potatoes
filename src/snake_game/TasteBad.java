@@ -13,9 +13,4 @@ public class TasteBad implements TasteBehavior {
     public int eat() {
         return -1;
     }
-
-    @Override
-    public Color getTasteColor(){
-        return taste_color;
-    }
 }

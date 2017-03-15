@@ -7,14 +7,8 @@ import org.newdawn.slick.Color;
  */
 public class TasteGood implements TasteBehavior {
 
-
-    public Color taste_color = Color.green;
     @Override
     public int eat() {
         return 1;
-    }
-    @Override
-    public Color getTasteColor(){
-        return taste_color;
     }
 }
