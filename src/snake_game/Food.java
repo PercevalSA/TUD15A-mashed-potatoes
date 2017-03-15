@@ -13,6 +13,18 @@ import java.util.ArrayDeque;
 public class Food extends Item {
 
     private TasteBehavior tasteBehavior;
+    private Image imgApple, imgAppleB;
+    private boolean imageLoaded = false;
+
+    public void loadImages(){
+        try {
+            imgApple = new Image("res/apple.png");
+            imgAppleB = new Image("res/apple-b.png");
+            imageLoaded = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public Food(float x, float y, boolean isGood){
         super(x,y, null);
@@ -51,16 +63,17 @@ public class Food extends Item {
 
     @Override
     public void drawItem(Graphics g) {
+        if(!imageLoaded)
+            loadImages();
+
         Image img = null;
-        try {
-            if (tasteBehavior instanceof TasteBad) {
-                img = new Image("res/apple-b.png");
-            }
-            else
-                img = new Image("res/apple.png");
-        } catch (SlickException e) {
-            e.printStackTrace();
+
+        if (tasteBehavior instanceof TasteBad) {
+            img = imgAppleB;
         }
+        else
+            img = imgApple;
+
         if(img != null) {
             img.draw(x_position, y_position, Application.ITEMSIZE, Application.ITEMSIZE);
         }

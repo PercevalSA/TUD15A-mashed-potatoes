@@ -10,7 +10,19 @@ import java.util.Deque;
 
 public class SnakeHead extends Item{
     private int previous_direction = 1;
-    Image img;
+
+    private Image imgSnakeHeadV, imgSnakeHeadH;
+    private boolean imageLoaded = false;
+
+    public void loadImages(){
+        try {
+            imgSnakeHeadV = new Image("res/snake-v.png");
+            imgSnakeHeadH = new Image("res/snake-h.png");
+            imageLoaded = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public SnakeHead(float x, float y){
         super(x,y,Color.green);
@@ -83,39 +95,25 @@ public class SnakeHead extends Item{
     }
 
     public void drawItem(Graphics g){
+        if(!imageLoaded)
+            loadImages();
+
         Image img = null;
         int direction = getDirection();
         switch (direction) {
             case 0:
-                try {
-                    img = new Image("res/snake-v.png");
-                    img = img.getFlippedCopy(false, true);
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
+                img = imgSnakeHeadV;
+                img = img.getFlippedCopy(false, true);
                 break;
             case 1:
-                try {
-                    img = new Image("res/snake-h.png");
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
+                img = imgSnakeHeadH;
                 break;
             case 2:
-                try {
-                    img = new Image("res/snake-v.png");
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
-                // The image is originally in this direction
+                img = imgSnakeHeadV;
                 break;
             case 3:
-                try {
-                    img = new Image("res/snake-h.png");
-                    img = img.getFlippedCopy(true, false);
-                } catch (SlickException e) {
-                    e.printStackTrace();
-                }
+                img = imgSnakeHeadH;
+                img = img.getFlippedCopy(true, false);
                 break;
         }
         if(img != null)
