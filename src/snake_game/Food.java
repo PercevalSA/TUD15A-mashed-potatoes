@@ -26,14 +26,26 @@ public class Food extends Item {
         }
     }
 
-    public void eat() {
+    public void eat() throws InvalidSizeException {
         ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
-        if(tasteBehavior.eat() == 1) {
-            SnakeBody grow = snakeArray.getLast();
-            snakeArray.addLast(new SnakeBody(grow.getX(), grow.getY()));
+        int eatValue = tasteBehavior.eat();
+        if(eatValue > 0) {
+            for(int i = 0; i < eatValue; i++) {
+                SnakeBody grow = snakeArray.getLast();
+                snakeArray.addLast(new SnakeBody(grow.getX(), grow.getY()));
+            }
         }
+        else if(eatValue < 0){
+            if(eatValue < snakeArray.size())
+                for(int i = 0; i < Math.abs(eatValue); i++) {
+                    snakeArray.removeLast();
+                }
+            else
+                throw new InvalidSizeException();
+        }
+
         else{
-            snakeArray.removeLast();
+            System.out.println("You ate a neutral apple");
         }
     }
 
