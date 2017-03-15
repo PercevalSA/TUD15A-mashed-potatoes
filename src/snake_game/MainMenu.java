@@ -12,7 +12,6 @@ public class MainMenu extends BasicGameState {
 
     // ID we return to class 'Application'
     protected int id;
-    protected Application app;
 
     private String gameOverMessage;
 
@@ -23,7 +22,6 @@ public class MainMenu extends BasicGameState {
 
     public MainMenu(int id) {
         this.id = id;
-        this.app = Application.getApp();
     }
 
     // init-method for initializing all resources
@@ -44,7 +42,7 @@ public class MainMenu extends BasicGameState {
         else{
             playersOptionsTTF.drawString(100, 100, "Game Over");
             playersOptionsTTF.drawString(100, 150, gameOverMessage);
-            playersOptionsTTF.drawString(100, 200, "Score : " + app.getSnakeArray().size());
+            playersOptionsTTF.drawString(100, 200, "Score : " + GameViewer.getScore());
         }
     }
 
@@ -53,9 +51,9 @@ public class MainMenu extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
         Input input = gc.getInput();
         if (input.isKeyPressed(Input.KEY_SPACE)) {
-            app.resetGame();
+            Application.getApp().resetGame();
             GameViewer.resetSpeedCounter();
-            app.enterState(GameViewer.getInstance().getID());
+            Application.getApp().enterState(GameViewer.getInstance().getID());
         }
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             gc.exit();

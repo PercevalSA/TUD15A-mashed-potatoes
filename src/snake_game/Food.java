@@ -55,4 +55,8 @@ public class Food extends Item {
         else
             super.drawItem(g);
     }
+
+    public int getValue() {
+        return tasteBehavior.getValue();
+    }
 }
