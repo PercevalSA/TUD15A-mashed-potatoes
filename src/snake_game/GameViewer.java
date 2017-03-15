@@ -42,8 +42,12 @@ public class GameViewer extends BasicGameState{
         return score.getScore();
     }
 
-    public static void setScore(Object obj){
+    public static void setScore(Object obj) {
         score.update(obj);
+    }
+
+    public static void resetScore() {
+        score.reset();
     }
 
     @Override

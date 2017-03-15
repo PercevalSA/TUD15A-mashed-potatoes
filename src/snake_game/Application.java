@@ -72,8 +72,10 @@ public class Application extends StateBasedGame {
 
 
     protected void resetGame() {
+        if(!MainMenu.getfirstTimeLaunched()) {
+            GameViewer.resetScore();
+        }
         snakeArray.clear();
-
         snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
 
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));

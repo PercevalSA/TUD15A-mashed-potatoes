@@ -73,4 +73,8 @@ public class MainMenu extends BasicGameState {
     public void setGameOverMessage(String gameOverMessage) {
         this.gameOverMessage = gameOverMessage;
     }
+
+    public static boolean getfirstTimeLaunched() {
+        return firstTimeLaunched;
+    }
 }
