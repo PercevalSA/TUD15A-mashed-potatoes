@@ -1,4 +1,5 @@
 package snake_game;
+    import org.jcp.xml.dsig.internal.dom.Utils;
     import org.newdawn.slick.GameContainer;
     import org.newdawn.slick.Input;
     import java.util.ArrayDeque;
@@ -14,7 +15,7 @@ public class GameController {
 
     public int fps = 0;
     private int direction = 1;
-    private int delay = 5;
+    private int delay = 3;
 
     private static GameController instance = null;
 
@@ -35,13 +36,17 @@ public class GameController {
  * Left : 3
  */
 
-    public void updateBodyPosition(GameContainer gc) throws WallCollisionException, BodyCollisionException, InvalidSizeException {
+    public void updateBodyPosition(GameContainer gc,int sleepTime) throws WallCollisionException, BodyCollisionException, InvalidSizeException {
+
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         whichDirection(gc);
 
-        if( ++fps % delay == 0) {
-            fps=0;
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
             //Get the input from keyboard
             float temp_x = snakeHead.getX();
@@ -66,6 +71,7 @@ public class GameController {
                 FoodManager.getInstance().mooveGoodApple();
             }
 
+
             Food food = checkBadFoodCollision();
             if (food != null) {
 
@@ -81,7 +87,6 @@ public class GameController {
 
             }
         }
-    }
 
     private boolean checkFoodCollision() {
         Food food = FoodManager.getInstance().getGoodApple();

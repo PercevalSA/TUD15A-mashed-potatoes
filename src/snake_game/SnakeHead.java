@@ -12,7 +12,7 @@ public class SnakeHead extends Item{
     private int previous_direction = 1;
 
     public SnakeHead(float x, float y){
-        super(x,y);
+        super(x,y,Color.green);
     }
 
     public int getDirection() {
@@ -81,23 +81,29 @@ public class SnakeHead extends Item{
         return false;
     }
 
-    public void drawItem(Graphics g, float x, float y) throws SlickException {
-        Image img = new Image("res/SnakeHeadVector.jpg");
+    public void drawItem(Graphics g){
+        Image img = null;
+        try {
+            img = new Image("res/SnakeHeadVector.jpg");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
         int direction = getDirection();
         img.setCenterOfRotation(0,0);
-
-        switch(direction) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                img = img.getFlippedCopy(true,false);
-                break;
+        if( img != null) {
+            switch (direction) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    img = img.getFlippedCopy(true, false);
+                    break;
+            }
+            img.draw(x_position, y_position,Application.ITEMSIZE,Application.ITEMSIZE);
         }
-
-        img.draw(x, y,Application.ITEMSIZE,Application.ITEMSIZE);
+        else super.drawItem(g);
     }
 }
