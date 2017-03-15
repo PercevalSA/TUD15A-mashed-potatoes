@@ -11,10 +11,19 @@ public class GameViewer extends BasicGameState{
 
     protected int id;
     protected Application app;
+    private int[] speedTimes = new int[] {10, 5 , 3};
+    private int[] delays = new int[speedTimes.length];
+    private int[] speedTimesCheck = new int[] {200, 166, 83 , 65, 45};
+    private int speedCounter = 0;
+    private int totalNumberOfFrames;
 
     public GameViewer(int id){
         this.id = id;
         this.app = Application.getApp();
+        totalNumberOfFrames = 0;
+        for (int i=0; i<speedTimes.length; i++){
+            delays[i]  = (int)((1.0/app.getFPS()) * speedTimes[speedCounter] * 1000);
+        }
     }
 
     @Override
@@ -22,12 +31,18 @@ public class GameViewer extends BasicGameState{
 
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
+        if(++totalNumberOfFrames % 60 == 0 && speedCounter < speedTimesCheck.length) {
+            if (speedCounter != (speedTimesCheck.length-1)) {speedCounter++;}
+            totalNumberOfFrames = 0;
+        }
         try {
-            Application.getApp().getGameController().updateBodyPosition(gc);
+            Application.getApp().getGameController().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
+            //Application.getApp().getGameController().updateBodyPosition(gc, delays[speedCounter]);
         }catch (WallCollisionException|BodyCollisionException e){
 
         }
     }
+
 
     @Override
     public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException {
@@ -78,13 +93,17 @@ public class GameViewer extends BasicGameState{
 
         g.setColor(Color.white);
 
-        g.drawString("FPS: " + app.getAppContainer().getFPS() + "   Score: " + snakeArray.size() + "   Position : (" + snake_head.x_position + ", " + snake_head.y_position + ")"
+        g.drawString("FPS:" + app.getAppContainer().getFPS() + "  Speed Level:" + speedCounter + "  Score:" + snakeArray.size() + "  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
                 , app.getWIDTH()/5f, app.getGAMEHEIGHT());
 
     }
 
     public int getID(){
         return id;
+    }
+
+    public void resetSpeedCounter(){
+        speedCounter = 0;
     }
 
 }

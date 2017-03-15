@@ -54,6 +54,7 @@ public class MainMenu extends BasicGameState {
         Input input = gc.getInput();
         if (input.isKeyPressed(Input.KEY_SPACE)) {
             app.resetGame();
+            app.getGameView().resetSpeedCounter();
             app.enterState(app.getGameView().getID());
         }
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {

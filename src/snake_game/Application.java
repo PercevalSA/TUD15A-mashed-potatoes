@@ -4,6 +4,8 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.text.FieldPosition;
 import java.util.ArrayDeque;
 
 public class Application extends StateBasedGame {
@@ -126,5 +128,9 @@ public class Application extends StateBasedGame {
 
     public Food getFood() {
         return food;
+    }
+
+    public int getFPS() {
+        return FPS;
     }
 }
