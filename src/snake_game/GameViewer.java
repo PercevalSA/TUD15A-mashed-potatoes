@@ -11,7 +11,7 @@ public class GameViewer extends BasicGameState{
 
     protected int id;
     //array with different frame rates whit which we updateBodyPosition
-    private int[] speedFrameRates = new int[] {10, 6, 5, 3, 2, 1};
+    private int[] speedFrameRates = new int[] {18, 12, 10, 6, 5, 3, 2};
     private int[] speedMillisecRates = new int[speedFrameRates.length];
     //alternative way to change the speed - array contains milliseconds
     private int[] speedTimesCheck = new int[] {180, 166, 83 , 75, 65, 55, 45};
@@ -41,13 +41,13 @@ public class GameViewer extends BasicGameState{
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         //control speed change rate
-        if(++totalNumberOfFrames % 90 == 0 && speedCounter < speedFrameRates.length) {
+        if(++totalNumberOfFrames % 720 == 0 && speedCounter < speedFrameRates.length) {
             if (speedCounter != (speedFrameRates.length-1)) {speedCounter++;}
             totalNumberOfFrames = 0;
         }
         try {
             //GameController.getInstance().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
-            GameController.getInstance().updateBodyPosition(gc, speedMillisecRates[speedCounter]);
+            GameController.getInstance().updateBodyPosition(gc, speedFrameRates[speedCounter]);
         }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
         }
