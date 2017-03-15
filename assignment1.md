@@ -8,7 +8,8 @@ We implemented the singleton pattern in the `Application`, `GameController` and 
 We assume there is only one game running at the time. So there is only one application and one controller.
 Moreover there is only one window so one viewer.
 Our objective is to access all three objects from anywhere in the code (in any object) while guaranteeing it is always the same instances.
-We don't use multi-threading so we don't need to `synchronise` constructors. As such, all three singletons look like :
+We don't use multi-threading so we don't need to `synchronise` constructors.
+As Application is the starter class for the main, we create the Application singleton in main and simplify it's `getInstance` to simply return the value. The other two singletons look like :
 
 ```java
 private static Class instance;
@@ -24,11 +25,10 @@ public static Class getInstance() {
 2. Make a class diagram of how the pattern is structured statically in your code.
 
 All `public static` variables are final for security reasons.
-![class diagram](img/classdiagram1.png)
+![class diagram](img/classdiagram.png)
 
 3. Make a sequence diagram of how the pattern works dynamically in your code.
 
-![sequence diagram](img/sequencediagram1.png)
 ## Behaviour
 
 1. Write a natural language description of why and how the pattern is implemented in your code.

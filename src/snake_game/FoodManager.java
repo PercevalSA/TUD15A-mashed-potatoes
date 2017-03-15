@@ -80,11 +80,8 @@ public class FoodManager implements Runnable{
                 System.out.println("Error while trying to put the thread to sleep");
             }
 
-            if(apples.size() < MAXAPPLES) {
-                float x_position = rand.nextFloat() * (Application.WIDTH - 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-                float y_position = rand.nextFloat() * (Application.GAMEHEIGHT - 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-                apples.add(new Food(x_position, y_position, false));
-            }
+            if(apples.size() < MAXAPPLES)
+                apples.add(createBadFood());
         }
     }
 }
