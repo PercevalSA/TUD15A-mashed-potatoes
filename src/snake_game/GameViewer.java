@@ -10,20 +10,21 @@ import java.util.ArrayDeque;
 public class GameViewer extends BasicGameState{
 
     protected int id;
-    protected Application app;
-    private int[] speedTimes = new int[] {10, 5 , 3};
-    private int[] delays = new int[speedTimes.length];
-    private int[] speedTimesCheck = new int[] {200, 166, 83 , 65, 45};
+    //array with different frame rates whit which we updateBodyPosition
+    private int[] speedFrameRates = new int[] {18, 12, 10, 6, 5, 3, 2};
+    private int[] speedMillisecRates = new int[speedFrameRates.length];
+    //alternative way to change the speed - array contains milliseconds
+    private int[] speedTimesCheck = new int[] {180, 166, 83 , 75, 65, 55, 45};
     private static int speedCounter = 0;
     private int totalNumberOfFrames;
     private static GameViewer instance = null;
 
     private GameViewer(){
         this.id = Application.GAMEVIEWER;
-        this.app = Application.getApp();
         totalNumberOfFrames = 0;
-        for (int i=0; i<speedTimes.length; i++){
-            delays[i]  = (int)((1.0/app.getFPS()) * speedTimes[speedCounter] * 1000);
+        //transform frame rates to the milliseconds - used to set sleeping time of the thread
+        for (int i=0; i<speedFrameRates.length; i++){
+            speedMillisecRates[i]  = (int)((1.0/Application.getApp().getFPS()) * speedFrameRates[i] * 1000);
         }
     }
 
@@ -39,13 +40,14 @@ public class GameViewer extends BasicGameState{
 
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
-        if(++totalNumberOfFrames % 60 == 0 && speedCounter < speedTimesCheck.length) {
-            if (speedCounter != (speedTimesCheck.length-1)) {speedCounter++;}
+        //control speed change rate
+        if(++totalNumberOfFrames % 720 == 0 && speedCounter < speedFrameRates.length) {
+            if (speedCounter != (speedFrameRates.length-1)) {speedCounter++;}
             totalNumberOfFrames = 0;
         }
         try {
-            GameController.getInstance().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
-            //Application.getApp().getGameController().updateBodyPosition(gc, delays[speedCounter]);
+            //GameController.getInstance().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
+            GameController.getInstance().updateBodyPosition(gc, speedFrameRates[speedCounter]);
         }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
         }
@@ -55,8 +57,8 @@ public class GameViewer extends BasicGameState{
     @Override
     public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException {
 
-        SnakeHead snake_head = app.getSnakeHead();
-        ArrayDeque<SnakeBody> snakeArray = app.getSnakeArray();
+        SnakeHead snake_head = Application.getApp().getSnakeHead();
+        ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
 
         for (SnakeBody element : snakeArray) {
             element.drawItem(g);
@@ -65,7 +67,7 @@ public class GameViewer extends BasicGameState{
         snake_head.drawItem(g);
 
 
-        Rectangle wall = new Rectangle(1,1,app.WIDTH-1,app.GAMEHEIGHT-1);
+        Rectangle wall = new Rectangle(1,1,Application.WIDTH-1,Application.GAMEHEIGHT-1);
         g.setColor(Color.white);
         g.draw(wall);
 
@@ -85,8 +87,8 @@ public class GameViewer extends BasicGameState{
         }
 
         g.setColor(Color.white);
-        g.drawString("FPS:" + app.getAppContainer().getFPS() + "  Speed Level:" + speedCounter + "  Score:" + snakeArray.size() + "  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
-                , app.WIDTH/5f, app.GAMEHEIGHT);
+        g.drawString("FPS:" + Application.getApp().getAppContainer().getFPS() + "  Speed Level:" + speedCounter + "  Score:" + snakeArray.size() + "  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
+                , Application.WIDTH/5f, Application.GAMEHEIGHT);
 
     }
 
