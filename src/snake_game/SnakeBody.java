@@ -30,4 +30,18 @@ public class SnakeBody extends Item {
         y_position =y;
     }
 
+    @Override
+    public void drawItem(Graphics g) {
+        Image img = null;
+        try {
+            img = new Image("res/snake_scale.png");
+            img = img.getFlippedCopy(false, true);
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+        if(img != null)
+            img.draw(x_position, y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+        else
+            super.drawItem(g);
+    }
 }

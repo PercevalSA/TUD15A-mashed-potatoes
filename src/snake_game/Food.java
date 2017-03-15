@@ -3,6 +3,8 @@ package snake_game;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
 import java.util.ArrayDeque;
@@ -33,5 +35,24 @@ public class Food extends Item {
         else{
             snakeArray.removeLast();
         }
+    }
+
+    @Override
+    public void drawItem(Graphics g) {
+        Image img = null;
+        try {
+            if (tasteBehavior instanceof TasteBad) {
+                img = new Image("res/apple-b.png");
+            }
+            else
+                img = new Image("res/apple.png");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+        if(img != null) {
+            img.draw(x_position, y_position, Application.ITEMSIZE, Application.ITEMSIZE);
+        }
+        else
+            super.drawItem(g);
     }
 }
