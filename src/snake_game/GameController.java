@@ -35,17 +35,20 @@ public class GameController {
  * Left : 3
  */
 
-    public void updateBodyPosition(GameContainer gc,int sleepTime) throws WallCollisionException, BodyCollisionException, InvalidSizeException {
+    public void updateBodyPosition(GameContainer gc,int sleepFrameRate) throws WallCollisionException, BodyCollisionException, InvalidSizeException {
 
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         whichDirection(gc);
 
-        try {
-            Thread.sleep(sleepTime);
+        /*try {
+            Thread.sleep(sleepFrameRate);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        if (++fps % sleepFrameRate == 0) {
+            fps = 0;
 
             //Get the input from keyboard
             float temp_x = snakeHead.getX();
@@ -55,17 +58,16 @@ public class GameController {
 
             //Get the body of the snake
             ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
-            if(snakeArray.size() != 0) {
+            if (snakeArray.size() != 0) {
                 SnakeBody last = snakeArray.getLast();
                 snakeArray.removeLast();
                 last.updateBody(temp_x, temp_y);
                 snakeArray.addFirst(last);
                 Application.getApp().setSnakeArray(snakeArray);
-            }
-            else
+            } else
                 throw new InvalidSizeException();
 
-            if(checkFoodCollision()){
+            if (checkFoodCollision()) {
                 FoodManager.getInstance().getGoodApple().eat();
                 FoodManager.getInstance().mooveGoodApple();
             }
@@ -76,16 +78,17 @@ public class GameController {
 
                 food.eat();
 
-                try{
+                try {
                     ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
                     foodArray.remove(food);
                     FoodManager.getInstance().setApples(foodArray);
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Error while trying to remove a bad apple from the list");
                 }
 
             }
         }
+    }
 
     private boolean checkFoodCollision() {
         Food food = FoodManager.getInstance().getGoodApple();
