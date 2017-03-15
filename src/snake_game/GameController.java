@@ -62,14 +62,8 @@ public class GameController {
                 throw new InvalidSizeException();
 
             if(checkFoodCollision()){
-
                 FoodManager.getInstance().getGoodApple().eat();
-                
-                Random rand = new Random();
-                float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-                float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-                FoodManager.getInstance().getGoodApple().setX(x_position);
-                FoodManager.getInstance().getGoodApple().setY(y_position);
+                FoodManager.getInstance().mooveGoodApple();
             }
 
             Food food = checkBadFoodCollision();
@@ -111,29 +105,6 @@ public class GameController {
         return false;
     }
 
-    //TODO: Shift to Factory
-    public void createFoodItem(){
-
-        Random rand = new Random();
-        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-
-        //Create one Good apple and a list of bad apples
-        ArrayList<Food> foods = new ArrayList<>();
-        Food food = new Food(x_position, y_position, true);
-        FoodManager.getInstance().setGoodApple(food);
-
-        x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        foods.add(new Food(x_position, y_position, false));
-
-        x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        foods.add(new Food(x_position, y_position, false));
-        FoodManager.getInstance().setApples(foods);
-
-
-    }
 
     private Food checkBadFoodCollision() {
         ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
