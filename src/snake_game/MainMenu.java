@@ -2,6 +2,7 @@ package snake_game;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Graphics;
@@ -35,14 +36,64 @@ public class MainMenu extends BasicGameState {
     // render-method for all the things happening on-screen
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+
+        Rectangle background = new Rectangle(0,0,Application.WIDTH,Application.HEIGHT);
+        g.setColor(Color.darkGray);
+        g.draw(background);
+        g.fill(background);
+
         if(firstTimeLaunched) {
-            playersOptionsTTF.drawString(100, 100, "Press Space to start :)");
-            playersOptionsTTF.drawString(100, 150, "Press Escape to quit");
+
+            Rectangle frame = new Rectangle(Application.WIDTH * 0.1f,Application.HEIGHT * 0.15f,
+                    Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
+            g.setColor(Color.red);
+            g.draw(frame);
+
+            g.setColor(Color.white);
+            g.setFont(new TrueTypeFont(new Font("Comic Sans MS", Font.PLAIN, 50), true));
+            g.drawString("SNAKE POTATO", Application.WIDTH * 0.18f, Application.HEIGHT * 0.2f);
+
+
+            g.setColor(Color.orange);
+            g.setFont(new TrueTypeFont(new Font("Garamon", Font.BOLD, 50), true));
+            g.drawString("START", Application.WIDTH * 0.37f, Application.HEIGHT * 0.5f);
+
+            g.setColor(Color.white);
+            g.setFont(new TrueTypeFont(new Font("Garamon", Font.PLAIN, 15), true));
+            g.drawString("press space", Application.WIDTH * 0.43f, Application.HEIGHT * 0.63f);
+
+            g.setColor(Color.black);
+            g.setFont(new TrueTypeFont(new Font("Garamon", Font.PLAIN, 18), true));
+            g.drawString("Press Escape to quit", Application.WIDTH * 0.36f, Application.HEIGHT * 0.75f);
+
+            g.setColor(Color.white);
+            g.setFont(new TrueTypeFont(new Font("Courier New", Font.PLAIN, 12), true));
+            g.drawString("© Made with <3 by the Mashed Potato Team", Application.WIDTH * 0.25f, Application.HEIGHT * 0.95f);
         }
         else{
-            playersOptionsTTF.drawString(100, 100, "Game Over");
-            playersOptionsTTF.drawString(100, 150, gameOverMessage);
-            playersOptionsTTF.drawString(100, 200, "Score : " + GameViewer.getScore());
+            Rectangle frame = new Rectangle(Application.WIDTH * 0.1f,Application.HEIGHT * 0.15f,
+                    Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
+            g.setColor(Color.red);
+            g.draw(frame);
+
+            g.setFont(new TrueTypeFont(new Font("Comic Sans MS", Font.BOLD, 50), true));
+            g.setColor(Color.black);
+            g.drawString("GAME OVER", Application.WIDTH * 0.24f + 2, Application.HEIGHT * 0.2f + 4);
+            g.setColor(Color.white);
+            g.drawString("GAME OVER", Application.WIDTH * 0.24f, Application.HEIGHT * 0.2f);
+
+            g.setColor(Color.orange);
+            g.setFont(new TrueTypeFont(new Font("Garamon", Font.PLAIN, 35), true));
+            g.drawString(gameOverMessage, Application.WIDTH * 0.3f, Application.HEIGHT * 0.45f);
+
+            g.setColor(Color.white);
+            g.setFont(new TrueTypeFont(new Font("Courier New", Font.PLAIN, 20), true));
+            g.drawString("Score      : " + GameViewer.getScore(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.68f);
+
+            g.setColor(Color.white);
+            g.setFont(new TrueTypeFont(new Font("Courier New", Font.PLAIN, 20), true));
+            g.drawString("Snake size : " + Application.getApp().getSnakeArray().size(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.73f);
+
         }
     }
 
