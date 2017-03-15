@@ -11,3 +11,5 @@ A simple snake developed during 2017 March Athens program session
     * In my case, I have : `-Djava.library.path=./lib/lwjgl-2.9.3/native/macosx`
 6. Run the game
 7. Enjoy ;)
+
+![ScreenShot](screenshot.png)
