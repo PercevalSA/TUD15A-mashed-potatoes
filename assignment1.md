@@ -24,10 +24,11 @@ public static Class getInstance() {
 2. Make a class diagram of how the pattern is structured statically in your code.
 
 All `public static` variables are final for security reasons.
-![class diagram](img/classdiagram.png)
+![class diagram](img/classdiagram1.png)
 
 3. Make a sequence diagram of how the pattern works dynamically in your code.
 
+![sequence diagram](img/sequencediagram1.png)
 ## Behaviour
 
 1. Write a natural language description of why and how the pattern is implemented in your code.
