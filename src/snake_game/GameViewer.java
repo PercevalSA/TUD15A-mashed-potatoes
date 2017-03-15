@@ -1,6 +1,5 @@
 package snake_game;
 
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -10,14 +9,17 @@ import java.util.ArrayDeque;
 public class GameViewer extends BasicGameState{
 
     protected int id;
+
     //array with different frame rates whit which we updateBodyPosition
     private int[] speedFrameRates = new int[] {18, 12, 10, 6, 5, 3, 2};
     private int[] speedMillisecRates = new int[speedFrameRates.length];
+
     //alternative way to change the speed - array contains milliseconds
     private int[] speedTimesCheck = new int[] {180, 166, 83 , 75, 65, 55, 45};
     private static int speedCounter = 0;
     private int totalNumberOfFrames;
     private static GameViewer instance = null;
+    private static Score score= null;
 
     private GameViewer(){
         this.id = Application.GAMEVIEWER;
@@ -26,6 +28,7 @@ public class GameViewer extends BasicGameState{
         for (int i=0; i<speedFrameRates.length; i++){
             speedMillisecRates[i]  = (int)((1.0/Application.getApp().getFPS()) * speedFrameRates[i] * 1000);
         }
+        score = new Score();
     }
 
     public static GameViewer getInstance(){
@@ -33,6 +36,14 @@ public class GameViewer extends BasicGameState{
             instance = new GameViewer();
         }
         return instance;
+    }
+
+    public static int getScore() {
+        return score.getScore();
+    }
+
+    public static void setScore(Object obj){
+        score.update(obj);
     }
 
     @Override
@@ -46,7 +57,6 @@ public class GameViewer extends BasicGameState{
             totalNumberOfFrames = 0;
         }
         try {
-            //GameController.getInstance().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
             GameController.getInstance().updateBodyPosition(gc, speedFrameRates[speedCounter]);
         }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
@@ -87,7 +97,7 @@ public class GameViewer extends BasicGameState{
         }
 
         g.setColor(Color.white);
-        g.drawString("FPS:" + Application.getApp().getAppContainer().getFPS() + "  Speed Level:" + speedCounter + "  Score:" + snakeArray.size() + "  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
+        g.drawString("FPS:" + Application.getApp().getAppContainer().getFPS() + "  Speed Level:" + speedCounter + "  Score:" + getScore() + "  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
                 , Application.WIDTH/5f, Application.GAMEHEIGHT);
 
     }

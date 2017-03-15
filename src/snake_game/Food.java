@@ -34,4 +34,8 @@ public class Food extends Item {
             snakeArray.removeLast();
         }
     }
+
+    public int getValue() {
+        return tasteBehavior.getValue();
+    }
 }

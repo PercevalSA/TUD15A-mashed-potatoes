@@ -105,6 +105,7 @@ public class GameController {
                     && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
                     && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
                     ) {
+                GameViewer.setScore(food);
                 System.out.println("You ate the FOOOOOOOOD");
                 return true;
             }
@@ -129,7 +130,8 @@ public class GameController {
                         && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
                         && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
                         ) {
-                    System.out.println("You ate the FOOOOOOOOD");
+                    GameViewer.setScore(food);
+                    System.out.println("You ate the BAAAAAAAD FOOOOOOD");
                     return food;
                 }
             }
