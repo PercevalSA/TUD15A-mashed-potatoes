@@ -1,19 +1,18 @@
 package snake_game;
 
+import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.*;
 import org.newdawn.slick.geom.Rectangle;
-
-import java.awt.*;
 
 public abstract class Item {
     protected Color color;
     protected float x_position;
     protected float y_position;
 
-    public Item(float x, float y){
+    public Item(float x, float y, Color color){
         this.x_position = x;
         this.y_position = y;
+        this.color = color;
     }
 
     public float getX(){
@@ -35,5 +34,12 @@ public abstract class Item {
 
     public Color getCol(){
         return color;
+    }
+
+    public void drawItem(Graphics g){
+        g.setColor(color);
+        Rectangle shape = new Rectangle(x_position,y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+        g.draw(shape);
+        g.fill(shape);
     }
 }

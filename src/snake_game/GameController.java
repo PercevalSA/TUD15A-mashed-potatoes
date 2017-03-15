@@ -14,7 +14,7 @@ public class GameController {
 
     public int fps = 0;
     private int direction = 1;
-    private int delay = 5;
+    private int delay = 3;
 
     private static GameController instance = null;
 
