@@ -18,10 +18,6 @@ public class GameViewer extends BasicGameState implements KeyListener {
 
     //array with different frame rates whit which we updateBodyPosition
     private int[] speedFrameRates = new int[] {11, 8, 6, 5, 4, 3, 2};
-    private int[] speedMillisecRates = new int[speedFrameRates.length];
-
-    //alternative way to change the speed - array contains milliseconds
-    private int[] speedTimesCheck = new int[] {180, 166, 83 , 75, 65, 55, 45};
     private static int speedCounter = 0;
     private int totalNumberOfFrames;
 
@@ -30,11 +26,7 @@ public class GameViewer extends BasicGameState implements KeyListener {
         totalNumberOfFrames = 0;
 
         this.resetGame();
-
-        //transform frame rates to the milliseconds - used to set sleeping time of the thread
-        for (int i=0; i<speedFrameRates.length; i++){
-            speedMillisecRates[i]  = (int)((1.0/Application.getApp().getFPS()) * speedFrameRates[i] * 1000);
-        }
+        
     }
 
    public void resetGame() {
