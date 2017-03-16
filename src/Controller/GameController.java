@@ -42,7 +42,7 @@ public class GameController {
     public void updateBodyPosition(GameContainer gc,int sleepFrameRate) throws WallCollisionException, BodyCollisionException, InvalidSizeException {
 
         //Get the snakeHead for updates
-        SnakeHead snakeHead = Application.getApp().getSnakeHead();
+        SnakeHead snakeHead = SnakeManager.getInstance().getSnakeHead();
         whichDirection(gc);
 
         if (++fps % sleepFrameRate == 0) {
@@ -55,13 +55,13 @@ public class GameController {
             snakeHead.updateCoord(20, direction);
 
             //Get the body of the snake
-            ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
+            ArrayDeque<SnakeBody> snakeArray = SnakeManager.getInstance().getSnakeArray();
             if (snakeArray.size() != 0) {
                 SnakeBody last = snakeArray.getLast();
                 snakeArray.removeLast();
                 last.updateBody(temp_x, temp_y);
                 snakeArray.addFirst(last);
-                Application.getApp().setSnakeArray(snakeArray);
+                SnakeManager.getInstance().setSnakeArray(snakeArray);
             } else
                 throw new InvalidSizeException();
 
@@ -91,7 +91,7 @@ public class GameController {
     private boolean checkFoodCollision() {
         Food food = FoodManager.getInstance().getGoodApple();
         if(food != null) {
-            SnakeHead snakeHead = Application.getApp().getSnakeHead();
+            SnakeHead snakeHead = SnakeManager.getInstance().getSnakeHead();
             float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
             float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
 
@@ -115,7 +115,7 @@ public class GameController {
     private Food checkBadFoodCollision() {
         ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
         if(foodArray != null) {
-            SnakeHead snakeHead = Application.getApp().getSnakeHead();
+            SnakeHead snakeHead = SnakeManager.getInstance().getSnakeHead();
             float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
             float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
 

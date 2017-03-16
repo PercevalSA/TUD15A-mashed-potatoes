@@ -85,8 +85,8 @@ public class GameViewer extends BasicGameState{
         g.draw(background);
         g.fill(background);
 
-        SnakeHead snake_head = Application.getApp().getSnakeHead();
-        ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
+        SnakeHead snake_head = SnakeManager.getInstance().getSnakeHead();
+        ArrayDeque<SnakeBody> snakeArray = SnakeManager.getInstance().getSnakeArray();
 
         for (SnakeBody element : snakeArray) {
             element.drawItem(g);

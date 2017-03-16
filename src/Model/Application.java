@@ -9,7 +9,6 @@ import Viewer.GameOver;
 import Viewer.MainMenu;
 import Viewer.Pause;
 
-import java.util.ArrayDeque;
 
 public class Application extends StateBasedGame {
 
@@ -24,9 +23,6 @@ public class Application extends StateBasedGame {
     private static MainMenu mainMenu = null;
     private static GameOver gameOver = null;
     private static Pause pause = null;
-
-    private SnakeHead snakeHead = null;
-    private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
 
     // Application Properties
     public static final int WIDTH   = 640;
@@ -88,25 +84,7 @@ public class Application extends StateBasedGame {
 
         GameViewer.resetScore();
         FoodManager.getInstance().initializeFoods();
-        snakeArray.clear();
-        snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
-
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));
-    }
-
-    public SnakeHead getSnakeHead() {
-        return snakeHead;
-    }
-
-    public ArrayDeque<SnakeBody> getSnakeArray() {
-        return snakeArray;
-    }
-
-    public void setSnakeArray(ArrayDeque<SnakeBody> snakeArray) {
-        this.snakeArray = snakeArray;
+        SnakeManager.getInstance().initializeSnake();
     }
 
     public static MainMenu getMainMenu() {

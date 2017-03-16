@@ -78,6 +78,7 @@ public class SnakeHead extends Item {
     }
 
     private boolean checkWallCollision(float x_temp, float y_temp) {
+        //TODO move to the controller
         int GAMEHEIGHT = Application.GAMEHEIGHT;
         int GAMEWIDTH = Application.WIDTH;
         if(x_temp <= 0 - Application.ITEMSIZE / 2|| x_temp + Application.ITEMSIZE / 2 >= GAMEWIDTH || y_temp <= 0 - Application.ITEMSIZE / 2|| y_temp + Application.ITEMSIZE / 2 >= GAMEHEIGHT)
@@ -86,7 +87,7 @@ public class SnakeHead extends Item {
     }
 
     public boolean checkBodyCollision(float x_temp, float y_temp) throws BodyCollisionException{
-        Deque<SnakeBody> body = Application.getApp().getSnakeArray();
+        Deque<SnakeBody> body = SnakeManager.getInstance().getSnakeArray();//TODO move to the controller
         for( SnakeBody b : body) {
             float x = b.getX();
             float y = b.getY();

@@ -38,7 +38,7 @@ public class Food extends Item {
     }
 
     public void eat() throws InvalidSizeException {
-        ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
+        ArrayDeque<SnakeBody> snakeArray = SnakeManager.getInstance().getSnakeArray();
         int eatValue = tasteBehavior.eat();
         if(eatValue > 0) {
             for(int i = 0; i < eatValue; i++) {
