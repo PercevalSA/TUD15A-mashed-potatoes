@@ -27,7 +27,7 @@ A simple snake developed during 2017 March Athens program session
 ![ScreenShot v2.0](screenshotv2.png)
 
 ### V 2.0 Start Menu
-![ScreenShot v2.0 Start](screenshotstart.png)
+![ScreenShot v2.0 Start](screenshotv2start.png)
 
 ### V 2.0 Pause Menu
-![ScreenShot v2.0 Pause](screenshotpause.png)
+![ScreenShot v2.0 Pause](screenshotv2pause.png)
