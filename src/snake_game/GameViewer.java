@@ -11,7 +11,7 @@ public class GameViewer extends BasicGameState{
     protected int id;
 
     //array with different frame rates whit which we updateBodyPosition
-    private int[] speedFrameRates = new int[] {18, 12, 10, 6, 5, 3, 2};
+    private int[] speedFrameRates = new int[] {13, 10, 6, 5, 4, 3, 2};
     private int[] speedMillisecRates = new int[speedFrameRates.length];
 
     //alternative way to change the speed - array contains milliseconds
@@ -53,7 +53,9 @@ public class GameViewer extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         //control speed change rate
         if(++totalNumberOfFrames % 720 == 0 && speedCounter < speedFrameRates.length) {
-            if (speedCounter != (speedFrameRates.length-1)) {speedCounter++;}
+            if (speedCounter != (speedFrameRates.length-1)) {
+                speedCounter++;
+            }
             totalNumberOfFrames = 0;
         }
         try {
@@ -69,7 +71,7 @@ public class GameViewer extends BasicGameState{
 
 
         Rectangle background = new Rectangle(0,0,Application.WIDTH,Application.HEIGHT);
-        g.setColor(Color.darkGray);
+        g.setColor(Color.decode("#F5F5F5"));
         g.draw(background);
         g.fill(background);
 
@@ -85,7 +87,7 @@ public class GameViewer extends BasicGameState{
 
 
         Rectangle wall = new Rectangle(1,1,Application.WIDTH-1,Application.GAMEHEIGHT-1);
-        g.setColor(Color.white);
+        g.setColor(Color.darkGray);
         g.draw(wall);
 
 
@@ -103,7 +105,7 @@ public class GameViewer extends BasicGameState{
             }
         }
 
-        g.setColor(Color.white);
+        g.setColor(Color.darkGray);
         g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
                         + "  |  Speed Level: " + speedCounter
                         + "  |  Score: " + getScore()
@@ -119,6 +121,10 @@ public class GameViewer extends BasicGameState{
 
     public static void resetSpeedCounter(){
         speedCounter = 0;
+    }
+
+    public static int getSpeedCounter() {
+        return speedCounter;
     }
 
     public static void resetScore() {

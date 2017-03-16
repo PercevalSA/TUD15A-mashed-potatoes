@@ -13,6 +13,18 @@ import java.util.ArrayDeque;
 public class Food extends Item {
 
     private TasteBehavior tasteBehavior;
+    private Image imgApple, imgAppleB;
+    private boolean imageLoaded = false;
+
+    public void loadImages(){
+        try {
+            imgApple = new Image("res/apple.png");
+            imgAppleB = new Image("res/apple-b.png");
+            imageLoaded = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public Food(float x, float y, boolean isGood){
         super(x,y, null);
@@ -26,29 +38,42 @@ public class Food extends Item {
         }
     }
 
-    public void eat() {
+    public void eat() throws InvalidSizeException {
         ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
-        if(tasteBehavior.eat() == 1) {
-            SnakeBody grow = snakeArray.getLast();
-            snakeArray.addLast(new SnakeBody(grow.getX(), grow.getY()));
+        int eatValue = tasteBehavior.eat();
+        if(eatValue > 0) {
+            for(int i = 0; i < eatValue; i++) {
+                SnakeBody grow = snakeArray.getLast();
+                snakeArray.addLast(new SnakeBody(grow.getX(), grow.getY()));
+            }
         }
+        else if(eatValue < 0){
+            if(eatValue < snakeArray.size())
+                for(int i = 0; i < Math.abs(eatValue); i++) {
+                    snakeArray.removeLast();
+                }
+            else
+                throw new InvalidSizeException();
+        }
+
         else{
-            snakeArray.removeLast();
+            System.out.println("You ate a neutral apple");
         }
     }
 
     @Override
     public void drawItem(Graphics g) {
+        if(!imageLoaded)
+            loadImages();
+
         Image img = null;
-        try {
-            if (tasteBehavior instanceof TasteBad) {
-                img = new Image("res/apple-b.png");
-            }
-            else
-                img = new Image("res/apple.png");
-        } catch (SlickException e) {
-            e.printStackTrace();
+
+        if (tasteBehavior instanceof TasteBad) {
+            img = imgAppleB;
         }
+        else
+            img = imgApple;
+
         if(img != null) {
             img.draw(x_position, y_position, Application.ITEMSIZE, Application.ITEMSIZE);
         }

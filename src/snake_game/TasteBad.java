@@ -4,7 +4,7 @@ public class TasteBad implements TasteBehavior {
 
     @Override
     public int eat() {
-        return 1;
+        return -1;
     }
 
     @Override

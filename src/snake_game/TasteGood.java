@@ -9,6 +9,6 @@ public class TasteGood implements TasteBehavior {
 
     @Override
     public int getValue() {
-        return 1;
+        return GameViewer.getSpeedCounter() + 1;
     }
 }
