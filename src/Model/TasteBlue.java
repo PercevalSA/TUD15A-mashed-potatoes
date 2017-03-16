@@ -1,12 +1,10 @@
 package Model;
 
-import Viewer.GameViewer;
-
-public class TasteGood implements TasteBehavior {
+public class TasteBlue implements TasteBehavior {
 
     @Override
     public int getType() {
-        return 5;
+        return 2;
     }
 
     @Override
@@ -16,6 +14,6 @@ public class TasteGood implements TasteBehavior {
 
     @Override
     public int getValue() {
-        return GameViewer.getSpeedCounter() + 1;
+        return -1;
     }
 }
