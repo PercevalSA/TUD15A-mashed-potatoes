@@ -18,12 +18,14 @@ public class SnakeManager {
 
     public void initializeSnake(){
         snakeArray.clear();
-        snakeHead = new SnakeHead(Application.WIDTH / 2 , Application.HEIGHT / 2);
+        int snake_x = ((int)Application.WIDTH / (2*Application.ITEMSIZE)) * Application.ITEMSIZE ;
+        int snake_y = ((int)Application.HEIGHT / (2*Application.ITEMSIZE)) * Application.ITEMSIZE;
+        snakeHead = new SnakeHead(snake_x, snake_y);
 
-        snakeArray.addFirst(new SnakeBody(Application.WIDTH / 2 - 20, Application.HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(Application.WIDTH / 2 - 20, Application.HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(Application.WIDTH / 2 - 20, Application.HEIGHT / 2));
-        snakeArray.addFirst(new SnakeBody(Application.WIDTH / 2 - 20, Application.HEIGHT / 2));
+        snakeArray.addFirst(new SnakeBody(snake_x - Application.ITEMSIZE, snake_y));
+        snakeArray.addFirst(new SnakeBody(snake_x - Application.ITEMSIZE, snake_y));
+        snakeArray.addFirst(new SnakeBody(snake_x - Application.ITEMSIZE, snake_y));
+        snakeArray.addFirst(new SnakeBody(snake_x - Application.ITEMSIZE, snake_y));
     }
 
     public SnakeHead getSnakeHead() {

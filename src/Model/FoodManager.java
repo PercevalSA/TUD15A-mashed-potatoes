@@ -69,19 +69,16 @@ public class FoodManager implements Runnable{
     @Override
     public void run() {
         while(true) {
-            if(Application.getApp().getCurrentStateId() == Application.GAMEVIEWER) {
-                Random rand = new Random();
-                int time = rand.nextInt(10) + 5;
-                try {
-                    Thread.sleep(time * 1000);
-                } catch (InterruptedException e) {
-                    System.out.println("Error while trying to put the thread to sleep");
-                }
-
-                if (apples.size() < MAXAPPLES)
-                    apples.add(createBadFood());
-
+            Random rand = new Random();
+            int time = rand.nextInt(10) + 5;
+            try {
+                Thread.sleep(time * 1000);
+            } catch (InterruptedException e) {
+                System.out.println("Error while trying to put the thread to sleep");
             }
+
+            if (apples.size() < MAXAPPLES && Application.getApp().getCurrentStateId() == Application.GAMEVIEWER)
+                apples.add(createBadFood());
         }
     }
 }
