@@ -11,7 +11,7 @@ public class GameViewer extends BasicGameState{
     protected int id;
 
     //array with different frame rates whit which we updateBodyPosition
-    private int[] speedFrameRates = new int[] {13, 10, 6, 5, 4, 3, 2};
+    private int[] speedFrameRates = new int[] {11, 8, 6, 5, 4, 3, 2};
     private int[] speedMillisecRates = new int[speedFrameRates.length];
 
     //alternative way to change the speed - array contains milliseconds
@@ -109,8 +109,8 @@ public class GameViewer extends BasicGameState{
         g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
                         + "  |  Speed Level: " + speedCounter
                         + "  |  Score: " + getScore()
-                        + "  |  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
-                , Application.WIDTH/32f, Application.GAMEHEIGHT);
+                        + "  |  Snake size : " + snakeArray.size()
+                , Application.WIDTH/16f, Application.GAMEHEIGHT);
 
     }
 
