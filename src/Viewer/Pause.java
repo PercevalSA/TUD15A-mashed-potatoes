@@ -3,9 +3,14 @@ package Viewer;
 import Model.Application;
 import Viewer.GameViewer;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Font;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.awt.*;
 
 public class Pause extends BasicGameState implements KeyListener {
 
@@ -56,6 +61,14 @@ public class Pause extends BasicGameState implements KeyListener {
         g.setFont(new TrueTypeFont(new java.awt.Font("Comic Sans MS", java.awt.Font.BOLD, 50), true));
         g.setColor(Color.white);
         g.drawString("PAUSE", Application.WIDTH * 0.375f, Application.HEIGHT * 0.4f);
+
+        g.setColor(Color.decode("#004D40"));
+        g.setFont(new TrueTypeFont(new java.awt.Font("Garamon", java.awt.Font.PLAIN, 18), true));
+        g.drawString("Press Space to resume", Application.WIDTH * 0.36f, Application.HEIGHT * 0.8f);
+
+        g.setColor(Color.decode("#004D40"));
+        g.setFont(new TrueTypeFont(new java.awt.Font("Garamon", java.awt.Font.PLAIN, 18), true));
+        g.drawString("Press Escape to quit", Application.WIDTH * 0.375f, Application.HEIGHT * 0.85f);
 
     }
 

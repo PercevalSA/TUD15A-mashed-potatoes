@@ -73,6 +73,14 @@ public class GameOver extends BasicGameState{
         g.setFont(new TrueTypeFont(new java.awt.Font("Courier New", java.awt.Font.PLAIN, 20), true));
         g.drawString("Snake size : " + SnakeManager.getInstance().getSnakeArray().size(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.73f);
 
+        g.setColor(Color.decode("#00897B"));
+        g.setFont(new TrueTypeFont(new java.awt.Font("Garamon", java.awt.Font.PLAIN, 18), true));
+        g.drawString("Press Space to play again", Application.WIDTH * 0.315f, Application.HEIGHT * 0.85f);
+
+        g.setColor(Color.decode("#00897B"));
+        g.setFont(new TrueTypeFont(new java.awt.Font("Garamon", java.awt.Font.PLAIN, 18), true));
+        g.drawString("Press Escape to quit", Application.WIDTH * 0.35f, Application.HEIGHT * 0.9f);
+
     }
 
     @Override
