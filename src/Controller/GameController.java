@@ -96,17 +96,8 @@ public class GameController {
         Food food = FoodManager.getInstance().getGoodApple();
         if(food != null) {
             SnakeHead snakeHead = SnakeManager.getInstance().getSnakeHead();
-            float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
-            float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
 
-            float x_food = food.getX();
-            float y_food = food.getY();
-
-            if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
-                    && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
-                    && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
-                    && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
-                    ) {
+            if (snakeHead.getX() == food.getX() && snakeHead.getY() == food.getY()){
                 setScore(food);
                 System.out.println("You ate the FOOOOOOOOD");
                 return true;
@@ -120,18 +111,8 @@ public class GameController {
         ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
         if(foodArray != null) {
             SnakeHead snakeHead = SnakeManager.getInstance().getSnakeHead();
-            float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
-            float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
-
             for(Food food : foodArray){
-                float x_food = food.getX();
-                float y_food = food.getY();
-
-                if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
-                        && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
-                        && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
-                        && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
-                        ) {
+                if (snakeHead.getX() == food.getX() && snakeHead.getY() == food.getY()){
                     setScore(food);
                     System.out.println("You ate the BAAAAAAAD FOOOOOOD");
                     return food;

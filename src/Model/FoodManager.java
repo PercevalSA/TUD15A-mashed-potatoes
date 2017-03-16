@@ -36,8 +36,8 @@ public class FoodManager implements Runnable{
 
     public synchronized void mooveGoodApple(){
         Random rand = new Random();
-        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        float x_position = rand.nextInt(Application.WIDTH / Application.ITEMSIZE) * Application.ITEMSIZE;
+        float y_position = rand.nextInt(Application.GAMEHEIGHT / Application.ITEMSIZE) * Application.ITEMSIZE;
 
         goodApple.setX(x_position);
         goodApple.setY(y_position);
@@ -45,16 +45,16 @@ public class FoodManager implements Runnable{
 
     public Food createGoodFood(){
         Random rand = new Random();
-        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        float x_position = rand.nextInt(Application.WIDTH / Application.ITEMSIZE) * Application.ITEMSIZE;
+        float y_position = rand.nextInt(Application.GAMEHEIGHT / Application.ITEMSIZE) * Application.ITEMSIZE;
 
         return new Food(x_position, y_position, true);
     }
 
     public Food createBadFood(){
         Random rand = new Random();
-        float x_position = rand.nextFloat()*(Application.WIDTH- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
-        float y_position = rand.nextFloat()*(Application.GAMEHEIGHT- 2 * Application.ITEMSIZE) + Application.ITEMSIZE;
+        float x_position = rand.nextInt(Application.WIDTH / Application.ITEMSIZE) * Application.ITEMSIZE;
+        float y_position = rand.nextInt(Application.GAMEHEIGHT / Application.ITEMSIZE) * Application.ITEMSIZE;
 
         return new Food(x_position, y_position, false);
     }
