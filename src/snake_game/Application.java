@@ -20,9 +20,7 @@ public class Application extends StateBasedGame {
     private static MainMenu mainMenu = null;
 
     private SnakeHead snakeHead = null;
-
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
-
 
     // Application Properties
     public static final int WIDTH   = 640;
@@ -57,14 +55,19 @@ public class Application extends StateBasedGame {
     public static void main(String[] args){
         try {
             instance = new Application("Potato Snake v" + VERSION);
+
+            // food manager
             FoodManager.getInstance().initializeFoods();
             new Thread(FoodManager.getInstance()).start();
+
+            // display
             mainMenu = new MainMenu(MAINMENU);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
             appContainer.setShowFPS(false);
             appContainer.start();
+
         } catch(SlickException e) {
             e.printStackTrace();
         }

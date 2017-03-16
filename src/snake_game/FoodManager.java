@@ -3,9 +3,6 @@ package snake_game;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by john on 14/03/2017.
- */
 public class FoodManager implements Runnable{
 
     private static final int MAXAPPLES = 6;

@@ -1,6 +1,9 @@
 package snake_game;
 
+import org.lwjgl.Sys;
 import org.newdawn.slick.*;
+import org.newdawn.slick.KeyListener;
+import org.newdawn.slick.MouseListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -8,18 +11,27 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import java.awt.Font;
+import java.awt.event.*;
 
-public class MainMenu extends BasicGameState {
+public class MainMenu extends BasicGameState implements KeyListener, MouseListener {
 
     // ID we return to class 'Application'
     protected int id;
 
-    private String gameOverMessage;
-
     private static boolean firstTimeLaunched = true;
-
+    private String gameOverMessage;
     private Font font;
     private TrueTypeFont playersOptionsTTF;
+    private boolean pressed = false;
+    private final float buttonX = Application.WIDTH * 0.24f;
+    private final float buttonY = Application.HEIGHT * 0.4f;
+    private final float buttonWidth = Application.WIDTH * 0.52f;
+    private final float buttonHeight = Application.HEIGHT * 0.25f;
+
+    private final float gameOverX = Application.WIDTH * 0.1f;
+    private final float gameOverY = Application.HEIGHT * 0.15f;
+    private final float gameOverWidth = Application.WIDTH * 0.8f;
+    private final float gameOverHeight = Application.HEIGHT * 0.25f;
 
     public MainMenu(int id) {
         this.id = id;
@@ -44,14 +56,12 @@ public class MainMenu extends BasicGameState {
 
         if(firstTimeLaunched) {
 
-            Rectangle frameShadow = new Rectangle(Application.WIDTH * 0.24f + 4,Application.HEIGHT * 0.4f + 4,
-                    Application.WIDTH * 0.52f,Application.HEIGHT * 0.25f);
+            Rectangle frameShadow = new Rectangle(buttonX + 4,buttonY + 4, buttonWidth, buttonHeight);
             g.setColor(Color.darkGray);
             g.fill(frameShadow);
             g.draw(frameShadow);
 
-            Rectangle frame = new Rectangle(Application.WIDTH * 0.24f,Application.HEIGHT * 0.4f,
-                    Application.WIDTH * 0.52f,Application.HEIGHT * 0.25f);
+            Rectangle frame = new Rectangle(buttonX + (pressed?4:0) , buttonY + (pressed?4:0), buttonWidth, buttonHeight);
             g.setColor(Color.decode("#2196F3")); // blue
             g.fill(frame);
             g.draw(frame);
@@ -78,14 +88,12 @@ public class MainMenu extends BasicGameState {
         }
         else{
 
-            Rectangle frameshadow = new Rectangle(Application.WIDTH * 0.1f + 4,Application.HEIGHT * 0.15f + 4,
-                    Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
+            Rectangle frameshadow = new Rectangle(gameOverX + 4 ,gameOverY + 4,gameOverWidth, gameOverHeight);
             g.setColor(Color.darkGray);
             g.fill(frameshadow);
             g.draw(frameshadow);
 
-            Rectangle frame = new Rectangle(Application.WIDTH * 0.1f,Application.HEIGHT * 0.15f,
-                    Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
+            Rectangle frame = new Rectangle(gameOverX + (pressed?4:0) ,gameOverY + (pressed?4:0), gameOverWidth, gameOverHeight);
             g.setColor(Color.decode("#4A148C")); //purple
             g.fill(frame);
             g.draw(frame);
@@ -109,19 +117,58 @@ public class MainMenu extends BasicGameState {
         }
     }
 
-    // update-method with all the magic happening in it
+    // Key Listener
+
     @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {
-        Input input = gc.getInput();
-        if (input.isKeyPressed(Input.KEY_SPACE)) {
+    public void keyPressed(int key, char c) {
+        super.keyPressed(key, c);
+        if(key == Input.KEY_SPACE) {
+            pressed = true;
+        }
+        if (key == Input.KEY_ESCAPE) {
+            Application.getAppContainer().exit();
+        }
+    }
+
+    @Override
+    public void keyReleased(int key, char c) {
+        super.keyReleased(key, c);
+        if(key == Input.KEY_SPACE) {
+            pressed = false;
             Application.getApp().resetGame();
             GameViewer.resetSpeedCounter();
             Application.getApp().enterState(GameViewer.getInstance().getID());
         }
-        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-            gc.exit();
+
+    }
+
+    @Override
+    public void mousePressed(int button, int x, int y) {
+        super.mousePressed(button, x, y);
+
+        if(button == 0 &&
+           x >= buttonX && x <= buttonX + buttonWidth &&
+           y >= buttonY && y <= buttonY + buttonHeight) {
+            pressed = true;
         }
     }
+
+    @Override
+    public void mouseReleased(int button, int x, int y) {
+        super.mouseReleased(button, x, y);
+        if(button == 0 &&
+                x >= buttonX && x <= buttonX + buttonWidth &&
+                y >= buttonY && y <= buttonY + buttonHeight) {
+            pressed = false;
+            Application.getApp().resetGame();
+            GameViewer.resetSpeedCounter();
+            Application.getApp().enterState(GameViewer.getInstance().getID());
+        }
+    }
+
+    // update-method with all the magic happening in it
+    @Override
+    public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException  {}
 
     // Returning 'ID' from class 'MainMenu'
     @Override
