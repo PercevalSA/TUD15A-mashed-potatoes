@@ -12,7 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.ArrayDeque;
 
-public class GameViewer extends BasicGameState{
+public class GameViewer extends BasicGameState implements KeyListener {
 
     protected int id;
 
@@ -24,12 +24,14 @@ public class GameViewer extends BasicGameState{
     private int[] speedTimesCheck = new int[] {180, 166, 83 , 75, 65, 55, 45};
     private static int speedCounter = 0;
     private int totalNumberOfFrames;
-    private static GameViewer instance = null;
     private static Score score = null;
 
-    private GameViewer(){
-        this.id = Application.GAMEVIEWER;
+    public GameViewer(int id) {
+        this.id = id;
         totalNumberOfFrames = 0;
+
+        this.resetGame();
+
         //transform frame rates to the milliseconds - used to set sleeping time of the thread
         for (int i=0; i<speedFrameRates.length; i++){
             speedMillisecRates[i]  = (int)((1.0/Application.getApp().getFPS()) * speedFrameRates[i] * 1000);
@@ -37,11 +39,11 @@ public class GameViewer extends BasicGameState{
         score = new Score();
     }
 
-    public static GameViewer getInstance(){
-        if(instance == null){
-            instance = new GameViewer();
-        }
-        return instance;
+   public void resetGame() {
+        GameViewer.resetScore();
+        GameViewer.resetSpeedCounter();
+        FoodManager.getInstance().initializeFoods();
+        SnakeManager.getInstance().initializeSnake();
     }
 
     public static int getScore() {
@@ -57,11 +59,6 @@ public class GameViewer extends BasicGameState{
 
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
-        Input input = gc.getInput();
-        int state = Application.getApp().getCurrentStateId();
-        if (input.isKeyPressed(Input.KEY_SPACE) && state == Application.GAMEVIEWER){
-            Application.getApp().enterState(Application.getPause().getID());
-        }
         //control speed change rate
         if(++totalNumberOfFrames % 720 == 0 && speedCounter < speedFrameRates.length) {
             if (speedCounter != (speedFrameRates.length-1)) {
@@ -94,12 +91,10 @@ public class GameViewer extends BasicGameState{
 
         snake_head.drawItem(g);
 
-
         Rectangle wall = new Rectangle(1,1,Application.WIDTH-1,Application.GAMEHEIGHT-1);
         g.setColor(Color.darkGray);
 
         g.draw(wall);
-
 
         //Draw the good apple
         Food foo = FoodManager.getInstance().getGoodApple();
@@ -115,7 +110,7 @@ public class GameViewer extends BasicGameState{
             }
         }
 
-
+        // infos toolbar
         g.setColor(Color.darkGray);
         g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
                         + "  |  Speed Level: " + speedCounter
@@ -125,6 +120,18 @@ public class GameViewer extends BasicGameState{
 
     }
 
+    @Override
+    public void keyPressed(int key, char c) {
+        super.keyPressed(key, c);
+        int state = Application.getApp().getCurrentStateId();
+
+        if(key == Input.KEY_SPACE && state == Application.GAMEVIEWER) {
+            Pause pause = new Pause(Application.PAUSE);
+            Application.getApp().addState(pause);
+            Application.getApp().enterState(pause.getID());
+
+        }
+    }
 
     public int getID(){
         return id;

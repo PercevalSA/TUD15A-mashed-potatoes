@@ -100,12 +100,8 @@ public class MainMenu extends BasicGameState implements KeyListener, MouseListen
     public void keyReleased(int key, char c) {
         super.keyReleased(key, c);
         int state = Application.getApp().getCurrentStateId();
-
         if(key == Input.KEY_SPACE && state == Application.MAINMENU) {
-            pressed = false;
-            Application.getApp().resetGame();
-            GameViewer.resetSpeedCounter();
-            Application.getApp().enterState(GameViewer.getInstance().getID());
+            enterGame();
         }
 
     }
@@ -130,16 +126,21 @@ public class MainMenu extends BasicGameState implements KeyListener, MouseListen
         if(button == 0  && state == Application.MAINMENU &&
                 x >= buttonX && x <= buttonX + buttonWidth &&
                 y >= buttonY && y <= buttonY + buttonHeight) {
-            pressed = false;
-            Application.getApp().resetGame();
-            GameViewer.resetSpeedCounter();
-            Application.getApp().enterState(GameViewer.getInstance().getID());
+            enterGame();
         }
+    }
+
+    private void enterGame() {
+        pressed = false;
+        GameViewer gameViewer = new GameViewer(Application.GAMEVIEWER);
+        Application.getApp().addState(gameViewer);
+        Application.setGameViewer(gameViewer);
+        Application.getApp().enterState(Application.getGameViewer().getID());
     }
 
     // update-method with all the magic happening in it
     @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException  {}
+    public void update(GameContainer gc, StateBasedGame sbg, int arg2) throws SlickException {}
 
     // Returning 'ID' from class 'MainMenu'
     @Override

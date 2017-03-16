@@ -20,6 +20,8 @@ public class Application extends StateBasedGame {
 
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
+
+    private static GameViewer gameViewer = null;
     private static MainMenu mainMenu = null;
     private static GameOver gameOver = null;
     private static Pause pause = null;
@@ -43,16 +45,12 @@ public class Application extends StateBasedGame {
 
     public Application(String appName){
         super(appName);
-        resetGame();
     }
 
     // Initialize game states
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         this.addState(mainMenu);
-        this.addState(GameViewer.getInstance());
-        this.addState(gameOver);
-        this.addState(pause);
         this.enterState(mainMenu.getID());
     }
 
@@ -66,8 +64,6 @@ public class Application extends StateBasedGame {
 
             // display
             mainMenu = new MainMenu(MAINMENU);
-            gameOver = new GameOver(GAMEOVER);
-            pause = new Pause(PAUSE);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
@@ -79,20 +75,12 @@ public class Application extends StateBasedGame {
         }
     }
 
-
-    public void resetGame() {
-
-        GameViewer.resetScore();
-        FoodManager.getInstance().initializeFoods();
-        SnakeManager.getInstance().initializeSnake();
+    public static GameViewer getGameViewer() {
+        return gameViewer;
     }
 
-    public static MainMenu getMainMenu() {
-        return mainMenu;
-    }
-
-    public static GameOver getGameOver() {
-        return gameOver;
+    public static void setGameViewer(GameViewer gameViewer) {
+        Application.gameViewer = gameViewer;
     }
 
     public static Pause getPause() {

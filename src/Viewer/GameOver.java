@@ -88,11 +88,14 @@ public class GameOver extends BasicGameState{
         super.keyPressed(key, c);
         int state = Application.getApp().getCurrentStateId();
 
-        if(key == Input.KEY_SPACE && state == Application.GAMEOVER) {
+        if (key == Input.KEY_SPACE && state == Application.GAMEOVER) {
             pressed = true;
         }
         if (key == Input.KEY_ESCAPE && state == Application.GAMEOVER) {
             Application.getAppContainer().exit();
+        }
+        if (key == Input.KEY_ENTER && state == Application.GAMEOVER) {
+            Application.getApp().enterState(Application.MAINMENU);
         }
     }
 
@@ -102,10 +105,7 @@ public class GameOver extends BasicGameState{
         int state = Application.getApp().getCurrentStateId();
 
         if(key == Input.KEY_SPACE && state == Application.GAMEOVER) {
-            pressed = false;
-            Application.getApp().resetGame();
-            GameViewer.resetSpeedCounter();
-            Application.getApp().enterState(GameViewer.getInstance().getID());
+            enterGame();
         }
 
     }
@@ -130,10 +130,13 @@ public class GameOver extends BasicGameState{
         if(button == 0 && state == Application.GAMEOVER &&
             x >= gameOverX && x <= gameOverX + gameOverWidth &&
             y >= gameOverY && y <= gameOverY + gameOverHeight) {
-            pressed = false;
-            Application.getApp().resetGame();
-            GameViewer.resetSpeedCounter();
-            Application.getApp().enterState(GameViewer.getInstance().getID());
+              enterGame();
         }
+    }
+
+    private void enterGame() {
+        pressed = false;
+        GameViewer gameViewer = new GameViewer(Application.GAMEVIEWER);
+        Application.getApp().enterState(gameViewer.getID());
     }
 }
