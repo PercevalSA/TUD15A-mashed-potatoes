@@ -73,7 +73,13 @@ public class MainMenu extends BasicGameState {
             g.setColor(Color.black);
             g.setFont(new TrueTypeFont(new Font("Courier New", Font.PLAIN, 12), true));
             g.drawString("© Made with <3 by the Mashed Potato Team", Application.WIDTH * 0.27f, Application.HEIGHT * 0.95f);
+        
+    }
 
+    public void print(Graphics g, String message, float x, float y, Color color, String fontName, int fontStyle, int fontSize){
+        g.setColor(color);
+        g.setFont(new TrueTypeFont(new Font(fontName, fontStyle, fontSize), true));
+        g.drawString(message, x, y);
     }
 
     // update-method with all the magic happening in it
