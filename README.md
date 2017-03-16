@@ -12,7 +12,22 @@ A simple snake developed during 2017 March Athens program session
 6. Run the game
 7. Enjoy ;)
 
+## Features
+* Main menu and GameOver menu
+* Pause menu with space bar
+* 5 levels from 0 to 4 : the speed of the snake increase accordingly
+* 2 types of apple : the red are sweet (+2) and the blue poisonned (-1)
+
+## Some Screenshots
+
+### V 1.0
 ![ScreenShot v1.0](screenshotv1.png)
+
+### V 2.0
 ![ScreenShot v2.0](screenshotv2.png)
-![ScreenShot v2.0 Start](screenshotstart.png)
-![ScreenShot v2.0 Pause](screenshotpause.png)
+
+### V 2.0 Start Menu
+![ScreenShot v2.0 Start](screenshotv2start.png)
+
+### V 2.0 Pause Menu
+![ScreenShot v2.0 Pause](screenshotv2pause.png)

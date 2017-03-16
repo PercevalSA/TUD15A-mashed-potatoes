@@ -31,7 +31,7 @@ public class Application extends StateBasedGame {
     public static final int HEIGHT  = 500;
     public static final int GAMEHEIGHT = 480;
     public static final int FPS     = 60;
-    public static final double VERSION = 2.0;
+    public static final double VERSION = 3.0;
 
     public static final int ITEMSIZE = 20;
 
