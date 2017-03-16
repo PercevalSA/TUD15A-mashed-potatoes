@@ -10,9 +10,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.awt.*;
 
-/**
- * Created by jovanovic on 3/16/2017.
- */
 public class GameOver extends BasicGameState{
 
     protected int id;
@@ -21,6 +18,12 @@ public class GameOver extends BasicGameState{
 
     private java.awt.Font font;
     private TrueTypeFont playersOptionsTTF;
+
+    private boolean pressed = false;
+    private final float gameOverX = Application.WIDTH * 0.1f;
+    private final float gameOverY = Application.HEIGHT * 0.15f;
+    private final float gameOverWidth = Application.WIDTH * 0.8f;
+    private final float gameOverHeight = Application.HEIGHT * 0.25f;
 
     public GameOver(int id) {
 
@@ -45,14 +48,12 @@ public class GameOver extends BasicGameState{
         g.draw(background);
         g.fill(background);
 
-        Rectangle frameshadow = new Rectangle(Application.WIDTH * 0.1f + 4,Application.HEIGHT * 0.15f + 4,
-                Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
+        Rectangle frameshadow = new Rectangle(gameOverX + 4 ,gameOverY + 4,gameOverWidth, gameOverHeight);
         g.setColor(Color.darkGray);
         g.fill(frameshadow);
         g.draw(frameshadow);
 
-        Rectangle frame = new Rectangle(Application.WIDTH * 0.1f,Application.HEIGHT * 0.15f,
-                Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
+        Rectangle frame = new Rectangle(gameOverX + (pressed?4:0) ,gameOverY + (pressed?4:0), gameOverWidth, gameOverHeight);
         g.setColor(Color.decode("#4A148C")); //purple
         g.fill(frame);
         g.draw(frame);
@@ -93,5 +94,53 @@ public class GameOver extends BasicGameState{
 
     public void setGameOverMessage(String gameOverMessage) {
         this.gameOverMessage = gameOverMessage;
+    }
+
+    // Key Listener
+    @Override
+    public void keyPressed(int key, char c) {
+        super.keyPressed(key, c);
+        if(key == Input.KEY_SPACE) {
+            pressed = true;
+        }
+        if (key == Input.KEY_ESCAPE) {
+            Application.getAppContainer().exit();
+        }
+    }
+
+    @Override
+    public void keyReleased(int key, char c) {
+        super.keyReleased(key, c);
+        if(key == Input.KEY_SPACE) {
+            pressed = false;
+            Application.getApp().resetGame();
+            GameViewer.resetSpeedCounter();
+            Application.getApp().enterState(GameViewer.getInstance().getID());
+        }
+
+    }
+
+    @Override
+    public void mousePressed(int button, int x, int y) {
+        super.mousePressed(button, x, y);
+
+        if(button == 0 &&
+            x >= gameOverX && x <= gameOverX + gameOverWidth &&
+            y >= gameOverY && y <= gameOverY + gameOverHeight) {
+            pressed = true;
+        }
+    }
+
+    @Override
+    public void mouseReleased(int button, int x, int y) {
+        super.mouseReleased(button, x, y);
+        if(button == 0 &&
+            x >= gameOverX && x <= gameOverX + gameOverWidth &&
+            y >= gameOverY && y <= gameOverY + gameOverHeight) {
+            pressed = false;
+            Application.getApp().resetGame();
+            GameViewer.resetSpeedCounter();
+            Application.getApp().enterState(GameViewer.getInstance().getID());
+        }
     }
 }

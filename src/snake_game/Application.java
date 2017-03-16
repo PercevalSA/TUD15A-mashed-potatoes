@@ -24,16 +24,14 @@ public class Application extends StateBasedGame {
     private static Pause pause = null;
 
     private SnakeHead snakeHead = null;
-
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
-
 
     // Application Properties
     public static final int WIDTH   = 640;
     public static final int HEIGHT  = 500;
     public static final int GAMEHEIGHT = 480;
     public static final int FPS     = 60;
-    public static final double VERSION = 1.1;
+    public static final double VERSION = 2.0;
 
     public static final int ITEMSIZE = 20;
 
@@ -63,8 +61,12 @@ public class Application extends StateBasedGame {
     public static void main(String[] args){
         try {
             instance = new Application("Potato Snake v" + VERSION);
+
+            // food manager
             FoodManager.getInstance().initializeFoods();
             new Thread(FoodManager.getInstance()).start();
+
+            // display
             mainMenu = new MainMenu(MAINMENU);
             gameOver = new GameOver(GAMEOVER);
             pause = new Pause(PAUSE);
@@ -73,6 +75,7 @@ public class Application extends StateBasedGame {
             appContainer.setTargetFrameRate(FPS);
             appContainer.setShowFPS(false);
             appContainer.start();
+
         } catch(SlickException e) {
             e.printStackTrace();
         }
@@ -82,6 +85,7 @@ public class Application extends StateBasedGame {
     protected void resetGame() {
 
         GameViewer.resetScore();
+        FoodManager.getInstance().initializeFoods();
         snakeArray.clear();
         snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
 
