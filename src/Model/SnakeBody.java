@@ -1,8 +1,7 @@
-package snake_game;
+package Model;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.*;
 
 
 public class SnakeBody extends Item {
@@ -52,7 +51,7 @@ public class SnakeBody extends Item {
         Image img = imgSnakeScale;
         
         if(img != null)
-            img.draw(x_position, y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+            img.draw(x_position, y_position, Application.ITEMSIZE,Application.ITEMSIZE);
         else
             super.drawItem(g);
     }

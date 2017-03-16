@@ -1,11 +1,10 @@
-package snake_game;
+package Model;
 
 
+import Exceptions.InvalidSizeException;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
 import java.util.ArrayDeque;
 

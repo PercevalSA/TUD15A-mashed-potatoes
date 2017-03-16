@@ -1,5 +1,7 @@
-package snake_game;
+package Viewer;
 
+import Model.Application;
+import Viewer.GameViewer;
 import org.newdawn.slick.*;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.MouseListener;

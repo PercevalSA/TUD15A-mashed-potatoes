@@ -1,4 +1,4 @@
-package snake_game;
+package Exceptions;
 
 public class InvalidMoveException extends Throwable {
     public InvalidMoveException(){

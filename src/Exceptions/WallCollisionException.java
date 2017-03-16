@@ -1,5 +1,7 @@
-package snake_game;
+package Exceptions;
 
+
+import Model.Application;
 
 public class WallCollisionException extends Exception {
     public WallCollisionException(){

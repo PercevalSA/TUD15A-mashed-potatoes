@@ -1,10 +1,14 @@
-package snake_game;
-    import org.jcp.xml.dsig.internal.dom.Utils;
+package Controller;
+
+    import Exceptions.BodyCollisionException;
+    import Exceptions.InvalidSizeException;
+    import Exceptions.WallCollisionException;
+    import Model.*;
+    import Viewer.GameViewer;
     import org.newdawn.slick.GameContainer;
     import org.newdawn.slick.Input;
     import java.util.ArrayDeque;
     import java.util.ArrayList;
-    import java.util.Random;
 
 /**
  * main game controller
@@ -88,11 +92,11 @@ public class GameController {
         Food food = FoodManager.getInstance().getGoodApple();
         if(food != null) {
             SnakeHead snakeHead = Application.getApp().getSnakeHead();
-            float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;
-            float y_snake = snakeHead.y_position + Application.ITEMSIZE / 2;
+            float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
+            float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
 
-            float x_food = food.x_position;
-            float y_food = food.y_position;
+            float x_food = food.getX();
+            float y_food = food.getY();
 
             if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
                     && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
@@ -112,12 +116,12 @@ public class GameController {
         ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
         if(foodArray != null) {
             SnakeHead snakeHead = Application.getApp().getSnakeHead();
-            float x_snake = snakeHead.x_position + Application.ITEMSIZE / 2;
-            float y_snake = snakeHead.y_position + Application.ITEMSIZE / 2;
+            float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
+            float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
 
             for(Food food : foodArray){
-                float x_food = food.x_position;
-                float y_food = food.y_position;
+                float x_food = food.getX();
+                float y_food = food.getY();
 
                 if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
                         && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)

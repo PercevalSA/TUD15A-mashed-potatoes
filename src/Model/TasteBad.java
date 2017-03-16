@@ -1,4 +1,4 @@
-package snake_game;
+package Model;
 
 public class TasteBad implements TasteBehavior {
 

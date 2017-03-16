@@ -1,9 +1,15 @@
-package snake_game;
+package Viewer;
 
+import Controller.GameController;
+import Exceptions.BodyCollisionException;
+import Exceptions.InvalidSizeException;
+import Exceptions.WallCollisionException;
+import Model.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
 import java.util.ArrayDeque;
 
 public class GameViewer extends BasicGameState{
@@ -65,7 +71,7 @@ public class GameViewer extends BasicGameState{
         }
         try {
             GameController.getInstance().updateBodyPosition(gc, speedFrameRates[speedCounter]);
-        }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
+        }catch (WallCollisionException | BodyCollisionException | InvalidSizeException e){
 
         }
     }

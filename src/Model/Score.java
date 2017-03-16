@@ -1,6 +1,8 @@
-package snake_game;
+package Model;
 
-public class Score implements Observer {
+import Model.Food;
+
+public class Score {
 
     private int score = 0;
 

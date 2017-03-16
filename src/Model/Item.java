@@ -1,4 +1,4 @@
-package snake_game;
+package Model;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
@@ -38,7 +38,7 @@ public abstract class Item {
 
     public void drawItem(Graphics g){
         g.setColor(color);
-        Rectangle shape = new Rectangle(x_position,y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+        Rectangle shape = new Rectangle(x_position,y_position, Application.ITEMSIZE,Application.ITEMSIZE);
         g.draw(shape);
         g.fill(shape);
     }

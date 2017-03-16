@@ -1,14 +1,13 @@
-package snake_game;
+package Viewer;
 
+import Model.Application;
+import Viewer.GameViewer;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
-import java.awt.*;
 
 public class GameOver extends BasicGameState{
 

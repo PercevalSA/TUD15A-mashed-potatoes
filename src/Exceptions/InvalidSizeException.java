@@ -1,4 +1,6 @@
-package snake_game;
+package Exceptions;
+
+import Model.Application;
 
 public class InvalidSizeException extends Exception {
     public InvalidSizeException() {

@@ -1,14 +1,15 @@
-package snake_game;
+package Model;
 
+import Exceptions.BodyCollisionException;
+import Exceptions.InvalidMoveException;
+import Exceptions.WallCollisionException;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
 import java.util.Deque;
 
-public class SnakeHead extends Item{
+public class SnakeHead extends Item {
     private int previous_direction = 1;
 
     private Image imgSnakeHeadV, imgSnakeHeadH;

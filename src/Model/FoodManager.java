@@ -1,4 +1,4 @@
-package snake_game;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Random;

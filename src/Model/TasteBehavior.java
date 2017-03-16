@@ -1,4 +1,4 @@
-package snake_game;
+package Model;
 
 public interface TasteBehavior {
     int eat();

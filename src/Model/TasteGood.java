@@ -1,4 +1,6 @@
-package snake_game;
+package Model;
+
+import Viewer.GameViewer;
 
 public class TasteGood implements TasteBehavior {
 
