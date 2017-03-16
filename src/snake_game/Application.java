@@ -15,11 +15,13 @@ public class Application extends StateBasedGame {
     public static final int MAINMENU = 1;
     public static final int GAMEVIEWER = 2;
     public static final int GAMEOVER = 3;
+    public static final int PAUSE = 4;
 
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
     private static MainMenu mainMenu = null;
     private static GameOver gameOver = null;
+    private static Pause pause = null;
 
     private SnakeHead snakeHead = null;
 
@@ -54,6 +56,7 @@ public class Application extends StateBasedGame {
         this.addState(mainMenu);
         this.addState(GameViewer.getInstance());
         this.addState(gameOver);
+        this.addState(pause);
         this.enterState(mainMenu.getID());
     }
 
@@ -64,6 +67,7 @@ public class Application extends StateBasedGame {
             new Thread(FoodManager.getInstance()).start();
             mainMenu = new MainMenu(MAINMENU);
             gameOver = new GameOver(GAMEOVER);
+            pause = new Pause(PAUSE);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
@@ -107,8 +111,16 @@ public class Application extends StateBasedGame {
         return gameOver;
     }
 
+    public static Pause getPause() {
+        return pause;
+    }
+
     public int getFPS() {
         return FPS;
+    }
+
+    public  int getCurrentStateId(){
+        return getCurrentStateID();
     }
 
 }
