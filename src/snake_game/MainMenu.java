@@ -90,9 +90,8 @@ public class MainMenu extends BasicGameState {
             g.fill(frame);
             g.draw(frame);
 
-            g.setFont(new TrueTypeFont(new Font("Comic Sans MS", Font.BOLD, 50), true));
-            g.setColor(Color.white);
-            g.drawString("GAME OVER", Application.WIDTH * 0.26f, Application.HEIGHT * 0.2f);
+            print(g, "GAME OVER", Application.WIDTH * 0.26f, Application.HEIGHT * 0.2f,
+                    Color.white, "Comic Sans MS", Font.BOLD, 50);
 
             g.setColor(Color.decode("#AD1457"));
             g.setFont(new TrueTypeFont(new Font("Garamon", Font.PLAIN, 35), true));
@@ -107,6 +106,12 @@ public class MainMenu extends BasicGameState {
             g.drawString("Snake size : " + Application.getApp().getSnakeArray().size(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.73f);
 
         }
+    }
+
+    public void print(Graphics g, String message, float x, float y, Color color, String fontName, int fontStyle, int fontSize){
+        g.setColor(color);
+        g.setFont(new TrueTypeFont(new Font(fontName, fontStyle, fontSize), true));
+        g.drawString(message, x, y);
     }
 
     // update-method with all the magic happening in it
