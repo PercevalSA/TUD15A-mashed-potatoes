@@ -14,10 +14,12 @@ public class Application extends StateBasedGame {
     // Game state identifiers
     public static final int MAINMENU = 1;
     public static final int GAMEVIEWER = 2;
+    public static final int GAMEOVER = 3;
 
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
     private static MainMenu mainMenu = null;
+    private static GameOver gameOver = null;
 
     private SnakeHead snakeHead = null;
     private ArrayDeque<SnakeBody> snakeArray= new ArrayDeque<>();
@@ -27,7 +29,7 @@ public class Application extends StateBasedGame {
     public static final int HEIGHT  = 500;
     public static final int GAMEHEIGHT = 480;
     public static final int FPS     = 60;
-    public static final double VERSION = 1.1;
+    public static final double VERSION = 2.0;
 
     public static final int ITEMSIZE = 20;
 
@@ -49,6 +51,7 @@ public class Application extends StateBasedGame {
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         this.addState(mainMenu);
         this.addState(GameViewer.getInstance());
+        this.addState(gameOver);
         this.enterState(mainMenu.getID());
     }
 
@@ -62,6 +65,7 @@ public class Application extends StateBasedGame {
 
             // display
             mainMenu = new MainMenu(MAINMENU);
+            gameOver = new GameOver(GAMEOVER);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
@@ -77,6 +81,7 @@ public class Application extends StateBasedGame {
     protected void resetGame() {
 
         GameViewer.resetScore();
+        FoodManager.getInstance().initializeFoods();
         snakeArray.clear();
         snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
 
@@ -100,6 +105,10 @@ public class Application extends StateBasedGame {
 
     public static MainMenu getMainMenu() {
         return mainMenu;
+    }
+
+    public static GameOver getGameOver() {
+        return gameOver;
     }
 
     public int getFPS() {

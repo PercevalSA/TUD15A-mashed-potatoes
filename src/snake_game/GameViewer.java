@@ -11,7 +11,7 @@ public class GameViewer extends BasicGameState{
     protected int id;
 
     //array with different frame rates whit which we updateBodyPosition
-    private int[] speedFrameRates = new int[] {13, 10, 6, 5, 4, 3, 2};
+    private int[] speedFrameRates = new int[] {11, 8, 6, 5, 4, 3, 2};
     private int[] speedMillisecRates = new int[speedFrameRates.length];
 
     //alternative way to change the speed - array contains milliseconds
@@ -69,12 +69,10 @@ public class GameViewer extends BasicGameState{
     @Override
     public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException {
 
-
         Rectangle background = new Rectangle(0,0,Application.WIDTH,Application.HEIGHT);
         g.setColor(Color.decode("#F5F5F5"));
         g.draw(background);
         g.fill(background);
-
 
         SnakeHead snake_head = Application.getApp().getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
@@ -88,6 +86,7 @@ public class GameViewer extends BasicGameState{
 
         Rectangle wall = new Rectangle(1,1,Application.WIDTH-1,Application.GAMEHEIGHT-1);
         g.setColor(Color.darkGray);
+
         g.draw(wall);
 
 
@@ -105,12 +104,13 @@ public class GameViewer extends BasicGameState{
             }
         }
 
+
         g.setColor(Color.darkGray);
         g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
                         + "  |  Speed Level: " + speedCounter
                         + "  |  Score: " + getScore()
-                        + "  |  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
-                , Application.WIDTH/32f, Application.GAMEHEIGHT);
+                        + "  |  Snake size : " + snakeArray.size()
+                , Application.WIDTH/16f, Application.GAMEHEIGHT);
 
     }
 
