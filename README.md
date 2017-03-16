@@ -12,4 +12,7 @@ A simple snake developed during 2017 March Athens program session
 6. Run the game
 7. Enjoy ;)
 
-![ScreenShot](screenshot.png)
+![ScreenShot v1.0](screenshotv1.png)
+![ScreenShot v2.0](screenshotv2.png)
+![ScreenShot v2.0 Start](screenshotstart.png)
+![ScreenShot v2.0 Pause](screenshotpause.png)
