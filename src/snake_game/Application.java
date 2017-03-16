@@ -29,7 +29,7 @@ public class Application extends StateBasedGame {
     public static final int HEIGHT  = 500;
     public static final int GAMEHEIGHT = 480;
     public static final int FPS     = 60;
-    public static final double VERSION = 1.0;
+    public static final double VERSION = 1.1;
 
     public static final int ITEMSIZE = 20;
 
@@ -72,8 +72,9 @@ public class Application extends StateBasedGame {
 
 
     protected void resetGame() {
-        snakeArray.clear();
 
+        GameViewer.resetScore();
+        snakeArray.clear();
         snakeHead = new SnakeHead(WIDTH / 2 , HEIGHT / 2);
 
         snakeArray.addFirst(new SnakeBody(WIDTH / 2 - 20, HEIGHT / 2));

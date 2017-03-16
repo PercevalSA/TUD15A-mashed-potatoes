@@ -11,6 +11,19 @@ import java.util.Deque;
 public class SnakeHead extends Item{
     private int previous_direction = 1;
 
+    private Image imgSnakeHeadV, imgSnakeHeadH;
+    private boolean imageLoaded = false;
+
+    public void loadImages(){
+        try {
+            imgSnakeHeadV = new Image("res/snake-v.png");
+            imgSnakeHeadH = new Image("res/snake-h.png");
+            imageLoaded = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public SnakeHead(float x, float y){
         super(x,y,Color.green);
     }
@@ -82,28 +95,30 @@ public class SnakeHead extends Item{
     }
 
     public void drawItem(Graphics g){
+        if(!imageLoaded)
+            loadImages();
+
         Image img = null;
-        try {
-            img = new Image("res/SnakeHeadVector.jpg");
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
         int direction = getDirection();
-        img.setCenterOfRotation(0,0);
-        if( img != null) {
-            switch (direction) {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    img = img.getFlippedCopy(true, false);
-                    break;
-            }
-            img.draw(x_position, y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+        switch (direction) {
+            case 0:
+                img = imgSnakeHeadV;
+                img = img.getFlippedCopy(false, true);
+                break;
+            case 1:
+                img = imgSnakeHeadH;
+                break;
+            case 2:
+                img = imgSnakeHeadV;
+                break;
+            case 3:
+                img = imgSnakeHeadH;
+                img = img.getFlippedCopy(true, false);
+                break;
         }
-        else super.drawItem(g);
+        if(img != null)
+            img.draw(x_position, y_position,Application.ITEMSIZE,Application.ITEMSIZE);
+        else
+            super.drawItem(g);
     }
 }

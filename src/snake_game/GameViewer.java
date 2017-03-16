@@ -1,6 +1,5 @@
 package snake_game;
 
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -10,14 +9,17 @@ import java.util.ArrayDeque;
 public class GameViewer extends BasicGameState{
 
     protected int id;
+
     //array with different frame rates whit which we updateBodyPosition
-    private int[] speedFrameRates = new int[] {18, 12, 10, 6, 5, 3, 2};
+    private int[] speedFrameRates = new int[] {13, 10, 6, 5, 4, 3, 2};
     private int[] speedMillisecRates = new int[speedFrameRates.length];
+
     //alternative way to change the speed - array contains milliseconds
     private int[] speedTimesCheck = new int[] {180, 166, 83 , 75, 65, 55, 45};
     private static int speedCounter = 0;
     private int totalNumberOfFrames;
     private static GameViewer instance = null;
+    private static Score score = null;
 
     private GameViewer(){
         this.id = Application.GAMEVIEWER;
@@ -26,6 +28,7 @@ public class GameViewer extends BasicGameState{
         for (int i=0; i<speedFrameRates.length; i++){
             speedMillisecRates[i]  = (int)((1.0/Application.getApp().getFPS()) * speedFrameRates[i] * 1000);
         }
+        score = new Score();
     }
 
     public static GameViewer getInstance(){
@@ -35,6 +38,14 @@ public class GameViewer extends BasicGameState{
         return instance;
     }
 
+    public static int getScore() {
+        return score.getScore();
+    }
+
+    public static void setScore(Object obj) {
+        score.update(obj);
+    }
+
     @Override
     public void init(GameContainer gc, StateBasedGame stbgame) throws SlickException {}
 
@@ -42,11 +53,12 @@ public class GameViewer extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         //control speed change rate
         if(++totalNumberOfFrames % 720 == 0 && speedCounter < speedFrameRates.length) {
-            if (speedCounter != (speedFrameRates.length-1)) {speedCounter++;}
+            if (speedCounter != (speedFrameRates.length-1)) {
+                speedCounter++;
+            }
             totalNumberOfFrames = 0;
         }
         try {
-            //GameController.getInstance().updateBodyPosition(gc, speedTimesCheck[speedCounter]);
             GameController.getInstance().updateBodyPosition(gc, speedFrameRates[speedCounter]);
         }catch (WallCollisionException|BodyCollisionException|InvalidSizeException e){
 
@@ -56,6 +68,11 @@ public class GameViewer extends BasicGameState{
 
     @Override
     public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException {
+
+        Rectangle background = new Rectangle(0,0,Application.WIDTH,Application.HEIGHT);
+        g.setColor(Color.decode("#F5F5F5"));
+        g.draw(background);
+        g.fill(background);
 
         SnakeHead snake_head = Application.getApp().getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
@@ -68,7 +85,8 @@ public class GameViewer extends BasicGameState{
 
 
         Rectangle wall = new Rectangle(1,1,Application.WIDTH-1,Application.GAMEHEIGHT-1);
-        g.setColor(Color.white);
+        g.setColor(Color.darkGray);
+
         g.draw(wall);
 
 
@@ -86,9 +104,13 @@ public class GameViewer extends BasicGameState{
             }
         }
 
-        g.setColor(Color.white);
-        g.drawString("FPS:" + Application.getApp().getAppContainer().getFPS() + "  Speed Level:" + speedCounter + "  Score:" + snakeArray.size() + "  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
-                , Application.WIDTH/5f, Application.GAMEHEIGHT);
+
+        g.setColor(Color.darkGray);
+        g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
+                        + "  |  Speed Level: " + speedCounter
+                        + "  |  Score: " + getScore()
+                        + "  |  Position:(" + snake_head.x_position + ", " + snake_head.y_position + ")"
+                , Application.WIDTH/32f, Application.GAMEHEIGHT);
 
     }
 
@@ -99,6 +121,16 @@ public class GameViewer extends BasicGameState{
 
     public static void resetSpeedCounter(){
         speedCounter = 0;
+    }
+
+    public static int getSpeedCounter() {
+        return speedCounter;
+    }
+
+    public static void resetScore() {
+        if(score!= null) {
+            score.reset();
+        }
     }
 
 }
