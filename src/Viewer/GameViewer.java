@@ -24,7 +24,6 @@ public class GameViewer extends BasicGameState implements KeyListener {
     private int[] speedTimesCheck = new int[] {180, 166, 83 , 75, 65, 55, 45};
     private static int speedCounter = 0;
     private int totalNumberOfFrames;
-    private static Score score = null;
 
     public GameViewer(int id) {
         this.id = id;
@@ -36,7 +35,6 @@ public class GameViewer extends BasicGameState implements KeyListener {
         for (int i=0; i<speedFrameRates.length; i++){
             speedMillisecRates[i]  = (int)((1.0/Application.getApp().getFPS()) * speedFrameRates[i] * 1000);
         }
-        score = new Score();
     }
 
    public void resetGame() {
@@ -46,13 +44,6 @@ public class GameViewer extends BasicGameState implements KeyListener {
         SnakeManager.getInstance().initializeSnake();
     }
 
-    public static int getScore() {
-        return score.getScore();
-    }
-
-    public static void setScore(Object obj) {
-        score.update(obj);
-    }
 
     @Override
     public void init(GameContainer gc, StateBasedGame stbgame) throws SlickException {}
@@ -111,10 +102,10 @@ public class GameViewer extends BasicGameState implements KeyListener {
         }
 
         // infos toolbar
-        g.setColor(Color.darkGray);
+        g.setColor(Color.black);
         g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
                         + "  |  Speed Level: " + speedCounter
-                        + "  |  Score: " + getScore()
+                        + "  |  Score: " + GameController.getScore()
                         + "  |  Snake size : " + snakeArray.size()
                 , Application.WIDTH/16f, Application.GAMEHEIGHT);
 
@@ -133,11 +124,11 @@ public class GameViewer extends BasicGameState implements KeyListener {
         }
     }
 
-    public int getID(){
+    public int getID() {
         return id;
     }
 
-    public static void resetSpeedCounter(){
+    public static void resetSpeedCounter() {
         speedCounter = 0;
     }
 
@@ -146,9 +137,7 @@ public class GameViewer extends BasicGameState implements KeyListener {
     }
 
     public static void resetScore() {
-        if(score!= null) {
-            score.reset();
-        }
+        GameController.resetScore();
     }
 
 }

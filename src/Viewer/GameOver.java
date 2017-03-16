@@ -1,8 +1,8 @@
 package Viewer;
 
+import Controller.GameController;
 import Model.Application;
 import Model.SnakeManager;
-import Viewer.GameViewer;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -67,7 +67,7 @@ public class GameOver extends BasicGameState{
 
         g.setColor(Color.black);
         g.setFont(new TrueTypeFont(new java.awt.Font("Courier New", java.awt.Font.PLAIN, 20), true));
-        g.drawString("Score      : " + GameViewer.getScore(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.68f);
+        g.drawString("Score      : " + GameController.getScore(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.68f);
 
         g.setColor(Color.black);
         g.setFont(new TrueTypeFont(new java.awt.Font("Courier New", java.awt.Font.PLAIN, 20), true));

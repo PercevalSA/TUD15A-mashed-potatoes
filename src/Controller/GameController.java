@@ -21,8 +21,12 @@ public class GameController {
     private int direction = 1;
 
     private static GameController instance = null;
+    private static Score score = null;
 
-    private GameController() {}
+
+    private GameController() {
+        score = new Score();
+    }
 
     public static GameController getInstance() {
         if(instance == null) {
@@ -92,18 +96,9 @@ public class GameController {
         Food food = FoodManager.getInstance().getGoodApple();
         if(food != null) {
             SnakeHead snakeHead = SnakeManager.getInstance().getSnakeHead();
-            float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
-            float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
 
-            float x_food = food.getX();
-            float y_food = food.getY();
-
-            if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
-                    && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
-                    && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
-                    && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
-                    ) {
-                GameViewer.setScore(food);
+            if (snakeHead.getX() == food.getX() && snakeHead.getY() == food.getY()){
+                setScore(food);
                 System.out.println("You ate the FOOOOOOOOD");
                 return true;
             }
@@ -116,19 +111,9 @@ public class GameController {
         ArrayList<Food> foodArray = FoodManager.getInstance().getApples();
         if(foodArray != null) {
             SnakeHead snakeHead = SnakeManager.getInstance().getSnakeHead();
-            float x_snake = snakeHead.getX() + Application.ITEMSIZE / 2;
-            float y_snake = snakeHead.getY() + Application.ITEMSIZE / 2;
-
             for(Food food : foodArray){
-                float x_food = food.getX();
-                float y_food = food.getY();
-
-                if ((x_snake >= x_food - (Application.ITEMSIZE / 2))
-                        && (x_snake <= x_food + 1.5 * Application.ITEMSIZE)
-                        && (y_snake >= y_food - 0.5 * Application.ITEMSIZE)
-                        && (y_snake <= y_food + 1.5 * Application.ITEMSIZE)
-                        ) {
-                    GameViewer.setScore(food);
+                if (snakeHead.getX() == food.getX() && snakeHead.getY() == food.getY()){
+                    setScore(food);
                     System.out.println("You ate the BAAAAAAAD FOOOOOOD");
                     return food;
                 }
@@ -155,6 +140,22 @@ public class GameController {
 
         if(input.isKeyDown(Input.KEY_LEFT)) {
             direction = 3;
+        }
+    }
+
+    public static int getScore() {
+        return score.getScore();
+    }
+
+    public static void setScore(Object obj) {
+        score.update(obj);
+    }
+
+    public static void resetScore() {
+        try {
+            score.reset();
+        } catch (Exception e){
+            score = new Score();
         }
     }
 }
