@@ -69,12 +69,10 @@ public class GameViewer extends BasicGameState{
     @Override
     public void render(GameContainer gc, StateBasedGame stbgame, Graphics g) throws SlickException {
 
-
         Rectangle background = new Rectangle(0,0,Application.WIDTH,Application.HEIGHT);
         g.setColor(Color.decode("#F5F5F5"));
         g.draw(background);
         g.fill(background);
-
 
         SnakeHead snake_head = Application.getApp().getSnakeHead();
         ArrayDeque<SnakeBody> snakeArray = Application.getApp().getSnakeArray();
@@ -88,6 +86,7 @@ public class GameViewer extends BasicGameState{
 
         Rectangle wall = new Rectangle(1,1,Application.WIDTH-1,Application.GAMEHEIGHT-1);
         g.setColor(Color.darkGray);
+
         g.draw(wall);
 
 
@@ -104,6 +103,7 @@ public class GameViewer extends BasicGameState{
                 food.drawItem(g);
             }
         }
+
 
         g.setColor(Color.darkGray);
         g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
