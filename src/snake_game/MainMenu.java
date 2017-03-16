@@ -14,7 +14,6 @@ public class MainMenu extends BasicGameState {
     // ID we return to class 'Application'
     protected int id;
 
-    private String gameOverMessage;
 
     private static boolean firstTimeLaunched = true;
 
@@ -42,7 +41,6 @@ public class MainMenu extends BasicGameState {
         g.draw(background);
         g.fill(background);
 
-        if(firstTimeLaunched) {
 
             Rectangle frameShadow = new Rectangle(Application.WIDTH * 0.24f + 4,Application.HEIGHT * 0.4f + 4,
                     Application.WIDTH * 0.52f,Application.HEIGHT * 0.25f);
@@ -75,38 +73,7 @@ public class MainMenu extends BasicGameState {
             g.setColor(Color.black);
             g.setFont(new TrueTypeFont(new Font("Courier New", Font.PLAIN, 12), true));
             g.drawString("© Made with <3 by the Mashed Potato Team", Application.WIDTH * 0.27f, Application.HEIGHT * 0.95f);
-        }
-        else{
 
-            Rectangle frameshadow = new Rectangle(Application.WIDTH * 0.1f + 4,Application.HEIGHT * 0.15f + 4,
-                    Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
-            g.setColor(Color.darkGray);
-            g.fill(frameshadow);
-            g.draw(frameshadow);
-
-            Rectangle frame = new Rectangle(Application.WIDTH * 0.1f,Application.HEIGHT * 0.15f,
-                    Application.WIDTH * 0.8f,Application.HEIGHT * 0.25f);
-            g.setColor(Color.decode("#4A148C")); //purple
-            g.fill(frame);
-            g.draw(frame);
-
-            g.setFont(new TrueTypeFont(new Font("Comic Sans MS", Font.BOLD, 50), true));
-            g.setColor(Color.white);
-            g.drawString("GAME OVER", Application.WIDTH * 0.26f, Application.HEIGHT * 0.2f);
-
-            g.setColor(Color.decode("#AD1457"));
-            g.setFont(new TrueTypeFont(new Font("Garamon", Font.PLAIN, 35), true));
-            g.drawString(gameOverMessage, Application.WIDTH * 0.3f, Application.HEIGHT * 0.48f);
-
-            g.setColor(Color.black);
-            g.setFont(new TrueTypeFont(new Font("Courier New", Font.PLAIN, 20), true));
-            g.drawString("Score      : " + GameViewer.getScore(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.68f);
-
-            g.setColor(Color.black);
-            g.setFont(new TrueTypeFont(new Font("Courier New", Font.PLAIN, 20), true));
-            g.drawString("Snake size : " + Application.getApp().getSnakeArray().size(), Application.WIDTH * 0.35f, Application.HEIGHT * 0.73f);
-
-        }
     }
 
     // update-method with all the magic happening in it
@@ -131,10 +98,6 @@ public class MainMenu extends BasicGameState {
 
     public static void setFirstTimeLaunched() {
         MainMenu.firstTimeLaunched = false;
-    }
-
-    public void setGameOverMessage(String gameOverMessage) {
-        this.gameOverMessage = gameOverMessage;
     }
 
     public static boolean getfirstTimeLaunched() {

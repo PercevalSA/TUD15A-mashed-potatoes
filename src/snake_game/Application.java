@@ -14,10 +14,12 @@ public class Application extends StateBasedGame {
     // Game state identifiers
     public static final int MAINMENU = 1;
     public static final int GAMEVIEWER = 2;
+    public static final int GAMEOVER = 3;
 
     private static Application instance = null;
     private static AppGameContainer appContainer = null;
     private static MainMenu mainMenu = null;
+    private static GameOver gameOver = null;
 
     private SnakeHead snakeHead = null;
 
@@ -51,6 +53,7 @@ public class Application extends StateBasedGame {
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         this.addState(mainMenu);
         this.addState(GameViewer.getInstance());
+        this.addState(gameOver);
         this.enterState(mainMenu.getID());
     }
 
@@ -60,6 +63,7 @@ public class Application extends StateBasedGame {
             FoodManager.getInstance().initializeFoods();
             new Thread(FoodManager.getInstance()).start();
             mainMenu = new MainMenu(MAINMENU);
+            gameOver = new GameOver(GAMEOVER);
             appContainer = new AppGameContainer(instance);
             appContainer.setDisplayMode(WIDTH, HEIGHT, false);
             appContainer.setTargetFrameRate(FPS);
@@ -97,6 +101,10 @@ public class Application extends StateBasedGame {
 
     public static MainMenu getMainMenu() {
         return mainMenu;
+    }
+
+    public static GameOver getGameOver() {
+        return gameOver;
     }
 
     public int getFPS() {

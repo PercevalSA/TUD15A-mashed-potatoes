@@ -40,7 +40,7 @@ public class GameController {
         //Get the snakeHead for updates
         SnakeHead snakeHead = Application.getApp().getSnakeHead();
         whichDirection(gc);
-        
+
         if (++fps % sleepFrameRate == 0) {
             fps = 0;
 
