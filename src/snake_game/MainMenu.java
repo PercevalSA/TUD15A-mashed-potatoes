@@ -84,10 +84,12 @@ public class MainMenu extends BasicGameState implements KeyListener, MouseListen
     @Override
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);
-        if(key == Input.KEY_SPACE) {
+        int state = Application.getApp().getCurrentStateId();
+
+        if(key == Input.KEY_SPACE && state == Application.MAINMENU) {
             pressed = true;
         }
-        if (key == Input.KEY_ESCAPE) {
+        if (key == Input.KEY_ESCAPE  && state == Application.MAINMENU) {
             Application.getAppContainer().exit();
         }
     }
@@ -95,7 +97,9 @@ public class MainMenu extends BasicGameState implements KeyListener, MouseListen
     @Override
     public void keyReleased(int key, char c) {
         super.keyReleased(key, c);
-        if(key == Input.KEY_SPACE) {
+        int state = Application.getApp().getCurrentStateId();
+
+        if(key == Input.KEY_SPACE && state == Application.MAINMENU) {
             pressed = false;
             Application.getApp().resetGame();
             GameViewer.resetSpeedCounter();
@@ -107,8 +111,9 @@ public class MainMenu extends BasicGameState implements KeyListener, MouseListen
     @Override
     public void mousePressed(int button, int x, int y) {
         super.mousePressed(button, x, y);
+        int state = Application.getApp().getCurrentStateId();
 
-        if(button == 0 &&
+        if(button == 0  && state == Application.MAINMENU &&
            x >= buttonX && x <= buttonX + buttonWidth &&
            y >= buttonY && y <= buttonY + buttonHeight) {
             pressed = true;
@@ -118,7 +123,9 @@ public class MainMenu extends BasicGameState implements KeyListener, MouseListen
     @Override
     public void mouseReleased(int button, int x, int y) {
         super.mouseReleased(button, x, y);
-        if(button == 0 &&
+        int state = Application.getApp().getCurrentStateId();
+
+        if(button == 0  && state == Application.MAINMENU &&
                 x >= buttonX && x <= buttonX + buttonWidth &&
                 y >= buttonY && y <= buttonY + buttonHeight) {
             pressed = false;

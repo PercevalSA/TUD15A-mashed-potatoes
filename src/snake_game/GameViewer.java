@@ -52,7 +52,8 @@ public class GameViewer extends BasicGameState{
     @Override
     public void update(GameContainer gc, StateBasedGame stbgame, int i) throws SlickException {
         Input input = gc.getInput();
-        if (input.isKeyPressed(Input.KEY_SPACE)){
+        int state = Application.getApp().getCurrentStateId();
+        if (input.isKeyPressed(Input.KEY_SPACE) && state == Application.GAMEVIEWER){
             Application.getApp().enterState(Application.getPause().getID());
         }
         //control speed change rate

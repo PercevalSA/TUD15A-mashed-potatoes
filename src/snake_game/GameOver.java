@@ -13,7 +13,6 @@ import java.awt.*;
 public class GameOver extends BasicGameState{
 
     protected int id;
-
     private String gameOverMessage;
 
     private java.awt.Font font;
@@ -77,20 +76,7 @@ public class GameOver extends BasicGameState{
     }
 
     @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
-        Input input = gc.getInput();
-        if (input.isKeyPressed(Input.KEY_SPACE)) {
-            Application.getApp().resetGame();
-            GameViewer.resetSpeedCounter();
-            Application.getApp().enterState(GameViewer.getInstance().getID());
-        }
-        if (input.isKeyPressed(Input.KEY_ENTER)) {
-            Application.getApp().enterState(Application.getMainMenu().getID());
-        }
-        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-            gc.exit();
-        }
-    }
+    public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {}
 
     public void setGameOverMessage(String gameOverMessage) {
         this.gameOverMessage = gameOverMessage;
@@ -100,10 +86,12 @@ public class GameOver extends BasicGameState{
     @Override
     public void keyPressed(int key, char c) {
         super.keyPressed(key, c);
-        if(key == Input.KEY_SPACE) {
+        int state = Application.getApp().getCurrentStateId();
+
+        if(key == Input.KEY_SPACE && state == Application.GAMEOVER) {
             pressed = true;
         }
-        if (key == Input.KEY_ESCAPE) {
+        if (key == Input.KEY_ESCAPE && state == Application.GAMEOVER) {
             Application.getAppContainer().exit();
         }
     }
@@ -111,7 +99,9 @@ public class GameOver extends BasicGameState{
     @Override
     public void keyReleased(int key, char c) {
         super.keyReleased(key, c);
-        if(key == Input.KEY_SPACE) {
+        int state = Application.getApp().getCurrentStateId();
+
+        if(key == Input.KEY_SPACE && state == Application.GAMEOVER) {
             pressed = false;
             Application.getApp().resetGame();
             GameViewer.resetSpeedCounter();
@@ -123,8 +113,9 @@ public class GameOver extends BasicGameState{
     @Override
     public void mousePressed(int button, int x, int y) {
         super.mousePressed(button, x, y);
+        int state = Application.getApp().getCurrentStateId();
 
-        if(button == 0 &&
+        if(button == 0  && state == Application.GAMEOVER &&
             x >= gameOverX && x <= gameOverX + gameOverWidth &&
             y >= gameOverY && y <= gameOverY + gameOverHeight) {
             pressed = true;
@@ -134,7 +125,9 @@ public class GameOver extends BasicGameState{
     @Override
     public void mouseReleased(int button, int x, int y) {
         super.mouseReleased(button, x, y);
-        if(button == 0 &&
+        int state = Application.getApp().getCurrentStateId();
+
+        if(button == 0 && state == Application.GAMEOVER &&
             x >= gameOverX && x <= gameOverX + gameOverWidth &&
             y >= gameOverY && y <= gameOverY + gameOverHeight) {
             pressed = false;

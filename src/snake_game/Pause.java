@@ -7,9 +7,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-/**
- * Created by jovanovic on 3/16/2017.
- */
 public class Pause extends BasicGameState {
 
     protected int id;
@@ -36,12 +33,12 @@ public class Pause extends BasicGameState {
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         Input input = gc.getInput();
-        if (input.isKeyPressed(Input.KEY_SPACE)) {
-            //Application.getApp().resetGame();
-            //GameViewer.resetSpeedCounter();
+        int state = Application.getApp().getCurrentStateId();
+
+        if (input.isKeyPressed(Input.KEY_SPACE) && state == Application.PAUSE) {
             Application.getApp().enterState(GameViewer.getInstance().getID());
         }
-        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+        if (input.isKeyPressed(Input.KEY_ESCAPE) && state == Application.PAUSE) {
             gc.exit();
         }
     }
