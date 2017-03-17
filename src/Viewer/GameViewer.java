@@ -96,7 +96,7 @@ public class GameViewer extends BasicGameState implements KeyListener {
         // infos toolbar
         g.setColor(Color.black);
         g.drawString("FPS: " + Application.getApp().getAppContainer().getFPS()
-                        + "  |  Speed Level: " + speedCounter
+                        + "  |  Speed Level: " + speedCounter + 1
                         + "  |  Score: " + GameController.getScore()
                         + "  |  Snake size : " + snakeArray.size()
                 , Application.WIDTH/16f, Application.GAMEHEIGHT);

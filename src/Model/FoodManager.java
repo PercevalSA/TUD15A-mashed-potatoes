@@ -59,7 +59,7 @@ public class FoodManager implements Runnable{
         return new Food(x_position, y_position, false);
     }
 
-    public void initializeFoods(){
+    public synchronized void initializeFoods(){
         goodApple = createGoodFood();
         apples.clear();
         apples.add(createBadFood());
@@ -77,8 +77,8 @@ public class FoodManager implements Runnable{
                 System.out.println("Error while trying to put the thread to sleep");
             }
 
-            if (apples.size() < MAXAPPLES && Application.getApp().getCurrentStateId() == Application.GAMEVIEWER)
-                apples.add(createBadFood());
+            if (getApples().size() < MAXAPPLES && Application.getApp().getCurrentStateId() == Application.GAMEVIEWER)
+                getApples().add(createBadFood());
         }
     }
 }
