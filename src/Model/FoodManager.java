@@ -70,7 +70,7 @@ public class FoodManager implements Runnable{
     public void run() {
         while(true) {
             Random rand = new Random();
-            int time = rand.nextInt(10) + 5;
+            int time = rand.nextInt(10) + 3;
             try {
                 Thread.sleep(time * 1000);
             } catch (InterruptedException e) {

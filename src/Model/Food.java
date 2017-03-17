@@ -35,22 +35,22 @@ public class Food extends Item {
             tasteBehavior = new TasteGood();
         }
         else{
+            /*
+            Green :  30 %
+            Blue  :  50 %
+            Yellow:  10 %
+            Purple:  10 %
+             */
             Random rand = new Random();
-            int type = rand.nextInt(4) + 1;
-            switch (type){
-                case 1:
-                    tasteBehavior = new TasteGreen();
-                    break;
-                case 2:
-                    tasteBehavior = new TasteBlue();
-                    break;
-                case 3:
-                    tasteBehavior = new TasteYellow();
-                    break;
-                case 4:
-                    tasteBehavior = new TastePurple();
-                    break;
-            }
+            int type = rand.nextInt(100) + 1;
+            if(type <= 30)
+                tasteBehavior = new TasteGreen();
+            else if(type <= 80)
+                tasteBehavior = new TasteBlue();
+            else if(type <= 90)
+                tasteBehavior = new TasteYellow();
+            else
+                tasteBehavior = new TastePurple();
         }
     }
 

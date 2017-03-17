@@ -1,5 +1,7 @@
 package Model;
 
+import Viewer.GameViewer;
+
 /**
  * Created by john on 16/03/2017.
  */
@@ -17,6 +19,6 @@ public class TasteYellow implements TasteBehavior {
 
     @Override
     public int getValue() {
-        return 5;
+        return 5 * (GameViewer.getSpeedCounter() + 1);
     }
 }
